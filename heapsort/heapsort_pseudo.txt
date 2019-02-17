@@ -1,0 +1,101 @@
+//***********************************************
+ Heapsort pseudo code
+//***********************************************
+
+#DEFINE A // Array that represents the heap
+#DEFINE A.length // return number of elements in A
+#DEFINE A.heap-size // valid elements in A
+
+// Note: 0 <= A.heap-size <= A.length
+
+// Return nodes
+PARENT(i)
+    return floor(i/2)
+    
+LEFT(i)
+    return 2i
+    
+RIGHT
+    return 2i+1
+
+//===============================================
+ Maintain the max heap property
+ - When MAX_HEAPIFY is called, it assumes that the binary trees rooted at LEFT(i) and RIGHT(i) are max heaps, but that A[i] might be smaller than its children, thus violating the max heap property.
+ //==============================================
+ 
+ MAX_HEAPIFY(A, i)
+    left = LEFT(i)
+    right = RIGHT(i)
+    if left < A.heapsize and A[left] > A[right]
+        largest = left // largest is left child
+    else largest = i // assign largest to be parent
+    
+    if right <= A.heap-size and A[right] > A[largest]
+        largest = right // largest child was right all along
+    if largest != i // a child (l or r) is larger, violating max heap rule
+        exchange A[i] with A[largest]
+        MAX_HEAPIFY(A, largest)
+        
+//===============================================
+ Build max heap
+ - Start at last parent and maintain max heap property going up.
+//===============================================
+
+BUILD_MAX_HEAP(A)
+    A.heap-size = A.length
+    for i = floor(A.length/2) downto 1
+        MAX_HEAPIFY(A, i)
+
+//===============================================
+ Heapsort algorithm
+//===============================================
+
+HEAPSORT(A)
+    BUILD_MAX_HEAP(A)
+    for i = A.length downto 2
+        exchange A[1] with A[i]
+        A.heap-size = A.heap-size-1 // decrease size as parents properly arranged
+        MAX_HEAPIFY(A, 1)
+
+//***********************************************
+ (Max) Priority queue
+//***********************************************
+
+HEAP_MAXIMUM(A)
+    return A[1]
+
+//===============================================
+ Maximum: extract element in A with largest key
+//===============================================
+
+HEAP_EXTRACT_MAX(A)
+    if A.heap-size < 1
+        error "heap underflow"
+    max = A[1]
+    A[1] = A[A.heap-size]
+    A.heap-size = A.heap-size-1
+    MAX_HEAPIFY(A, 1)
+    return max
+
+//===============================================
+ Increase key
+ - Increases the value of element x's key to a new value k, where x <= k.
+//===============================================
+
+HEAP_INCREASE_KEY(A, i, key)
+    if key < A[i]
+        error "new key is smaller than curreny key"
+    A[i] = key
+    while i > 1 and A[PARENT(i)] < A[i]
+        exchange A[i] with A[PARENT(i)]
+        i = PARENT(i)
+
+//===============================================
+ Insert
+ - Takes as an input the key of the new element to inserted into max heap A.
+//===============================================
+
+MAX_HEAP_INSERT(A, key)
+    A.heap-size = A.heap-size+1 // increase size of valid heap
+    A[A.heap-size] = -infinity
+    HEAP_INCREASE_KEY(A, A.heap-size, key)

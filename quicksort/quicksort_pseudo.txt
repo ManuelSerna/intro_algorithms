@@ -1,0 +1,32 @@
+//***********************************************
+ Quick sort pseudocode.
+//***********************************************
+
+#DEFINE A // array with n elements
+#DEFINE p // index of left-most element
+#DEFINE r // index of right-most element
+
+//-----------------------------------------------
+ Keep calling partition procedure to sort.
+ - Initial call: QUICK_SORT(A, 1, A.length)
+//-----------------------------------------------
+QUICK_SORT(A, p, r)
+    if p < r
+        q = PARTITION(A, p, r)
+        QUICKSORT(A, p, q-1)
+        QUICKSORT(A, q+1, r)
+
+//-----------------------------------------------
+ Partition procedure
+ - Partition/pivot value will be the right-most element in A
+//-----------------------------------------------
+PARTITION(A, p, r)
+    x = A[r]
+    i = p-1
+    for j = p to r - 1
+        if A[j] <= x
+            i = i + 1
+            exchange A[i] with A[j]
+    // Put pivot value at beginning of subarray A[i+1...r] (array bigger than x)
+    exchange A[i+1] with A[r]
+    return i + 1
