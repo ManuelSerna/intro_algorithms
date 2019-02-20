@@ -72,11 +72,11 @@ void quicksort(int A[], int p, int r)
 //-----------------------------------------------
 int main()
 {
-    // Random data
-    //int A[SIZE] = {2, 8, 7, 1, 3, 5, 6, 4};
+    // Random data (best case: n*log base 2 of n)
+    int A[SIZE] = {2, 8, 7, 1, 3, 5, 6, 4};
 
     // Worst case: already sorted data (n^2 time)
-    int A[SIZE] = {1, 2, 3, 4, 5, 6, 7, 8};
+    //int A[SIZE] = {1, 2, 3, 4, 5, 6, 7, 8};
 
     quicksort(A, 0, SIZE-1);// sort array using quicksort
 

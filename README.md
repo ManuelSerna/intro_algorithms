@@ -1,4 +1,7 @@
 # into_algorithms
 
-This repository contains all of my implementations of various algorithms and such.
-I have used this code to learn more about these algorithms, on top of learning how to analyse them.
+This repository contains pseudocode and/or implementations of various algorithms,
+data structures, etc. for my Algorithms course at the University of Arkansas.
+
+Pseudocode credit goes to the textbook used:
+Cormen, T. H., Leiserson, C. E., Rivest, R. L., & Stein, C. (n.d.). Introduction to algorithms (3rd ed.).
