@@ -1,0 +1,176 @@
+//***********************************************
+  Binary Search Tree pseudo code.
+//***********************************************
+ 
+/*
+ Binary search tree property:
+    Let x be a node in a binary search tree.
+    If y is a node in the left subtree of x,
+    then y.key <= x.key. If y is a node in the
+    right subtree of x, then y.key >= x.key.
+*/
+
+#DEFINE T       // binary search tree
+#DEFINE x, y, z // nodes
+#DEFINE k       // some key k for a node
+
+//===============================================
+  Walking procedures: inorder, preorder, & postorder.
+    * Inorder: traverse left subtree, visit root,
+        and traverse right subtree.
+        - Prints out all keys in a bst in sorted order.
+        - If x is the root of an n-node subtree,
+        then this call takes Theta(n) time.
+        
+    * Preorder: visit root, traverse left subtree,
+        and traverse right subtree.
+    
+    * Postorder: traverse left subtree, traverse
+        right subtree, and visit root.
+//===============================================
+INORDER_TREE_WALK(x)
+    if x != NULL
+        INORDER_TREE_WALK(x.left)
+        print(x.key)
+        INORDER_TREE_WALK(x.right)
+ 
+//===============================================
+ Recursive Tree search.
+    - Compare key k with node x's key.
+//===============================================
+TREE_SEARCH(x, k)
+    if x == NULL or k == x.key
+        return x
+    if k < x.key
+        return TREE_SEARCH(x.left, k)
+    else
+        return TREE_SEARCH(x.right, k)
+
+//==============================================
+ Iterative Tree search.
+//==============================================
+ITERATIVE_TREE_SEARCH(x, k)
+    while x != NULL and k != x.key
+        if k < x.key
+            x = x.left
+        else
+            x = x.right
+    return x
+
+//==============================================
+ Get minimum.
+//==============================================
+TREE_MINIMUM(x)
+    while x.left != NULL
+        x = x.left
+    return x
+
+//==============================================
+ Get maximum.
+//==============================================
+TREE_MAXIMUM(x)
+    while x.right != NULL
+        x = x.right
+    return x
+
+//==============================================
+ Find successor of a node.
+//==============================================
+TREE_SUCCESSOR(x)
+    if x.right != NULL
+        return TREE_MINIMUM(x.right)
+    
+    y = x.p
+    
+    while y != NULL and x  == y.right
+        x = y
+        y = y.p
+    return y
+
+//==============================================
+ Insert a value into a bst.
+    - The procedure takes a node z for which
+    z.key = v, z.left = NULL, and z.right = NULL.
+    It modifies T and some of the attributes of z
+    in such a way that it inserts z into an
+    appropriate position in the tree.
+//==============================================
+TREE_INSERT(T, z)
+    y = NULL
+    x = T.root
+    
+    while x != NULL
+        y = x
+        if z.key < x.key
+            x = x.left
+        else
+            x = x.right
+    
+    z.p = y
+    
+    if y == NULL
+        T.root = z // tree T was empty
+    else if z.key < y.key
+        y.left = z
+    else
+        y.right = z
+
+//==============================================
+ Transplant.
+    - When this procedure replaces the subtree rooted
+    at node u with the subtree rooted at node v, node
+    u's parent becomes node v's parent, and u's parent
+    ends up having v as its appropriate child.
+//==============================================
+TRANSPLANT(T, u, v)
+    if u.p == NULL
+        T.root = v  // u is the root of T
+    else if u == u.p.left
+        u.p.left = v    // u is a left child
+    else
+        u.p.right = v   // u is right child
+    
+    if v != NULL
+        v.p = u.p   // update v.p if v is not NULL
+        
+
+//==============================================
+ Delete node z from a bst T.
+ 
+ Three cases to consider:
+    * Node has no child:
+        - If z has no children, then simply remove 
+        it by modifying its parent to replace z
+        with NULL as its child.
+    
+    * Node has one child:
+        - If z has just one child, then we elevate
+        that child to take z's position in the tree
+        by modifying z's parent to replace z by
+        z's child.
+    
+    * Node has two children:
+        - If z has two children, then we find z's
+        successor y--which must be in z's right
+        subtree--and have y take z's position in
+        the tree.
+        The rest of z's original right subtree
+        becomes y's new right subtree, and z's
+        left subtree becomes y's new left subtree.
+        
+        
+//==============================================
+TREE_DELETE(T, z)
+    if z.left == NULL
+        TRANSPLANT(T, z, z.right)
+    else if z.right == NULL
+        TRANSPLANT(T, z, z.left)
+    else
+        y = TREE_MINIMUM(z.right)
+        if y.p != z
+            TRANSPLANT(T, y, y.right)
+            y.right = z.right
+            y.right.p = y
+        TRANSPLANT(T, z, y)
+        y.left = z.left
+        y.left.p = y
