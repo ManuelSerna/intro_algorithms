@@ -3,16 +3,18 @@
 This repository contains pseudocode and/or implementations of various algorithms,
 data structures, etc. for my Algorithms course at the University of Arkansas.
 
-Sorting algorithms:
-	- Insertion sort
-	- Merge sort
-	- Heap sort (pseudo code only)
-	- Quicksort
-	- Counting sort
-	- Radix sort (pseudo code only)
-	- Bucket sort (pseudo code only)
-	- Binary search tree (pseudo code only)
-	- more to come...
+Sorting algorithms and data structures covered:
+	Insertion sort, 
+	Merge sort, 
+	Maximum subarray problem, 
+	Matrix multiplication, 
+	Heap peocedures (pseudo code only), 
+	Quicksort, 
+    Counting sort, 
+	Radix sort (pseudo code only), 
+	Bucket sort (pseudo code only), 
+	Binary search tree (pseudo code only), 
+	and more to come...
 
 Pseudocode credit goes to the textbook used:
 Cormen, T. H., Leiserson, C. E., Rivest, R. L., & Stein, C. (n.d.). Introduction to algorithms (3rd ed.).

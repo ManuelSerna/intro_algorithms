@@ -1,20 +1,47 @@
-/************************************************
- Quick sort algorithm implementation
-************************************************/
+//***********************************************
+// Quick sort algorithm implementation
+/*
+    Best case run time: Theta(n lg n)
+    Worst case run time: Theta(n^2)
+*/
+//***********************************************
 #include <iostream>
 using namespace std;
 
 const int SIZE = 8;
 
+//===============================================
+// Array printing helper function for array P.
+//===============================================
+void print(int P[], int length)
+{
+    for(int i = 0; i < length; i++)
+    {
+        cout << P[i] << " ";
+    }
+    cout << endl;
+}
+
 //-----------------------------------------------
-// Partition function used for quick sort.
+/*
+    Partition function used for quick sort.
+    Inputs:
+            A --array to be sorted.
+            p --left
+    Notes:
+            A[0...i] --subarray whose elements are less than pivot.
+            A[i
+*/
 //-----------------------------------------------
 int partition(int A[], int p, int r)
 {
-    cout << "\nPartitioning." << endl;
+    cout << endl;
+    cout << "Partitioning." << endl;
+    
     int x = A[r];
     int i = p-1;
-    cout << "New pivot value: " << x << endl;
+    
+    cout << "Pivot: " << x << endl;
 
     // Compare pivot value x from p until before x 
     for(int j = p; j < r; j++)
@@ -28,27 +55,19 @@ int partition(int A[], int p, int r)
             A[i] = A[j];
             A[j] = temp;
 
-            for(int i = 0; i < SIZE; i++)
-            {
-                cout << "|"<< A[i];
-            }
-            cout << "|";
-            cout << " <- switched " << A[j] << " with " << A[i] << endl;
-            cout << "--------------------------------\n";
+            print(A, SIZE);
+            cout << "\t--switched " << A[j] << " with " << A[i] << endl;
+            cout << "--------------------------------" << endl;;
         }
     }
 
-    // Put pivot at the end of subarray bigger than x
-    // -(exchange A[i+1] with A[r])
+    // Place current pivot after left subarray A[i+1].
+    // Now, we have a new pivot for right subarray A[i+2...r].
     int temp = A[i+1];
     A[i+1] = A[r];
-    A[r] = temp;// new pivot value for next call for partition
+    A[r] = temp;
 
-    for(int i = 0; i < SIZE; i++)
-    {
-        cout << "|"<< A[i];
-    }
-    cout << "|" << endl;
+    print(A, SIZE);
     cout << "================================\n";
 
     return i + 1;
@@ -61,7 +80,8 @@ void quicksort(int A[], int p, int r)
 {
     if(p < r)
     {
-        int q = partition(A, p, r); // recurse again on pivot
+        // Keep partitioning until recursion bottoms out.
+        int q = partition(A, p, r);
         quicksort(A, p, q-1);
         quicksort(A, q+1, r);
     }
@@ -78,14 +98,12 @@ int main()
     // Worst case: already sorted data (n^2 time)
     //int A[SIZE] = {1, 2, 3, 4, 5, 6, 7, 8};
 
-    quicksort(A, 0, SIZE-1);// sort array using quicksort
+    // Sort A using quicksort
+    quicksort(A, 0, SIZE-1);
 
     cout << "Sorted array: " << endl;
-    for(int i = 0; i < SIZE; i++)
-    {
-        cout << "|" << A[i];
-    }
-    cout << "|" << endl;
+    print(A, SIZE);
+    cout << endl;
 
     return 0;
 }

@@ -1,0 +1,43 @@
+//***********************************************
+ Merge sort
+//***********************************************
+
+#DEFINE A // array with n elements
+#DEFINE INFINITY // stands for positive infinity
+
+//-----------------------------------------------
+ Divide until you read subarray with one element
+//-----------------------------------------------
+MERGE_SORT(A, left, right)
+    if left < right
+        mid = floor((left+right)/2)
+        MERGE_SORT(A, left, mid) // left subarray
+        MERGE_SORT(A, mid+1, right) // right subarray
+        MERGE(A, left, mid, right) // combine subarrays
+
+//-----------------------------------------------
+ Merge subarrays, starting at subarray with one element (which is already sorted)
+//-----------------------------------------------
+MERGE(A, left, mid, right)
+    n1 = mid - left + 1
+    n2 = right - mid
+
+    let L[1...n1+1] and R[1...n2+1] be new arrays
+
+    for i = 1 to n1
+        L[i] = A[left+i-1]
+    for j = 1 to n2
+        R[j] = A[mid+j]
+
+    L[n1+1] = INFINITY
+    R[n2+1] = INFINITY
+
+    i = 1
+    j = 1
+
+    for k = left to right
+        if L[k] <= R[j]
+            A[k] = L[i]
+            i = i+1
+        else A[k] = R[j]
+            j = j+1
