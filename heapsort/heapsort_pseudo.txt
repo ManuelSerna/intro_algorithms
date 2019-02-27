@@ -1,29 +1,28 @@
 //***********************************************
- Heapsort pseudo code
+ Heapsort pseudo code.
 //***********************************************
-
-#DEFINE A // Array that represents the heap
-#DEFINE A.length // return number of elements in A
+#DEFINE A           // Array that represents the heap
+#DEFINE A.length    // return number of elements in A
 #DEFINE A.heap-size // valid elements in A
 
 // Note: 0 <= A.heap-size <= A.length
 
-// Return nodes
+// Return indices
 PARENT(i)
     return floor(i/2)
     
 LEFT(i)
     return 2i
     
-RIGHT
+RIGHT(i)
     return 2i+1
 
 //===============================================
- Maintain the max heap property
+ Maintain the max heap property.
  - When MAX_HEAPIFY is called, it assumes that the binary trees rooted at LEFT(i) and RIGHT(i) are max heaps, but that A[i] might be smaller than its children, thus violating the max heap property.
- //==============================================
- 
- MAX_HEAPIFY(A, i)
+ - This procedure will not build a max heap, we need to traverse all the parents to do so.
+//==============================================
+MAX_HEAPIFY(A, i)
     left = LEFT(i)
     right = RIGHT(i)
     if left < A.heapsize and A[left] > A[right]
@@ -37,37 +36,37 @@ RIGHT
         MAX_HEAPIFY(A, largest)
         
 //===============================================
- Build max heap
+ Build max heap.
  - Start at last parent and maintain max heap property going up.
+ - This means potentially going down the height of the tree to maintain the max heap property.
 //===============================================
-
 BUILD_MAX_HEAP(A)
     A.heap-size = A.length
     for i = floor(A.length/2) downto 1
         MAX_HEAPIFY(A, i)
 
 //===============================================
- Heapsort algorithm
+ Heapsort algorithm.
+ - This algorithm sorts by first building a max heap.
+ Then switch the last value of the valid heap with the root, so the largest values will be at the end of the array, decrease the heap size by 1. Of course when you swap, you have to maintain the max heap property again to get the next-largest value at the root, and repeat.
 //===============================================
-
 HEAPSORT(A)
     BUILD_MAX_HEAP(A)
     for i = A.length downto 2
         exchange A[1] with A[i]
-        A.heap-size = A.heap-size-1 // decrease size as parents properly arranged
+        A.heap-size = A.heap-size-1
         MAX_HEAPIFY(A, 1)
 
 //***********************************************
- (Max) Priority queue
+ (Max) Priority queue.
 //***********************************************
-
 HEAP_MAXIMUM(A)
     return A[1]
 
 //===============================================
- Maximum: extract element in A with largest key
+ Maximum: remove and return the index with the largest key.
+ - Put biggest value (the root) at the end, decrease the heap size by 1. Then max heapify (very much like one iteration of heap sort).
 //===============================================
-
 HEAP_EXTRACT_MAX(A)
     if A.heap-size < 1
         error "heap underflow"
@@ -81,10 +80,9 @@ HEAP_EXTRACT_MAX(A)
  Increase key
  - Increases the value of element x's key to a new value k, where x <= k.
 //===============================================
-
 HEAP_INCREASE_KEY(A, i, key)
     if key < A[i]
-        error "new key is smaller than curreny key"
+        error "new key is smaller than current key"
     A[i] = key
     while i > 1 and A[PARENT(i)] < A[i]
         exchange A[i] with A[PARENT(i)]
@@ -94,8 +92,16 @@ HEAP_INCREASE_KEY(A, i, key)
  Insert
  - Takes as an input the key of the new element to inserted into max heap A.
 //===============================================
-
 MAX_HEAP_INSERT(A, key)
     A.heap-size = A.heap-size+1 // increase size of valid heap
-    A[A.heap-size] = -infinity
+    A[A.heap-size] = -(infinity)
     HEAP_INCREASE_KEY(A, A.heap-size, key)
+
+//===============================================
+ Delete
+ - Takes key at position i, puts it at the end of the valid heap, decrease the size of the valid heap by one, and then maintain the max heap property.
+//===============================================
+MAX_HEAP_DELETE(A, i)
+    A[i] = A[A.heapsize]        // put value at i
+    A.heapsize = A.heapsize - 1 // decrease size of heap by 1
+    MAX_HEAPIFY(A, i)           // adjust "new" heap

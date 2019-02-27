@@ -10,32 +10,68 @@
     right subtree of x, then y.key >= x.key.
 */
 
-#DEFINE T       // binary search tree
-#DEFINE x, y, z // nodes
-#DEFINE k       // some key k for a node
+#DEFINE T         // binary search tree
+#DEFINE x,y,z,u,v // nodes
+#DEFINE x.p       // parent node of some node x
+#DEFINE k         // some key k for a node
+#DEFINE n         // number of nodes
+
 
 //===============================================
   Walking procedures: inorder, preorder, & postorder.
     * Inorder: traverse left subtree, visit root,
         and traverse right subtree.
         - Prints out all keys in a bst in sorted order.
-        - If x is the root of an n-node subtree,
-        then this call takes Theta(n) time.
         
     * Preorder: visit root, traverse left subtree,
         and traverse right subtree.
     
     * Postorder: traverse left subtree, traverse
         right subtree, and visit root.
+    
+    --All of the recursive calls take Theta(n) time.
 //===============================================
 INORDER_TREE_WALK(x)
     if x != NULL
         INORDER_TREE_WALK(x.left)
         print(x.key)
         INORDER_TREE_WALK(x.right)
+
+//-----------------------------------------------
+// Non-recursive inorder tree walk below.
+// Hint: an easy solution uses a stack as an auxillary data structure. A more complicated, but elegant, solution uses no stack but assumes that we can test two pointers for equality.
+//-----------------------------------------------
+ITERATIVE_INORDER_TREE_WALK(T)
+    let S be a new stack
+    current = T.root
+    done = false
+    while !done
+        if current != NULL
+            PUSH(S, current)        // push parent node before going down
+            current = current.left  // traverse all the way to the left first
+        else
+            if !S.EMPTY()
+                current = POP(S)    // pop parent and print before going right
+                print(current)
+                current = current.right // now go right
+            else
+                done = true     // done if stack is empty (have gone all the way to the right)
+        
+PREORDER_TREE_WALK(x)
+    if x != NULL
+        print(x.key)
+        PREORDER_TREE_WALK(x.left)
+        PREORDER_TREE_WALK(x.right)
+
+POSTORDER_TREE_WALK(x)
+    if x != NULL
+        POSTORDER_TREE_WALK(x.left)
+        POSTORDER_TREE_WALK(x.right)
+        print(x.key)
  
+
 //===============================================
- Recursive Tree search.
+ Tree search (recursive and iterative).
     - Compare key k with node x's key.
 //===============================================
 TREE_SEARCH(x, k)
@@ -46,10 +82,7 @@ TREE_SEARCH(x, k)
     else
         return TREE_SEARCH(x.right, k)
 
-//==============================================
- Iterative Tree search.
-//==============================================
-ITERATIVE_TREE_SEARCH(x, k)
+TREE_SEARCH(x, k)
     while x != NULL and k != x.key
         if k < x.key
             x = x.left
@@ -57,84 +90,122 @@ ITERATIVE_TREE_SEARCH(x, k)
             x = x.right
     return x
 
-//==============================================
- Get minimum.
-//==============================================
+
+//===============================================
+ Get minimum (recursive and iterative).
+//===============================================
+TREE_MINIMUM(x)
+    if x.left != NULL
+        return RECURSIVE_TREE_MINIMUM(x.left)
+    else
+        return x
+
 TREE_MINIMUM(x)
     while x.left != NULL
         x = x.left
     return x
 
-//==============================================
- Get maximum.
-//==============================================
+
+//===============================================
+ Get maximum (recursive and iterative).
+//===============================================
+TREE_MAXIMUM(x)
+    if x.right != NULL
+        return RECURSIVE_TREE_MAXIMUM(x.right)
+    else
+        return x
+
 TREE_MAXIMUM(x)
     while x.right != NULL
         x = x.right
     return x
 
-//==============================================
+
+//===============================================
+ Find predecessor of a node
+    - i. Going down: if node x has a left subtree, then the predecessor will be the max of that left subtree.
+
+    - ii. Going up: Keep going up bst, if x is NOT the left child of parent y, and y is not null, then x is the right child of y, and y is the node you are looking for. 
+    The first turn to the left going up will give you the predecessor.
+//===============================================
+TREE_PREDECESSOR(x)
+    if x.left != NULL
+        return TREE_MAXIMUM(x.left)
+
+    y = x.p     // make node y parent of x
+    
+    while y != NULL and x == y.left
+        x = y       // x moves up to parent node
+        y = y.p     // y moves up to next parent node
+    return y
+
+
+//===============================================
  Find successor of a node.
-//==============================================
+    - i. Going down: if node x has a right subtree, the the successor will be the minimum of that right subtree.
+    
+    - ii. Going up: Keep going up bst, if x is NOT the right child of parent y, and y is not null, then x if the left child of y, and y is the node you are looking for.
+    The first turn to the right going up will give you the successor.
+//===============================================
 TREE_SUCCESSOR(x)
     if x.right != NULL
         return TREE_MINIMUM(x.right)
     
-    y = x.p
+    y = x.p     // make node y parent of x
     
     while y != NULL and x  == y.right
-        x = y
-        y = y.p
+        x = y       // x moves up to parent node
+        y = y.p     // y moves up to next parent node
     return y
 
-//==============================================
+//===============================================
  Insert a value into a bst.
     - The procedure takes a node z for which
     z.key = v, z.left = NULL, and z.right = NULL.
     It modifies T and some of the attributes of z
     in such a way that it inserts z into an
     appropriate position in the tree.
-//==============================================
+//===============================================
 TREE_INSERT(T, z)
     y = NULL
     x = T.root
     
-    while x != NULL
-        y = x
+    while x != NULL     // tree was not empty
+        y = x           // parent of x is y
         if z.key < x.key
-            x = x.left
+            x = x.left  // go down left subtree
         else
-            x = x.right
+            x = x.right // else go down right subtree
     
-    z.p = y
+    z.p = y     // for the root, parent is NULL
     
     if y == NULL
-        T.root = z // tree T was empty
+        T.root = z  // tree T was empty, z is made the root, we are done
     else if z.key < y.key
-        y.left = z
+        y.left = z  // z is the LEFT child of y
     else
-        y.right = z
+        y.right = z // z is the RIGHT child of y
 
-//==============================================
+//===============================================
  Transplant.
     - When this procedure replaces the subtree rooted
-    at node u with the subtree rooted at node v, node
-    u's parent becomes node v's parent, and u's parent
-    ends up having v as its appropriate child.
-//==============================================
+    at node u with the subtree rooted at node v, 
+    node u's parent becomes node v's parent, and 
+    u's parent ends up having v as its appropriate child.
+//===============================================
 TRANSPLANT(T, u, v)
     if u.p == NULL
-        T.root = v  // u is the root of T
+        T.root = v      // u is root of T, replace it with v
     else if u == u.p.left
-        u.p.left = v    // u is a left child
+        u.p.left = v    // u is a left subtree
     else
-        u.p.right = v   // u is right child
+        u.p.right = v   // u is right subtree
     
     if v != NULL
-        v.p = u.p   // update v.p if v is not NULL
+        v.p = u.p       // parent of v same as parent of u
         
 
-//==============================================
+//===============================================
  Delete node z from a bst T.
  
  Three cases to consider:
@@ -157,15 +228,13 @@ TRANSPLANT(T, u, v)
         The rest of z's original right subtree
         becomes y's new right subtree, and z's
         left subtree becomes y's new left subtree.
-        
-        
-//==============================================
+//===============================================
 TREE_DELETE(T, z)
     if z.left == NULL
-        TRANSPLANT(T, z, z.right)
+        TRANSPLANT(T, z, z.right)   // z has no left child
     else if z.right == NULL
-        TRANSPLANT(T, z, z.left)
-    else
+        TRANSPLANT(T, z, z.left)    // z has just left child
+    else                            // z has two children
         y = TREE_MINIMUM(z.right)
         if y.p != z
             TRANSPLANT(T, y, y.right)
