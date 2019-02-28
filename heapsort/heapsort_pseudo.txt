@@ -26,11 +26,13 @@ MAX_HEAPIFY(A, i)
     left = LEFT(i)
     right = RIGHT(i)
     
-    if left < A.heapsize and A[left] > A[right]
-        largest = left // largest is left child
+    // Compare left and parent first
+    if left < A.heapsize and A[left] > A[i]
+        largest = left // largest is left child (and left is in the valid heap)
     else 
         largest = i // assign largest to be parent
     
+    // Out of the parent and left child, compare the largest out of those two with the right (if right is in the valid heap)
     if right <= A.heap-size and A[right] > A[largest]
         largest = right // largest child was right all along
 

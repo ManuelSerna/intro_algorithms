@@ -37,6 +37,7 @@ INORDER_TREE_WALK(x)
         print(x.key)
         INORDER_TREE_WALK(x.right)
 
+
 //-----------------------------------------------
 // Non-recursive inorder tree walk below.
 // Hint: an easy solution uses a stack as an auxillary data structure. A more complicated, but elegant, solution uses no stack but assumes that we can test two pointers for equality.
@@ -158,38 +159,41 @@ TREE_SUCCESSOR(x)
         y = y.p     // y moves up to next parent node
     return y
 
+
 //===============================================
  Insert a value into a bst.
-    - The procedure takes a node z for which
-    z.key = v, z.left = NULL, and z.right = NULL.
-    It modifies T and some of the attributes of z
-    in such a way that it inserts z into an
-    appropriate position in the tree.
+    - Two cases:
+        * Tree already exists: thus you will go down using the binary search process. Then if the current node is NULL, then insert left or right of the child.
+        
+        * No tree exists: make the node z the root, skip the while loop and go into the first if statement.
 //===============================================
 TREE_INSERT(T, z)
     y = NULL
     x = T.root
     
-    while x != NULL     // tree was not empty
+    // Tree is not null, go down the tree like search procedure, insert z as a leaf
+    while x != NULL
         y = x           // parent of x is y
         if z.key < x.key
             x = x.left  // go down left subtree
         else
             x = x.right // else go down right subtree
     
-    z.p = y     // for the root, parent is NULL
+    z.p = y // For the root, parent is NULL.
     
     if y == NULL
-        T.root = z  // tree T was empty, z is made the root, we are done
+        T.root = z  // tree T was empty, z is made the root, we are done, parent is NULL
     else if z.key < y.key
-        y.left = z  // z is the LEFT child of y
+        y.left = z  // insert z LEFT of parent
     else
-        y.right = z // z is the RIGHT child of y
+        y.right = z // insert z RIGHT of parent
+
 
 //===============================================
  Transplant.
-    - When this procedure replaces the subtree rooted
-    at node u with the subtree rooted at node v, 
+    - When this procedure replaces 
+    the subtree rooted at node u 
+    with the subtree rooted at node v, 
     node u's parent becomes node v's parent, and 
     u's parent ends up having v as its appropriate child.
 //===============================================
