@@ -107,6 +107,6 @@ MAX_HEAP_INSERT(A, key)
  - Takes the last value at the end of the valid max heap and overwrites the values at index i. Then decrease the size of the valid max heap by one, and then maintain the max heap property.
 //===============================================
 MAX_HEAP_DELETE(A, i)
-    A[i] = A[A.heapsize]        // put value at i
+    A[i] = A[A.heapsize]        // replace node i's value with the last node's value, effectively deleting the node
     A.heapsize = A.heapsize - 1 // decrease size of heap by 1
     MAX_HEAPIFY(A, i)           // adjust "new" heap

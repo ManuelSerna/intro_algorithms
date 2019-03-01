@@ -191,23 +191,22 @@ TREE_INSERT(T, z)
 
 //===============================================
  Transplant.
-    - When this procedure replaces 
-    the subtree rooted at node u 
-    with the subtree rooted at node v, 
-    node u's parent becomes node v's parent, and 
-    u's parent ends up having v as its appropriate child.
+    - Delete subtree rooted at u, and
+    replace it with subtree rooted at v.
 //===============================================
 TRANSPLANT(T, u, v)
-    if u.p == NULL
+    if u.p == NULL      // nothing to replace
         T.root = v      // u is root of T, replace it with v
-    else if u == u.p.left
-        u.p.left = v    // u is a left subtree
-    else
-        u.p.right = v   // u is right subtree
     
-    if v != NULL
+    // Check if u is either a left or right child
+    else if u == u.p.left
+        u.p.left = v    // u is a left subtree, replace it
+    else
+        u.p.right = v   // u is right subtree , replace it
+    
+    if v != NULL        // update the parent of v
         v.p = u.p       // parent of v same as parent of u
-        
+
 
 //===============================================
  Delete node z from a bst T.
