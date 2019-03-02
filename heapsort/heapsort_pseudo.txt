@@ -3,9 +3,9 @@
 //***********************************************
 #DEFINE A           // Array that represents the heap
 #DEFINE A.length    // return number of elements in A
-#DEFINE A.heap-size // valid elements in A
+#DEFINE A.heap_size // valid elements in A
 
-// Note: 0 <= A.heap-size <= A.length
+// Note: 0 <= A.heap_size <= A.length
 
 // Return indices
 PARENT(i)
@@ -27,18 +27,40 @@ MAX_HEAPIFY(A, i)
     right = RIGHT(i)
     
     // Compare left and parent first
-    if left < A.heapsize and A[left] > A[i]
+    if left < A.heap_size and A[left] > A[i]
         largest = left // largest is left child (and left is in the valid heap)
     else 
         largest = i // assign largest to be parent
     
     // Out of the parent and left child, compare the largest out of those two with the right (if right is in the valid heap)
-    if right <= A.heap-size and A[right] > A[largest]
+    if right <= A.heap_size and A[right] > A[largest]
         largest = right // largest child was right all along
 
     if largest != i // a child (l or r) is larger, violating max heap rule
         exchange A[i] with A[largest]
         MAX_HEAPIFY(A, largest)
+        
+//-----------------------------------------------
+ Recursive max heapify.
+//-----------------------------------------------
+MAX_HEAPIFY(A, i)
+    while true
+        left = LEFT(i)
+        right = RIGHT(i)
+        
+        if left < A.heap_size and A.nodes[left] > A.nodes[i]
+            largest = left
+        else
+            largest = i
+        
+        if right < A.heap_size and A.nodes[right] > A.nodes[i]
+            largest = right
+        
+        if largest == i
+            return
+        
+        exchange A.nodes[i] with A.nodes[largest]
+        i = largest
         
 //===============================================
  Build max heap.
@@ -46,7 +68,7 @@ MAX_HEAPIFY(A, i)
  - This means potentially going down the height of the tree to maintain the max heap property.
 //===============================================
 BUILD_MAX_HEAP(A)
-    A.heap-size = A.length
+    A.heap_size = A.length
     for i = floor(A.length/2) downto 1
         MAX_HEAPIFY(A, i)
 
@@ -59,11 +81,13 @@ HEAPSORT(A)
     BUILD_MAX_HEAP(A)
     for i = A.length downto 2
         exchange A[1] with A[i]
-        A.heap-size = A.heap-size-1
+        A.heap_size = A.heap_size-1
         MAX_HEAPIFY(A, 1)
 
+
+
 //***********************************************
- Max Priority queue.
+ Max Priority queue-related code.
 //***********************************************
 HEAP_MAXIMUM(A)
     return A[1]
@@ -73,11 +97,11 @@ HEAP_MAXIMUM(A)
  - Put biggest value (the root) at the end, decrease the heap size by 1. Then max heapify (very much like one iteration of heap sort).
 //===============================================
 HEAP_EXTRACT_MAX(A)
-    if A.heap-size < 1
+    if A.heap_size < 1
         error "heap underflow"
     max = A[1]
-    A[1] = A[A.heap-size]
-    A.heap-size = A.heap-size-1
+    A[1] = A[A.heap_size]
+    A.heap_size = A.heap_size-1
     MAX_HEAPIFY(A, 1)
     return max
 
@@ -98,15 +122,76 @@ HEAP_INCREASE_KEY(A, i, key)
  - Takes as an input the key of the new element to inserted into max heap A.
 //===============================================
 MAX_HEAP_INSERT(A, key)
-    A.heap-size = A.heap-size+1 // increase size of valid heap
-    A[A.heap-size] = -(infinity)
-    HEAP_INCREASE_KEY(A, A.heap-size, key)
+    A.heap_size = A.heap_size+1 // increase size of valid heap
+    A[A.heap_size] = -(infinity)
+    HEAP_INCREASE_KEY(A, A.heap_size, key)
 
 //===============================================
  Delete.
  - Takes the last value at the end of the valid max heap and overwrites the values at index i. Then decrease the size of the valid max heap by one, and then maintain the max heap property.
 //===============================================
 MAX_HEAP_DELETE(A, i)
-    A[i] = A[A.heapsize]        // replace node i's value with the last node's value, effectively deleting the node
-    A.heapsize = A.heapsize - 1 // decrease size of heap by 1
+    A[i] = A[A.heap_size]        // replace node i's value with the last node's value, effectively deleting the node
+    A.heap_size = A.heap_size - 1 // decrease size of heap by 1
     MAX_HEAPIFY(A, i)           // adjust "new" heap
+
+
+
+//***********************************************
+ Min heap-related code.
+//***********************************************
+
+HEAP_MINIMUM(A)
+    return A[1]
+
+//===============================================
+ Create a min heap.
+//===============================================
+MIN_HEAPIFY(A, i)
+    left = LEFT(i)
+    right = RIGHT(i)
+    
+    if left <= A.heap_size and A[left] < A[i]
+        smallest = left
+    else
+        smallest = i
+        
+    if right <= A.heap_size and A[r] < A[smallest]
+        smallest = right
+    
+    if smallest != i
+        exchange A[i] with A[smallest]
+        MIN_HEAPIFY(A, smallest)
+        
+//===============================================
+ Return the minimum value in the min heap.
+//===============================================
+HEAP_EXTRACT_MIN(A)
+    if A.heap_size < 1
+        error "heap underflow"
+    min = A[1]              // store minimum value
+    A[1] = A[A.heap_size]   // put largest value at root
+    A.heap_size = A.heap_size - 1   // decrease size of valid heap
+    MIN_HEAPIFY(A, 1)       // restore the min heap property
+    return min
+
+
+//===============================================
+ Decrease the value of some index in A.
+//===============================================
+HEAP_DECREASE_KEY(A, i, key)
+    if key > A[i]
+        error "new key is larger than current key"
+    A[i] = key
+    while i > 1 and A[PARENT(i)] > A[i]
+        exchange A[i] with A[PARENT(i)]
+        i = PARENT(i)
+
+
+//===============================================
+ Insert a value into the min heap.
+//===============================================
+MIN_HEAP_INSERT(A, key)
+    A.heap_size = A.heap_size + 1
+    A[A.heap_size] = infinity
+    HEAP_DECREASE_KEY(A, A.heap_size, key)
