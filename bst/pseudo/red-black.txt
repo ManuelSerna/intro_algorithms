@@ -1,0 +1,84 @@
+//*********************************************** 
+ Red-Black Tree pseudocode.
+//***********************************************
+
+/*
+- A red-black tree is a binary search tree that satisfies the
+red-black properties.
+
+    i.   Every node is either red or black.
+
+    ii.  The root is black
+
+    iii. Every leaf (NIL) is black.
+        - the leafs are nodes with nothing.
+
+    iv.  If a node is red, then both its children are black.
+        - Implies red nodes are NEVER connected.
+
+    v.   For each node, all simple paths from the node to descendant
+    leaves contain the same number of black nodes.
+
+- A red-black tree with n internal nodes has height at most 2 * lg(n + 1)
+    
+- Can the dynamic-set operations SEARCH, MINIMUM, MAXIMUM, SUCCESSOR, and PREDECESSOR
+in O(lg n ) time on red-black trees, since each can run in O(h) time on a regular bst
+of height h.
+*/
+
+//===============================================
+ Rotation.
+//===============================================
+
+    |         LEFT_ROTATE(T, x)          |
+    y         <----------------          x
+   / \                                  / \
+  x   C                                A   y
+ / \          ---------------->           / \
+A   B         RIGHT_ROTATE(T, x)         B   C
+
+//-----------------------------------------------
+ Left rotate.
+//-----------------------------------------------
+LEFT_ROTATE(T, x)
+    y = x.right         // set y
+    x.right = y.left    // turn y's left subtree into x's subtree
+    
+    if y.left != T.nil
+        y.left.p = x
+    y.p = x.p           // link x's parent to y
+    
+    if x.p == T.nil
+        T.root = y
+    else if x == x.p.left
+        x.p.left = y
+    else
+        x.p.right = y
+    
+    y.left = x          // put x on y's left
+    x.p = y
+
+
+//-----------------------------------------------
+ Right rotate.
+//-----------------------------------------------
+TODO: write code for right rotate.
+
+
+//===============================================
+ Insert.
+//===============================================
+TODO: write code for insert
+TODO: write code for insert fixup
+
+
+//===============================================
+ Transplant for red-black trees.
+//===============================================
+TODO: write code for transplant
+
+//===============================================
+ Delete.
+//===============================================
+TODO: write code for delete
+TODO: write code for delete fixup
