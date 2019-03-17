@@ -26,6 +26,15 @@ in O(lg n ) time on red-black trees, since each can run in O(h) time on a regula
 of height h.
 */
 
+
+//===============================================
+ Find minimum of a subtree.
+//===============================================
+TREE_MINIMUM(x)
+    while x.left != NULL
+        x = x.left
+    return x
+
 //===============================================
  Rotation.
 //===============================================
@@ -128,12 +137,12 @@ RB_INSERT(T, z)
 RB_INSERT_FIXUP(T, z)
     while z.p.color == RED
         if z.p == z.p.p.left
-            y = z.p.p.right      // y is z's grandfather
+            y = z.p.p.right             // y is z's grandfather
             if y.color == RED
-                z.p.color = BLACK   // case 1
-                y.color = BLAXK     // case 1
-                z.p.p.color = RED   // case 1
-                z = z.p.p           // case 1
+                z.p.color = BLACK       // case 1
+                y.color = BLAXK         // case 1
+                z.p.p.color = RED       // case 1
+                z = z.p.p               // case 1
             else if z == z.p.right
                     z = z.p             // case 2
                     LEFT_ROTATE(T, z)   // case 2
@@ -141,29 +150,116 @@ RB_INSERT_FIXUP(T, z)
                 z.p.p.color = RED       // case 3
                 RIGHT_ROTATE(T, z)      // case 3
         else
-            y = z.p.p.left      // y is z's grandfather
+            y = z.p.p.left              // y is z's grandfather
             if y.color == RED
-                z.p.color = BLACK   // case 1
-                y.color = BLAXK     // case 1
-                z.p.p.color = RED   // case 1
-                z = z.p.p           // case 1
+                z.p.color = BLACK       // case 1
+                y.color = BLAXK         // case 1
+                z.p.p.color = RED       // case 1
+                z = z.p.p               // case 1
             else if z == z.p.left
                     z = z.p             // case 2
                     RIGHT_ROTATE(T, z)  // case 2
                 z.p.color = BLACK       // case 3
                 z.p.p.color = RED       // case 3
                 LEFT_ROTATE(T, z)       // case 3
-    
-    T.root.color = BLACK        // root is black (case 0)
+    T.root.color = BLACK                // root is black (case 0)
 
 
 //===============================================
  Transplant for red-black trees.
 //===============================================
-TODO: write code for transplant
+RB_TRANSPLANT(T, u, v)
+    if u.p == T.nil         // nothing to replace
+        T.root = v          // u is root of T, replace it with v
+    else if u == u.p.left
+        u.p.left = v        // u is a left subtree, replace it with v
+    else
+        u.p.right = v       // u is a right subtree, replace it with v
+    v.p = u.p               // link v to u's parent, replacement complete
 
 //===============================================
  Delete.
 //===============================================
-TODO: write code for delete
-TODO: write code for delete fixup
+RB_DELETE(T, z)
+    y = z
+    y_original_color = y.color
+    if z.left == T.nil
+        x = z.right
+        RB_TRANSPLANT(T, z, z.right)
+    
+    else if z.right == T.nil
+        x = z.left
+        RB_TRANSPLANT(T, z, z.left)
+    
+    else
+        y = TREE_MINIMUM(z.right)
+        y_original_color = y.color
+        x = y.right
+        
+        if y.p == z
+            x.p = y
+        else
+            RB_TRANSPLANT(T, y, y.right)
+            y.right = z.right
+            y.right.p = y
+        
+        RB_TRANSPLANT(T, z, y)
+        y.left = z.left
+        y.left.p = y
+        y.color = z.color
+    if y_original_color == BLACK
+        RB_DELETE_FIXUP(T, x)
+
+
+//-----------------------------------------------
+ Delete fixup procedure.
+//-----------------------------------------------
+RB_DELETE_FIXUP(T, x)
+    while x != T.root and x.color == BLACK
+        if x == x.p.left
+            w = x.p.right
+            
+            if w.color == RED
+                w.color = BLACK         // case 1
+                x.p.color = RED         // case 1
+                LEFT_ROTATE(T, x.p)     // case 1
+                w = x.p.right           // case 1
+            
+            if w.left.color == BLACK and w.right.color == BLACK
+                w.color = RED           // case 2
+                x = x.p                 // case 2
+            
+            else if w.right.color == BLACK
+                w.left.color = BLACK    // case 3
+                w.color = RED           // case 3
+                RIGHT_ROTATE(T, w)      // case 3
+                w = x.p.right           // case 3
+            w.color = x.p.color         // case 4
+            x.p.color = BLACK           // case 4
+            LEFT_ROTATE(T, x.p)         // case 4
+            x = T.root                  // case 4
+            
+        // x == x.p.right
+        else
+            w = x.p.left
+            
+            if w.color == RED
+                w.color = BLACK         // case 1
+                x.p.color = RED         // case 1
+                RIGHT_ROTATE(T, x.p)    // case 1
+                w = x.p.left            // case 1
+            
+            if w.right.color == BLACK and w.left.color == BLACK
+                w.color = RED           // case 2
+                x = x.p                 // case 2
+            
+            else if w.left.color == BLACK
+                w.right.color = BLACK   // case 3
+                w.color = RED           // case 3
+                LEFT_ROTATE(T, w)       // case 3
+                w = x.p.left            // case 3
+            w.color = x.p.color         // case 4
+            x.p.color = BLACK           // case 4
+            RIGHT_ROTATE(T, x.p)        // case 4
+            x = T.root                  // case 4
+    x.color = BLACK

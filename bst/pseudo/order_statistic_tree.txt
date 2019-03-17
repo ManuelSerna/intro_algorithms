@@ -1,0 +1,38 @@
+//***********************************************
+// Order-Statistic Tree
+/*
+A red-black tree where each node has an extra attribute--size. This attribute contains the number of (internal) nodes in the subtree rooted at x (including x itself), that is, the size of the subtree.
+*/
+//***********************************************
+
+//===============================================
+ Dynamic order statistics
+//===============================================
+
+//-----------------------------------------------
+// Find the node with the ith smallest key in an order-statistic tree T
+//-----------------------------------------------
+OS_SELECT(x, i)
+    r = x.left.size + 1
+    if i == r
+        return x
+    else if i < r
+        return OS_SELECT(x.left, i)
+    else
+        return OS_SELECT(x.right, i - r)
+
+//-----------------------------------------------
+// We can think of node x’s rank as the number of nodes preceding x in an inorder tree walk, plus 1 for x itself.
+//-----------------------------------------------
+OS_RANK(T, x)
+    r = x.left.size + 1
+    y = x
+    while y != T.root
+        if y == y.p.right
+            r = r + y.p.left.size + 1
+        y = y.p
+    return r
+
+//===============================================
+ TODO: read over other content starting in section 14.2
+//===============================================
