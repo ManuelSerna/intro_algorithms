@@ -1,4 +1,4 @@
-# into_algorithms
+# intro_algorithms
 
 This repository contains pseudocode and/or implementations of various algorithms, data structures, etc. for my Algorithms course at the University of Arkansas.
 
