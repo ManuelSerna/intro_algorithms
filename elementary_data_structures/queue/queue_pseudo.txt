@@ -1,0 +1,34 @@
+//***********************************************
+ Queue pseudo code.
+//***********************************************
+
+/*
+In a queue, the element deleted is always the one that has been in the set for the longest time: the queue implements a first-in, first-out, or FIFO, policy.
+
+We call the INSERT operation on a queue E NQUEUE, and we call the DELETE operation DEQUEUE; like the stack operation POP, DEQUEUE takes no element argument. The FIFO property of a queue causes it to operate like a line of customers waiting to pay a cashier. The queue has a head and a tail. When an element is en-queued, it takes its place at the tail of the queue, just as a newly arriving customer takes a place at the end of the line. The element dequeued is always the one at the head of the queue, like the customer at the head of the line who has waited the longest.
+*/
+
+#DEFINE Q       // queue in the form of an array
+#DEFINE head    // beginning of queue (oldest value)
+#DEFINE tail    // end of queue (newly inserted values)
+
+//-----------------------------------------------
+ Enqueue
+//-----------------------------------------------
+ENQUEUE(Q, x)
+    Q[Q.tail] = x
+    if Q.tail == Q.length
+        Q.tail = 1
+    else
+        Q.tail = Q.tail + 1
+
+//-----------------------------------------------
+ Dequeue
+//-----------------------------------------------
+DEQUEUE(Q)
+    x = Q[Q.head]
+    if Q.head == Q.length
+        Q.head = 1
+    else
+        Q.head = Q.head + 1
+    return x
