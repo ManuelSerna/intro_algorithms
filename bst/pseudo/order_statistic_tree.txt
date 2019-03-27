@@ -32,7 +32,3 @@ OS_RANK(T, x)
             r = r + y.p.left.size + 1
         y = y.p
     return r
-
-//===============================================
- TODO: read over other content starting in section 14.2
-//===============================================
