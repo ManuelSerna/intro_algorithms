@@ -14,10 +14,10 @@ class Node
     public:
     int value;
     char color;// Red = 'R', Black = 'B'
-    Node *Parent;
-    Node *Left;
-    Node *Right;
-}
+    Node *parent;
+    Node *left;
+    Node *right;
+};
 
 //===============================================
 // Define the Red Black tree class interface.
@@ -31,17 +31,17 @@ class RedBlackTree
 
     // Return nodes related to a node n
     Node *Parent(Node *n);
-    Node *Grandfather(Node *n);
+    Node *Grandparent(Node *n);
     Node *Sibling(Node *n);
     Node *Uncle(Node *n);
 
     // Rotation methods
-    void RotateLeft(Node *n);
-    void RotateRight(Node *n);
+    void RotateLeft(Node *x);
+    void RotateRight(Node *x);
 
     // Insertion-related methods, divide fixup into the four cases
-    Node *Insert(Root, Node *n);
-    void InsertHelper(Root, Node *n);
+    void Insert(Node *n);
+    void InsertHelper(Node *n);
     void InsertFixup(Node *n);
     void InsertCase1(Node *n);
     void InsertCase2(Node *n);
@@ -52,5 +52,6 @@ class RedBlackTree
     // TODO: define and later implement
 
     private:
-    Node *Root;
-}
+    Node *root;
+    Node *nil;
+};
