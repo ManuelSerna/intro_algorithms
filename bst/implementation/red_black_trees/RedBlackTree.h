@@ -39,14 +39,9 @@ class RedBlackTree
     void RotateLeft(Node *x);
     void RotateRight(Node *x);
 
-    // Insertion-related methods, divide fixup into the four cases
-    void Insert(Node *n);
-    void InsertHelper(Node *n);
-    void InsertFixup(Node *n);
-    void InsertCase1(Node *n);
-    void InsertCase2(Node *n);
-    void InsertCase3(Node *n);
-    void InsertCase4(Node *n);
+    // Insertion-related methods
+    void Insert(Node *z);
+    void InsertFixup(Node *z);
 
     // Delete-related methods
     // TODO: define and later implement

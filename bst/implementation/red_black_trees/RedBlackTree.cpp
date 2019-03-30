@@ -89,7 +89,7 @@ A visual:
    / \                                  / \
   x   C                                A   y
  / \          ---------------->           / \
-A   B         RotateRIght(y)             B   C  
+A   B         RotateRight(y)             B   C  
 */
 //===============================================
 void RedBlackTree::RotateLeft(Node *x)
@@ -158,49 +158,115 @@ void RedBlackTree::RotateRight(Node *y)
 
 //===============================================
 // Insert method and recursive helper.
-//===============================================
-void RedBlackTree::Insert(Node *n)
-{
-
-}
-
-void RedBlackTree::InsertHelper(Node *n)
-{
-
-}
-
-void RedBlackTree::InsertFixup(Node *n)
-{
-
-}
-
-//===============================================
 /*
-Insertion cases:
-    i.   x
-    ii.  x
-    iii. x
-    iv.  x
+Four cases for fixing insertion:
+    1. z is the root.
+        - color z black
+    2. z's parent is black.
+        - black height still valid, do nothing
+    3. z's parent is red and z's uncle is red.
+        - recolor z's: parent, uncle, and grandparent to black, black, and red respectively.
+    4. z is red and z's uncle is black.
+        - goal: rotate z into its grandparent's position, to do this make z and its parent both right or both left subtrees to z's grandfather. Z and its former grandparent will both be red while z's parent will be black.
 */
 //===============================================
-void RedBlackTree::InsertCase1(Node *n)
+void RedBlackTree::Insert(Node *z)
 {
+    Node *y = nil;
+    Node *x = root;
 
+    // Search the red-black tree to insert z (this is a normal insert)
+    while (x != nil)
+    {
+        y = x;
+
+        if (z->value < x->value)
+        {
+            x = x->left;
+        }
+        else
+        {
+            x = x->right;
+        }
+    }
+
+    z->parent = y;// make y z's parent, and then check where z is relative to y
+
+    if ( y == nil)
+    {
+        root = z;// tree empty
+    }
+    else if (z->value == y->value)
+    {
+        y->left = z;// insert left
+    }
+    else
+    {
+        y->right = z;// insert right
+    }
+    
+    // Properly assign z's nil nodes, and always insert a red node
+    z->left = nil;
+    z->right = nil;
+    z->color = 'R';
+
+    // Maintain red-black properties
+    InsertFixup(z);
 }
 
-void RedBlackTree::InsertCase2(Node *n)
+void RedBlackTree::InsertFixup(Node *z)
 {
+    if (Parent(z) == nil)
+    {
+        if(Parent(z) == nil)
+        {
+            z->color = 'B';
+        }
+    }
+    else if (Parent(z)->color == 'B')
+    {
+        // No red-black properties violated
+        return;
+    }
+    else if (Uncle(z) != nil && Uncle(z)->color == 'R')
+    {
+        Parent(z)->color = 'B';
+        Uncle(z)->color = 'B';
+        Grandparent(z)->color = 'R';
 
-}
+        // Grandparent may now violate condition that root is black or that it may be the red child of a red parent
+        InsertFixup(Grandparent(z));
+    }
+    else
+    {
+        Node *p = Parent(z);
+        Node *g = Grandparent(z);
 
-void RedBlackTree::InsertCase3(Node *n)
-{
+        // Ensure that z and its parent are outer nodes in the tree
+        if (z == p->right && p == g->left)
+        {
+            RotateLeft(p);
+            z = z->left;
+        }
+        else if (z == p->left && p->right)
+        {
+            RotateRight(p);
+            z = z->right;
+        }
 
-}
+        // Now that node z and its parent are both right or both left children, rotate the grandparent the opposite direction of z
+        if (z == p->left)
+        {
+            RotateRight(g);
+        }
+        else
+        {
+            RotateLeft(g);
+        }
 
-void RedBlackTree::InsertCase4(Node *n)
-{
-
+        p->color = 'B';
+        g->color = 'R';
+    }
 }
 
 //===============================================
