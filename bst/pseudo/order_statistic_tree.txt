@@ -1,16 +1,16 @@
 //***********************************************
 // Order-Statistic Tree
-/*
-A red-black tree where each node has an extra attribute--size. This attribute contains the number of (internal) nodes in the subtree rooted at x (including x itself), that is, the size of the subtree.
-*/
+//An order statistic tree is simply a red-black tree with additional information stored in each node, in addition to the usual attributes of each node, we another--size. Size contains the number of (internal) nodes in the subtree rooted at x (including x itself), that is, the size of the subtree.
 //***********************************************
 
 //===============================================
- Dynamic order statistics
+ Dynamic order statistics queries
 //===============================================
 
 //-----------------------------------------------
-// Find the node with the ith smallest key in an order-statistic tree T
+// Select
+// Find the node with the ith smallest key in an order-statistic tree T.
+// Since the height of the red-black tree is at most O(lg n), the running time for this procedure is O(lg n) for a dynamic set of n elements.
 //-----------------------------------------------
 OS_SELECT(x, i)
     r = x.left.size + 1
@@ -19,10 +19,24 @@ OS_SELECT(x, i)
     else if i < r
         return OS_SELECT(x.left, i)
     else
-        return OS_SELECT(x.right, i - r)
+        return OS_SELECT(x.right, i - r)    // narrow down size of i when going right, as you've eliminated the route of going down x's left subtree
+
+
+// Recrusive version
+OS_SELECT_RECURSIVE(x, i)
+    r = x.left.size + 1 // start at the root (counting the root)
+    while(i != r)
+        if(i < r)
+            x = x.left  // go left
+        else
+            x = x.right // go right
+            i = i – r
+        r = x.left + 1
+    return x            // found key
 
 //-----------------------------------------------
-// We can think of node x’s rank as the number of nodes preceding x in an inorder tree walk, plus 1 for x itself.
+// Rank
+// Given a pointer to a node x in an order-statistic tree, this procedure returns the position of x in the linear order determined by an inorder tree walk.
 //-----------------------------------------------
 OS_RANK(T, x)
     r = x.left.size + 1
@@ -32,3 +46,7 @@ OS_RANK(T, x)
             r = r + y.p.left.size + 1
         y = y.p
     return r
+
+//===============================================
+// Interval trees
+//===============================================
