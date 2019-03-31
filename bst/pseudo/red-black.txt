@@ -48,7 +48,7 @@ A   B         RIGHT_ROTATE(T, y)         B   C
 
 // *Notice that only the subtree B changes parent nodes, A will always be the left subtree of x while C will always be the right subtree of y.
 //-----------------------------------------------
- Left rotate pn x.
+ Left rotate on x.
 //-----------------------------------------------
 LEFT_ROTATE(T, x)
     y = x.right         // set y to be x's right child
@@ -85,7 +85,7 @@ RIGHT_ROTATE(T, y)
     else if y == y.p.right
         y.p.right = x   // make y the right child of x
     else
-        y.p.left = x    // make x the left child of y
+        y.p.left = x    // make y the left child of x
     
     x.right = y         // put y on x's right
     y.p = x

@@ -16,6 +16,8 @@ This repository contains pseudocode and/or implementations of various algorithms
 * Binary search tree (pseudo code only)
 * Red-Black trees
 * Dynamic Order Statistics
+* Dynamic Programming
+* Greedy Algorithms
 
 ### Pseudocode credit goes to the textbook used:
 Cormen, T. H., Leiserson, C. E., Rivest, R. L., & Stein, C. (n.d.). Introduction to algorithms (3rd ed.).

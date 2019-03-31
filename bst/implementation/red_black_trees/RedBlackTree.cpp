@@ -10,14 +10,8 @@
 //===============================================
 RedBlackTree::RedBlackTree()
 {
-    // Define nil for black null leafs
-    nil = NULL;
-
     // Root is nothing, with no values
     root = NULL;
-    root->parent = nil;
-    root->left = nil;
-    root->right = nil;
 }
 
 RedBlackTree::~RedBlackTree()
@@ -28,6 +22,11 @@ RedBlackTree::~RedBlackTree()
 //===============================================
 // Nodes related to any node n.
 //===============================================
+Node *RedBlackTree::Root()
+{
+    return root;
+}
+
 Node *RedBlackTree::Parent(Node *n)
 {
     return n->parent;
@@ -80,6 +79,25 @@ Node *RedBlackTree::Uncle(Node *n)
 }
 
 //===============================================
+// Printing methods: preorder, inorder, and postorder.
+//===============================================
+void RedBlackTree::Print()
+{
+    // TODO: implement all tree trasversal prints
+    Inorder(root);
+}
+
+void RedBlackTree::Inorder(Node *x)
+{
+    if (x != NULL)
+    {
+        Inorder(x->left);
+        cout << x->value << " " << endl;
+        Inorder(x->right);
+    }
+}
+
+//===============================================
 // Rotation operations.
 /*
 A visual:
@@ -98,7 +116,7 @@ void RedBlackTree::RotateLeft(Node *x)
     x->right = y->left;// turn y's left subtree (B) into x's right
 
     // If B is a populated subtree, have x point to it
-    if (y->left != nil)
+    if (y->left != NULL)
     {
         y->left->parent = x;// 
     }
@@ -107,7 +125,7 @@ void RedBlackTree::RotateLeft(Node *x)
     y->parent = x->parent;
 
     // Make y the new root if x was the root
-    if (x->parent == nil)
+    if (x->parent == NULL)
     {
         root = x;
     }
@@ -130,7 +148,7 @@ void RedBlackTree::RotateRight(Node *y)
     y->left = x->right;// turn x's left subtree (B) into y's right subtree
 
     // If B is a populated subtree, have y point to x
-    if (x->right != nil)
+    if (x->right != NULL)
     {
         x->right->parent = y;
     }
@@ -138,7 +156,7 @@ void RedBlackTree::RotateRight(Node *y)
     x->parent = y->parent;// link x's parent to y
 
     // Make x the new root if y was the root
-    if (y->parent == nil)
+    if (y->parent == NULL)
     {
         root = x;
     }
@@ -170,13 +188,17 @@ Four cases for fixing insertion:
         - goal: rotate z into its grandparent's position, to do this make z and its parent both right or both left subtrees to z's grandfather. Z and its former grandparent will both be red while z's parent will be black.
 */
 //===============================================
-void RedBlackTree::Insert(Node *z)
+void RedBlackTree::Insert(int value)
 {
-    Node *y = nil;
+    // Create new node z and fill in value from input
+    Node *z = new Node;
+    z->value = value;
+
+    Node *y = NULL;
     Node *x = root;
 
     // Search the red-black tree to insert z (this is a normal insert)
-    while (x != nil)
+    while (x != NULL)
     {
         y = x;
 
@@ -192,7 +214,7 @@ void RedBlackTree::Insert(Node *z)
 
     z->parent = y;// make y z's parent, and then check where z is relative to y
 
-    if ( y == nil)
+    if ( y == NULL)
     {
         root = z;// tree empty
     }
@@ -206,8 +228,8 @@ void RedBlackTree::Insert(Node *z)
     }
     
     // Properly assign z's nil nodes, and always insert a red node
-    z->left = nil;
-    z->right = nil;
+    z->left = NULL;
+    z->right = NULL;
     z->color = 'R';
 
     // Maintain red-black properties
@@ -216,9 +238,9 @@ void RedBlackTree::Insert(Node *z)
 
 void RedBlackTree::InsertFixup(Node *z)
 {
-    if (Parent(z) == nil)
+    if (Parent(z) == NULL)
     {
-        if(Parent(z) == nil)
+        if(Parent(z) == NULL)
         {
             z->color = 'B';
         }
@@ -228,7 +250,7 @@ void RedBlackTree::InsertFixup(Node *z)
         // No red-black properties violated
         return;
     }
-    else if (Uncle(z) != nil && Uncle(z)->color == 'R')
+    else if (Uncle(z) != NULL && Uncle(z)->color == 'R')
     {
         Parent(z)->color = 'B';
         Uncle(z)->color = 'B';

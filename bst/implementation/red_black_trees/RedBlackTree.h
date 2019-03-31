@@ -30,17 +30,22 @@ class RedBlackTree
     ~RedBlackTree();
 
     // Return nodes related to a node n
+    Node *Root();
     Node *Parent(Node *n);
     Node *Grandparent(Node *n);
     Node *Sibling(Node *n);
     Node *Uncle(Node *n);
+
+    // Printing method
+    void Print();
+    void Inorder(Node *x);
 
     // Rotation methods
     void RotateLeft(Node *x);
     void RotateRight(Node *x);
 
     // Insertion-related methods
-    void Insert(Node *z);
+    void Insert(int value);
     void InsertFixup(Node *z);
 
     // Delete-related methods
@@ -48,5 +53,4 @@ class RedBlackTree
 
     private:
     Node *root;
-    Node *nil;
 };
