@@ -22,17 +22,18 @@ void print(int P[], int length)
     cout << endl;
 }
 
-//-----------------------------------------------
+//===============================================
 /*
     Partition function used for quick sort.
     Inputs:
             A --array to be sorted.
-            p --left
+            p --index for left-most element
+            r --index of next pivot
     Notes:
-            A[0...i] --subarray whose elements are less than pivot.
-            A[i
+            A[p..i] --subarray whose elements are less than pivot.
+            A[j..r-1] --subarray whose elements are greater than pivot (at r).
 */
-//-----------------------------------------------
+//===============================================
 int partition(int A[], int p, int r)
 {
     cout << endl;
@@ -73,9 +74,9 @@ int partition(int A[], int p, int r)
     return i + 1;
 }
 
-//-----------------------------------------------
+//===============================================
 // Quick sort algorithm
-//-----------------------------------------------
+//===============================================
 void quicksort(int A[], int p, int r)
 {
     if(p < r)
@@ -87,9 +88,9 @@ void quicksort(int A[], int p, int r)
     }
 }
 
-//-----------------------------------------------
+//===============================================
 // MAIN
-//-----------------------------------------------
+//===============================================
 int main()
 {
     // Random data (best case: n*log base 2 of n)
