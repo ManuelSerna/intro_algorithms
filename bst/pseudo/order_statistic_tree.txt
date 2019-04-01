@@ -1,16 +1,21 @@
 //***********************************************
 // Order-Statistic Tree
-//An order statistic tree is simply a red-black tree with additional information stored in each node, in addition to the usual attributes of each node, we another--size. Size contains the number of (internal) nodes in the subtree rooted at x (including x itself), that is, the size of the subtree.
 //***********************************************
+// An order statistic tree is simply a red-black tree with additional information stored in each node, in addition to the usual attributes of each node, we another--size. Size contains the number of (internal) nodes in the subtree rooted at x (including x itself), that is, the size of the subtree.
 
 //===============================================
  Dynamic order statistics queries
 //===============================================
 
 //-----------------------------------------------
-// Select
-// Find the node with the ith smallest key in an order-statistic tree T.
-// Since the height of the red-black tree is at most O(lg n), the running time for this procedure is O(lg n) for a dynamic set of n elements.
+/*
+    Select
+    - Find the node with the ith smallest key in an order-statistic tree T.
+    - Since the height of the red-black tree is at most O(lg n), the running time for this procedure is O(lg n) for a dynamic set of n elements.
+
+    - Another to think about this: if x is always T.root, OS_SELECT will return the value of a node with rank i.
+        * Given rank, find node.
+*/
 //-----------------------------------------------
 OS_SELECT(x, i)
     r = x.left.size + 1
@@ -35,18 +40,60 @@ OS_SELECT_RECURSIVE(x, i)
     return x            // found key
 
 //-----------------------------------------------
-// Rank
-// Given a pointer to a node x in an order-statistic tree, this procedure returns the position of x in the linear order determined by an inorder tree walk.
+/*
+    Rank
+    - Given a pointer to a node x in an order-statistic tree, this procedure returns the position of x in the linear order determined by an inorder tree walk.
+    
+    * Given node, find rank--the opposite of select procedure if always starting at root.
+*/
 //-----------------------------------------------
 OS_RANK(T, x)
     r = x.left.size + 1
-    y = x
+    y = x           // keep x fixed, but move (initialy y == x) starting from x
     while y != T.root
         if y == y.p.right
             r = r + y.p.left.size + 1
-        y = y.p
+        y = y.p     // move up the tree to the parent
     return r
 
+//-----------------------------------------------
+// Key rank: procedure that takes as input as order-statistic tree T and a key k and returns the rank of k in the dynamic set represented by T (assuming all keys are distinct).
+// Recurse down the entire tree T, since you are just returning rank, this prcedure is very similar to OS_RANK.
+//-----------------------------------------------
+OS_KEY_RANK(T, k)
+    if k == T.root.key
+        return T.root.left.size + 1 // k is the root's key
+    else if T.root.key > k
+        return OS_KEY_RANK(T.left, k) // recurse left
+    else
+        return T.root.left.size + 1 + OS_KEY_RANK(T.right, k) // go left
+
+//-----------------------------------------------
+// Return the ith successor of node x in the linear order of the tree in O(lg n) time.
+//-----------------------------------------------
+OS_SUCCESSOR(T, x, i)
+    r = OS_RANK(T, x)   // obtain the rank
+    s = r + i           // add how far ahead ith successor is in relation to r, call this new position s
+    return OS_SELECT(T.root, s) // now simply return successor +i positions ahead of x in linear order
+    
+
+
 //===============================================
-// Interval trees
+// Interval tree - red black tree that supports operations on dynamic sets of intervals.
+/*
+    New data added: 
+        - interval  --interval with endpoints being two real numbers
+        - high      --higher endpoint for interval attribute
+        - low       --lower endpoint
+        - max       --max high endpoint value for the subtree
+*/
 //===============================================
+// Only new operation
+INTERVAL_SEARCH(T, i)
+    x = T.root
+    while x != T.nil and i does not overlap x.interval
+        if x.left != T.nil and x.left.max >= i.low
+            x = x.left
+        else
+            x = x.right
+    return x
