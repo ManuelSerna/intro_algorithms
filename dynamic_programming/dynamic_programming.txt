@@ -1,0 +1,16 @@
+//***********************************************
+// Dynamic Programming notes
+//***********************************************
+
+- Dynamic programming is similar to divide and conquer in that problems are made into smaller problems, and then combining the solutions of those smaller problems.
+    - When dividing and conquering problems, however, there may be overlap between subproblems, in other words, subproblems share subproblems.
+    - A dynamic-programming algorithm solves each subsubproblem just once and then saves its answer in a table, thereby avoiding the work of recomputing the answer every time it solves each subsubproblem.
+
+- We typically apply dynamic programming to optimization problems.
+
+- When developing a dynamic-programming algorithm, we follow a sequence of four steps:
+    1. Characterize the structure of an optimal solution.
+    2. Recursively define the value of an optimal solution.
+    3. Compute the value of an optimal solution, typically in a bottom-up fashion.
+        - at this point we have the value of an optimal solution, not the solution itself (that is what step 4 is for)
+    4. Construct an optimal solution from computed information.

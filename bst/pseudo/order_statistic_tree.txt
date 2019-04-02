@@ -27,7 +27,7 @@ OS_SELECT(x, i)
         return OS_SELECT(x.right, i - r)    // narrow down size of i when going right, as you've eliminated the route of going down x's left subtree
 
 
-// Recrusive version
+// Recursive version
 OS_SELECT_RECURSIVE(x, i)
     r = x.left.size + 1 // start at the root (counting the root)
     while(i != r)
@@ -43,39 +43,39 @@ OS_SELECT_RECURSIVE(x, i)
 /*
     Rank
     - Given a pointer to a node x in an order-statistic tree, this procedure returns the position of x in the linear order determined by an inorder tree walk.
+    Start at x, then move up to root.
     
     * Given node, find rank--the opposite of select procedure if always starting at root.
 */
 //-----------------------------------------------
 OS_RANK(T, x)
     r = x.left.size + 1
-    y = x           // keep x fixed, but move (initialy y == x) starting from x
-    while y != T.root
-        if y == y.p.right
+    y = x           // keep x fixed, but move y (initialy y == x) starting from x
+    while y != T.root       // stop at the root
+        if y == y.p.right   // 
             r = r + y.p.left.size + 1
         y = y.p     // move up the tree to the parent
     return r
 
 //-----------------------------------------------
-// Key rank: procedure that takes as input as order-statistic tree T and a key k and returns the rank of k in the dynamic set represented by T (assuming all keys are distinct).
+// Key rank: procedure that takes as input as order-statistic tree T and a key k (not a node like before) and returns the rank of k in the dynamic set represented by T (assuming all keys are distinct).
 // Recurse down the entire tree T, since you are just returning rank, this prcedure is very similar to OS_RANK.
 //-----------------------------------------------
 OS_KEY_RANK(T, k)
     if k == T.root.key
         return T.root.left.size + 1 // k is the root's key
-    else if T.root.key > k
+    else if k < T.root.key
         return OS_KEY_RANK(T.left, k) // recurse left
     else
-        return T.root.left.size + 1 + OS_KEY_RANK(T.right, k) // go left
+        return T.root.left.size + 1 + OS_KEY_RANK(T.right, k) // go right, adding size of current left subtree
 
 //-----------------------------------------------
 // Return the ith successor of node x in the linear order of the tree in O(lg n) time.
 //-----------------------------------------------
 OS_SUCCESSOR(T, x, i)
-    r = OS_RANK(T, x)   // obtain the rank
+    r = OS_RANK(T, x)   // obtain the rank, think of r as the "starting" point
     s = r + i           // add how far ahead ith successor is in relation to r, call this new position s
     return OS_SELECT(T.root, s) // now simply return successor +i positions ahead of x in linear order
-    
 
 
 //===============================================
@@ -96,4 +96,4 @@ INTERVAL_SEARCH(T, i)
             x = x.left
         else
             x = x.right
-    return x
+    return x    // return interval x that overlaps i

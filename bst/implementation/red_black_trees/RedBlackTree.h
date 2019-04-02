@@ -49,7 +49,9 @@ class RedBlackTree
     void InsertFixup(Node *z);
 
     // Delete-related methods
-    // TODO: define and later implement
+    void Transplant(Node *u, Node *v);
+    void Delete(int value);
+    void DeleteFixup(Node *x);
 
     private:
     Node *root;

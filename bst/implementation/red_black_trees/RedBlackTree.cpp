@@ -85,6 +85,7 @@ void RedBlackTree::Print()
 {
     // TODO: implement all tree trasversal prints
     Inorder(root);
+    cout << endl << endl;
 }
 
 void RedBlackTree::Inorder(Node *x)
@@ -92,7 +93,7 @@ void RedBlackTree::Inorder(Node *x)
     if (x != NULL)
     {
         Inorder(x->left);
-        cout << x->value << " " << endl;
+        cout << x->value << x->color << " ";
         Inorder(x->right);
     }
 }
@@ -218,13 +219,13 @@ void RedBlackTree::Insert(int value)
     {
         root = z;// tree empty
     }
-    else if (z->value == y->value)
+    else if (z->value < y->value)
     {
         y->left = z;// insert left
     }
     else
     {
-        y->right = z;// insert right
+        y->right = z;// insert right (also inserts duplicates right)
     }
     
     // Properly assign z's nil nodes, and always insert a red node
@@ -292,5 +293,32 @@ void RedBlackTree::InsertFixup(Node *z)
 }
 
 //===============================================
-// TODO: implement delete methods
+// Delete methods.
 //===============================================
+void RedBlackTree::Transplant(Node *u, Node *v)
+{
+    if (u->parent == NULL)
+    {
+        root = v;// u is the root, replace it with v
+    }
+    else if (u == u->parent->left)
+    {
+        u->parent->left = v;// u was a left subtree, replace it with v
+    }
+    else
+    {
+        u->parent->right = v;// u was a right subtree, replace it with v
+    }
+
+    v->parent = u->parent;// link v to u's parent, replacemet complete
+}
+
+void RedBlackTree::Delete(int value)
+{
+    //
+}
+
+void RedBlackTree::DeleteFixup(Node *x)
+{
+    //
+}

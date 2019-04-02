@@ -1,0 +1,5 @@
+//*********************************************** 
+// Matrix-chain multiplication notes
+//*********************************************** 
+
+- This section explores how we can multiply a chain of matrices while performing the fewest total scalar multiplications. 
