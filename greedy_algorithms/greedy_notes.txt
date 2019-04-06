@@ -1,0 +1,49 @@
+//***********************************************
+// Greedy algorithms notes.
+//***********************************************
+
+* For many optimization problems, using dynamic programming to determine the best choices is overkill; simpler, more efficient algorithms will do. A greedy algorithm always makes the choice that looks best at the moment. That is, it makes a locally optimal choice in the hope that this choice will lead to a globally optimal solution.
+
+//===============================================
+// Acticity selection problem.
+//===============================================
+/*
+    Statement: schedule several competing activities that require exclusive use of a common resource, with a goal of selecting a maximum size set of mutually comaptible activities.
+
+    -Have a set S = {a1, a2, ..., an} of n activities.
+        - Each activity has a start time s and finish time f where
+            0 <= s < f < (infinity) for each activity i.
+    Activities must be sorted by increasing finish time.
+*/
+//-----------------------------------------------
+/*
+    Recursive activity selector--uses greedy top-down approach to find max set of mutually comaptible activities.
+
+    Parameters:
+        - s[] --array of start times
+        - f[] --array of finish times
+
+    Variables:
+        - A --array that holds activities--activity a(i)
+        
+    Run time:   Theta(n) time given n activities
+    
+    Returns:    max-size set of mutually compatible activities in S
+*/
+//-----------------------------------------------
+GREEDY_ACTIVITY_SELECTOR(s, f)
+    n = s.length
+    A = a(1)    // initialize A to contain just the first activity a[1]
+    k = 1       // index most recent addition to A
+    
+    // Find the earliest in set of activities to finish. Consider each activity a(m) in turn and adds a(m) to A if it's compatible with all previously selected activities; such an activity is the earliest to finish.
+    for m = 2 to n
+        if s[m] >= f[k]
+            A = A + a(m)
+            k = m
+    return A
+
+
+//===============================================
+// Huffman codes
+//===============================================

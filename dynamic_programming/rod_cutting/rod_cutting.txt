@@ -42,7 +42,7 @@ CUT_ROD(p, n)
         - Write procedure recursively but save new subproblems in an array or hash table. The procedure checks if the subproblem has already been solved, if so, it returns the saved value.
         - We say that the recursive procedure has been memoized; it “remembers” what results it has computed previously.
 
-    
+
     - Bottom-up method:
         - This approach typically depends on some natural notion of the "size" of a subproblem, such that solving any particular subproblem depends only on solving "smaller" subproblems.
             - Sort the subproblems by size, from smallest to biggest.

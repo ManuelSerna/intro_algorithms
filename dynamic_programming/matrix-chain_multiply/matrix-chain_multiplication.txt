@@ -1,5 +1,107 @@
 //*********************************************** 
-// Matrix-chain multiplication notes
+ Matrix-chain multiplication notes
 //*********************************************** 
 
 - This section explores how we can multiply a chain of matrices while performing the fewest total scalar multiplications. 
+
+-Problem: given n matrices A1, A2, ..., An, we want to compute the product. 
+    Matrices are fixed and mutliplication between them is associative, so all parenthesizations yield the same product.
+    
+    ex: Given Matrices A, B, C, and D, these can be multiplied in five ways:
+        
+        (A(B(CD))),
+        (A((BC)D)),
+        ((AB)(CD)),
+        ((A(BC))D),
+        (((AB)C)D).
+
+    Multiplying two adjacent and compatible matrices has a cost, how we parenthensize the matrices will have an impact on this cost. We want to find the best cost.
+    
+    Goal: to determine an ORDER for multiplying matrices that has the lowest cost.
+
+//-----------------------------------------------
+ Standard matrix chain algorithm
+//-----------------------------------------------
+
+MATRIX_MULTIPLY(A[][], B[][])
+    if A.columns != B.rows
+        error "Incompatible matrices"
+    else
+        // Create product matrix
+        let C[A.rows][B.columns] be a new matrix
+        
+        // Fill in C[i][j] with product
+        for i = 1 to A.rows
+            for j = 1 to B.columns
+                C[i][j] = 0
+                
+                // Now at C[i][j], multiply elements in A's column k (in the same row) with B's row k (in the same column)
+                for k = 1 to A.columns
+                    C[i][j] = C[i][j] + A[i][k] * B[k][j]
+        return C
+    
+//-----------------------------------------------
+ Example:
+//-----------------------------------------------
+
+    Given sequence of matrices <A, B, C>. The dimensions are 10x100, 100x5, and 5x50 respectively. 
+    
+        First try:
+            If we multiply according to the parenthesization 
+            
+            ((AB)C), 
+            
+            we first perform 10*100*5 = 5000 scalar multiplications to compute the 10x5 matrix product of AB.
+            Then also have 10*5*50 scalar multiplications to multiply this product by C.
+            In this case, there a total of 7500 scalar multiplications.
+        
+        Second try: 
+            Let's try another parenthesization
+            
+            (A(BC)),
+            
+            we first perform 100*5*50 = 25,000 scalar mutliplications (ouch) to compute the matrix product of BC. We then add 10*100*50 = 50,000 scalar multiplications to multiply this product by A.
+            
+            In this case, there are a total of 75,000 scalar mutliplications (ouchies).
+        
+        Computing with the first parenthesization is 10 times faster!
+
+Note: Trying to find every possible parenthesization (brute-forcing it) is a poor strategy to obtain the optimal order. Given n matrices, the number of possibilities is exponential in n.
+        
+//-----------------------------------------------
+ Determines the optimal number of scalar mutliplications needed to compute a matrix chain product
+//-----------------------------------------------
+MATRIX_CHAIN_ORDER(p[])
+    n = p.length - 1
+    let m[1..n][1..n]
+    and s[1..n-1][2..n] be new tables
+    
+    for i = 1 to n
+        m[i][i] = 0
+    
+    for length = 2 to n      // chain length
+        for i = 1 to n-length - 1
+            j = i + length - 1
+            m[i][j] = (infinity)
+            
+            for k = i to j-1
+                q = m[i][k] + [k+1][j] + p[i-1]*p[k]*p[j]
+                if q < m[i][j]
+                    m[i][j] = q
+                    s[i][j] = k
+    return m and s
+
+//-----------------------------------------------
+ Print an optimal parenthesization of a sequence of n matrices, given the s table computed by MATRIX_CHAIN_ORDER and the indices i and j.
+//-----------------------------------------------
+PRINT_OPTIMAL_PARENS(s, i, j)
+    if i == j
+        print "A[i]"
+    else
+        print "("
+        PRINT_OPTIMAL_PARENS(s, i, s[i][j])
+        PRINT_OPTIMAL_PARENS(s, s[i][j] + 1, j)
+        print ")"
+      
+//-----------------------------------------------
+Next: maybe do the next sections beyond 15.2--15.3 (elements of dynamic programming), 15.4 (longest common subsequence)
