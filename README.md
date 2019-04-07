@@ -8,69 +8,48 @@ Cormen, T. H., Leiserson, C. E., Rivest, R. L., & Stein, C. (n.d.). Introduction
 I used the above source to take notes, write pseudo code, and implement many of the algorithms and data structures.
 
 ## Sorting algorithms and data structures covered:
-* Insertion sort:
-  - Pseudo code, and Python implementation.
+* __Insertion sort__: pseudo code, and Python implementation.
 
-* Merge sort:
-  - Pseudo code, and C++ implementation.
+* __Merge sort__: pseudo code, and C++ implementation.
 
-* Maximum subarray problem:
-  - C++ implementation.
+* __Maximum subarray problem__: C++ implementation.
 
-* Matrix multiplication:
-  - Naive implementation.
-  - Strassen's notes and pseudo code.
+* __Matrix multiplication__: naive implementation; Strassen's notes and pseudo code.
 
-* Heapsort (with procedures):
-  - Pseudo code with some notes.
+* __Heaps__: pseudo code with some notes over heap procedures.
 
-* Quicksort:
-  - Pseudo code and C++ implementation.
+* __Quicksort__: pseudo code and C++ implementation.
 
-* Linear time sorting:
-  * Counting sort:
-    - Pseudo code and C++ implementation.
+* __Linear time sorting__:
+  * __Counting sort__: pseudo code and C++ implementation.
   
-  * Radix sort:
-    - Pseudo code.
+  * __Radix sort__: pseudo code.
   
-  * Bucket sort:
-    - Pseudo code.
+  * __Bucket sort__: pseudo code.
 
-* Elementary Data Structures:
-  * Stack:
-    - Pseudo code and C++ implementation.
+* __Elementary Data Structures__:
+  * __Stack__: pseudo code and C++ implementation.
   
-  * Queue:
-    - Some notes and pseudo code.
+  * __Queue__: some notes and pseudo code.
   
-  * Linked Lists:
-    - Pseudo code.
+  * __Linked Lists__: pseudo code.
 
-* Binary search trees:
-  * Regular binary search tree:
-    - Some notes, pseudo code, and NEED TO IMPLEMENT.
+* __Binary search trees__:
+  * __Regular binary search tree__: some notes, pseudo code, and NEED TO IMPLEMENT.
   
-  * Red-black trees:
-    - Some notes, pseudo code, and C++ implementation (NOT COMPLETE--NEED DELETE OPERATION).
+  * __Red-black trees__: some notes, pseudo code, and C++ implementation (NOT COMPLETE--NEED DELETE OPERATION).
   
-  * Order-Statistics trees (dynamic order statistics):
-    - Pseudo code.
+  * __Order-Statistics trees (dynamic order statistics)__: pseudo code.
 
-* Dynamic Programming
-  - General notes solely on topic.
+* __Dynamic Programming__: general notes solely on topic.
   
-  * Rod cutting:
-    - Some notes, pseudo code, and Python implementation (NOT COMPLETE--SOME ERRORS).
+  * __Rod cutting__: some notes, pseudo code, and Python implementation (NOT COMPLETE--SOME ERRORS).
   
-  * Matrix-chain multiply:
-    - Some notes, pseudo code, and NEED TO IMPLEMENT.
+  * __Matrix-chain multiply__: some notes, pseudo code, and NEED TO IMPLEMENT.
 
-* Greedy Algorithms:
-  - in progress.
+* __Greedy Algorithms__: in progress.
 
-* Elementary graph algorithms:
-  - in progress.
+* __Elementary graph algorithms__: in progress.
 
 ## Credits
 
