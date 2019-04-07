@@ -43,7 +43,7 @@ I used the above source to take notes, write pseudo code, and implement many of 
 
 * __Dynamic Programming__: general notes solely on topic.
   
-  * __Rod cutting__: some notes, pseudo code, and Python implementation (NOT COMPLETE--SOME ERRORS).
+  * __Rod cutting__: some notes, pseudo code, and Python implementation.
   
   * __Matrix-chain multiply__: some notes, pseudo code, and NEED TO IMPLEMENT.
 

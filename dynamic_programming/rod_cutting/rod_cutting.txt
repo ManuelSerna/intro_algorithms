@@ -101,7 +101,7 @@ BOTTOM_UP_CUT_ROD(p, n)
 - We can extend the dynamic-programming approach to record not only the optimal value computed for each subproblem, but also a choice that led to the optimal value. With this information, we can readily print an optimal solution.
 
 Extended version of BOTTOM_UP_CUT_ROD: 
-     computes, for each rod size j , not only the maximum revenue r[j], but also s[j], the optimal size of the first piece to cut off
+     computes, for each rod size j, not only the maximum revenue r[j], but also s[j], the optimal size of the first piece to cut off
 //-----------------------------------------------
 
 EXTENDED_BOTTOM_UP_CUT_ROD(p, n)
