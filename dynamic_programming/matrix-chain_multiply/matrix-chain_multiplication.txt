@@ -115,6 +115,5 @@ PRINT_OPTIMAL_PARENS(s, i, j)
         PRINT_OPTIMAL_PARENS(s, i, s[i][j])
         PRINT_OPTIMAL_PARENS(s, s[i][j] + 1, j)
         print ")"
-      
-//-----------------------------------------------
-Next: maybe do the next sections beyond 15.2--15.3 (elements of dynamic programming), 15.4 (longest common subsequence)
+
+See attached scanned document for a much more thorough example.
