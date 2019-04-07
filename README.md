@@ -50,8 +50,3 @@ I used the above source to take notes, write pseudo code, and implement many of 
 * __Greedy Algorithms__: in progress.
 
 * __Elementary graph algorithms__: in progress.
-
-## Credits
-
-#### Max sub-array implementation credited to GeeksforGeeks:
-https://www.geeksforgeeks.org/maximum-subarray-sum-using-divide-and-conquer-algorithm/
