@@ -71,7 +71,9 @@ Note: Trying to find every possible parenthesization (brute-forcing it) is a poo
 //-----------------------------------------------
  Determines the optimal number of scalar mutliplications needed to compute a matrix chain product
 
-
+ Array p[] is the sequence of dimensions of matrices A1..An.
+    - Say, if p[0] = 2, p[1] = 4, p[2] = 3
+    These numbers mean the first matrix in the sequence has dimensions 2x4, and the second 4x3, the 4 is a shared dimension between them, and so on. This simplifies storage and the mutliplication process for getting cost (in number of scalar multiplications).
 //-----------------------------------------------
 MATRIX_CHAIN_ORDER(p[])
     n = p.length - 1
