@@ -9,10 +9,11 @@ def max(a, b):
     else:
         return b
 
-#------------------------------------------------
-# Extended bottom-up approach implementation
-#------------------------------------------------
+#================================================
+# Bottom-up approach implementation
+#================================================
 
+# Regular bottom-up, returns only max profit
 def bottom_up_cut_rod(p, n):
     # Let r[0..n] be a new array, go up to n+1 to save r[n]--optimal solution
     r = [None for i in range(n+1)]
@@ -32,6 +33,7 @@ def bottom_up_cut_rod(p, n):
     return r[n]
     
 #------------------------------------------------
+# Extended version of bottom-up
 # Computes, for each rod size j, not only the maximum revenue r[j], but also s[j], the optimal size of the first piece to cut off
 #------------------------------------------------
 def extended_bottom_up_cut_rod(p, n):
@@ -41,6 +43,8 @@ def extended_bottom_up_cut_rod(p, n):
 
     r[0] = 0
 
+    # Start at 0, then take each possible profit sum combination from 1..i and i+1..j, record the max price as you go up to j.
+    # The index that gives this max profit is then stored.
     for j in range(n+1):
         q = -1
         for i in range(j+1):
