@@ -1,0 +1,17 @@
+//***********************************************
+ Breadth-first search pseudo code.
+//***********************************************
+
+/*
+    TODO: fill in important notes from book
+*/
+
+// G is a graph with V (set of vertices) and E (set of edges) and is represented as an adjacency list.
+#DEFINE G = (V, E)
+
+// Source vertex (that exists in V)
+#DEFINE s
+
+
+BFS(G, s)
+    // TODO: fill in psudo code from book
