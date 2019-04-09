@@ -1,0 +1,102 @@
+//***********************************************
+ Depth-first search notes.
+//***********************************************
+The objective of the depth-first strategy is to go as deep into the graph as possible.
+    - Depth-first explores edges out of the most recently discovered vertex v that still has unexplored edges leaving it.
+    - Once all of v's edges have been explored, the search "backtracks" to explore edges leaving from which v was discovered, then continue until all vertices connected to source vertex.
+    - If there are vertices yet to be discovered, the algorithm selects one as a new source and repeats this traversal process.
+
+Vertices are colored:
+    - White: every vertex originally white, "undiscovered"
+    - Gray: "discovered" vertex during search
+    - Black: vertex blackened when finished (when adjacency list as been examined completely)
+    
+    This guarantees that each vertex ends up exactly once spanning tree if searching from mutliple source vertices
+
+Attributes of a vertex v
+    - d: records when v was first discovered and grayed
+    - f: records when search finishes examining v's adjacency list and blackens v
+    
+    v.d < v.f
+    
+    Vertex u is white before u.d, gray between time u.d and u.f, and black thereafter.
+
+Note: this algorithm is mostly used as a subroutine in other algorithms.
+
+//-----------------------------------------------
+ DFS pseudo code, graph G can be directed or undirected, with time being a global variable.
+//-----------------------------------------------
+
+#DEFINE time
+
+// Using recursion
+DFS(G)
+    for each vertex u that exists in G.V
+        u.color = "white"
+        u.predecessor = NULL
+    time = 0
+    for each vertex u that exists in G.V
+        if u.color == "white"
+            DFS_VISIT(G, u)
+
+DFS_VISIT(G, u)
+    time = time + 1         // white vertex u has just been discovered
+    u.d = time
+    u.color = "gray"
+    for each v that exists in G.Adj[u]  // explore edge (u, v)
+        if v.color == "white"
+            v.predecessor = u
+            DFS_VISIT(G, v)
+    u.color = "black"       // blacken u; it is finished
+    time = time + 1
+    u.f = time
+
+
+//-----------------------------------------------
+ DFS procedure that uses a stack instead of recursion.
+//-----------------------------------------------
+// Same call
+DFS(G)
+    // Each vertex starts off as white
+    for each vertex u that exists in G.V
+        u.color = "white"
+        u.p = NULL
+    for each u that exists in G.V
+        if u.color == "white"
+            DFS_VISIT_STACK(G, u)   // use stack, not recursion
+            
+DFS_VISIT_STACK_VERSION(G, u)
+    S = empty stack
+    S.push(u)
+    while stack is not empty
+        x = S.pop()
+        if x.color == "white"
+            time = time + 1
+            x.color = "gray"
+            S.push(x)
+            for each v in x.adjacent()
+                if v.color == "white"
+                    v.predecessor = x
+                    stack.push(v)
+        else if x.color == "gray"
+            time = time + 1
+            x.f = time
+            x.color = "black"
+
+// Print front, cross, and back edges that form from the DFS spanning tree
+DFS-VISIT-PRINT(G, u)
+    time = time + 1
+    u.d = time
+    u.color = "gray"
+    for each v that exists in G.Adj[u]
+        if v.color == "white"
+            print "(u, v) is a tree edge."
+            v.predecessor = u
+            DFS-VISIT-PRINT(G, v)
+        else if v.color == "gray"
+            print "(u, v) is a back edge."
+        else
+            if v.d > u.d
+                print "(u, v) is a forward edge."
+            else 
+                print "(u, v) is a cross edge."

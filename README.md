@@ -30,9 +30,9 @@ I used the above source to take notes, write pseudo code, and implement many of 
 * __Elementary Data Structures__:
   * __Stack__: pseudo code and C++ implementation.
   
-  * __Queue__: some notes and pseudo code.
+  * __Queue__: some notes and pseudo code. (SHOULD IMPLEMENT)
   
-  * __Linked Lists__: pseudo code.
+  * __Linked Lists__: pseudo code. (SHOULD IMPLEMENT)
 
 * __Binary search trees__:
   * __Regular binary search tree__: some notes, pseudo code, and NEED TO IMPLEMENT.

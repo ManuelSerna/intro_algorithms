@@ -2,7 +2,6 @@
  Elementary Graph notes.
 //***********************************************
 
-
 Introduction
 //-----------------------------------------------
 This chapter presents methods for representing a graph and for searching a graph.
@@ -16,61 +15,9 @@ Searching a graph means systematically following the edges of the graph so as to
 
 
 Representations of graphs (see scanned doc)
-
 //-----------------------------------------------
 Given graph G = (V, E)
     G = graph
     V = set of vertices
     E = set of edges
-
-
-Breadth-first search
-//-----------------------------------------------
-Given a graph G = (V, E) and a distinguished source vertex s, breadth-first search systematically explores the edges of G to "discover" every vertex that is reachable from s. It computes the distance (smallest number of edges) from s to each reachable vertex. It also produces a "breadth-first tree" with s being the root, and the root's descendants are all the reachable vertices. 
-
-This algorithm works for directed and undirected graphs.
-
-To keep track of progress, breadth-first search colors each vertex:
-    - White:
-        All vertices are initially white, this color means "undiscovered".
     
-    When a vertex is discovered, it becomes nonwhite, gray and black colors mean a certain node has been discovered already.
-    
-    If (u, v) exist in E...
-    - Gray:
-        May have some adjacent white vertices, these can represent the "frontier" between discovered and undiscovered vertices.
-    
-    - Black:
-        If vertex u is black, then vertex v is either gray or black; that is, all vertices adjacent to black vertices have been discovered
-
-The pseudo code for BFS assumes that the input graph G = (V, E) is represented using adjacency lists. Color for a vertex u is stored in u.color and the predecessor in u.p (NULL if there is no predecessor).
-The attribute u.d holds the distance from the source s to vertex u computed by the algorithm, and this procedure uses a queue to manage gray vertices.
-
-#DEFINE MAX = max number supported
-
-// Note some set notation used
-BFS(G, s)
-    // Vertex u from the set of vertices not including source vertex
-    for each vertex u that exists in {G.V - {s}}
-        u.color = "white"
-        u.d = MAX
-        u.predecessor = NULL
-    s.color = "gray"
-    s.d = 0
-    s.predecessor = NULL
-    Q = empty queue
-    ENQUEUE(Q, s)
-    while Q is not empty
-        u = DEQUEUE(Q)
-        for each v that exists in G.Adj[u]
-            if v.color == "white"
-                v.color = "gray"
-                v.d = u.d + 1
-                v.predecessor = u
-                ENQUEUE(Q, v)
-        u.color = "black"
-
-
-Depth-first search
-//-----------------------------------------------
-x
