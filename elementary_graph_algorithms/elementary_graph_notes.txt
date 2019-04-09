@@ -16,14 +16,3 @@ Searching a graph means systematically following the edges of the graph so as to
 
 
 Representations of graphs (see scanned doc)
-//-----------------------------------------------
-
-
-Breadth-first search
-//-----------------------------------------------
-x
-
-
-Depth-first search
-//-----------------------------------------------
-x
