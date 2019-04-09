@@ -41,12 +41,15 @@ I used the above source to take notes, write pseudo code, and implement many of 
   
   * __Order-Statistics trees (dynamic order statistics)__: pseudo code.
 
-* __Dynamic Programming__: general notes solely on topic.
+* __Dynamic Programming__: general notes for approach structure.
   
   * __Rod cutting__: some notes, pseudo code, and Python implementation.
   
-  * __Matrix-chain multiply__: some notes, pseudo code, and NEED TO IMPLEMENT.
+  * __Matrix-chain multiply__: some notes, pseudo code, and C++ implementation (NOT COMPLETE).
 
 * __Greedy Algorithms__: in progress.
 
-* __Elementary graph algorithms__: in progress.
+* __Elementary graph algorithms__: general notes on topic.
+  * __Breadth-first search__: pseudo code with notes.
+
+  * __Depth-first search__: coming soon.
