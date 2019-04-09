@@ -58,6 +58,9 @@ void matrixChainOrder(int p[], int m[][N], int s[][N])
     {
         m[i][i] = 0;
     }
+    
+    // Now, first, start calculating costs for all pairs of matrices
+    for(int 
 }
 
 
@@ -66,6 +69,9 @@ void matrixChainOrder(int p[], int m[][N], int s[][N])
 //-----------------------------------------------
 int main()
 {
+    // Sequence of dimensions between adjacent matrices in the sequence
+    int dimSequence = {5, 4, 6, 2, 7};
+    
     // Table m for optimal values given a subsequence of i matrices (0 <= i <= n)
     int m[N][N];
     init2DArray(m);
@@ -75,7 +81,7 @@ int main()
     init2DArray(s);
     
     cout << "Sequence of " << N << " arrays." << endl;
-    //matrixChainOrder(FILL IN PARAMS);
+    matrixChainOrder(dimSequence, m, s);
     
     return 0;
 }

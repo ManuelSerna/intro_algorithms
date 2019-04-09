@@ -1,3 +1,29 @@
 //***********************************************
  Elementary Graph notes.
 //***********************************************
+
+
+Introduction
+//-----------------------------------------------
+This chapter presents methods for representing a graph and for searching a graph.
+
+    Review: 
+        - Remember how a graph in graph theory works.
+        - A graph is typically represented with circles and lines which connect these circles. Circles are formally called vertices, and lines are called edges. 
+        - Data can be tacked on to these vertices and edges to make things more interesting.
+
+Searching a graph means systematically following the edges of the graph so as to visit the vertices of the graph.
+
+
+Representations of graphs (see scanned doc)
+//-----------------------------------------------
+
+
+Breadth-first search
+//-----------------------------------------------
+x
+
+
+Depth-first search
+//-----------------------------------------------
+x
