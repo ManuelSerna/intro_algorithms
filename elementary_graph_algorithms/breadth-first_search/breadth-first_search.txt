@@ -34,26 +34,33 @@ Note: this procedure is used to find the shortest path distances between two ver
 //-----------------------------------------------
  BFS pseudo code
 //-----------------------------------------------
-#DEFINE MAX = max number supported
+#DEFINE MAX = max number supported by prog lang
 
-// Note some set notation used
+// Note: some set notation used
 BFS(G, s)
     // Vertex u from the set of vertices not including source vertex
     for each vertex u that exists in {G.V - {s}}
         u.color = "white"
         u.d = MAX
         u.predecessor = NULL
+        
+    // source vertex starts out gray (as we still need to explore adjacent vertices) and start at time = 0
     s.color = "gray"
     s.d = 0
     s.predecessor = NULL
+    
+    // Create a queue structure and insert s into it, note that it wil be removed in the first line of the while loop.
+    // If s is the only vertex in V, then we exit the while loop.
     Q = empty queue
     ENQUEUE(Q, s)
+    
     while Q is not empty
         u = DEQUEUE(Q)
+        // Look at each adjacent vertex of u
         for each v that exists in G.Adj[u]
             if v.color == "white"
-                v.color = "gray"
-                v.d = u.d + 1
-                v.predecessor = u
-                ENQUEUE(Q, v)
-        u.color = "black"
+                v.color = "gray"    // discovered vertex is gray now
+                v.d = u.d + 1       // add one unit of time from "parent" node u...
+                v.predecessor = u   // ...and label u as such
+                ENQUEUE(Q, v)       // queue adjacent vertex v so we can search it later
+        u.color = "black"           // when all adjacent vertices have been discovered, we're done, color this vertex u black
