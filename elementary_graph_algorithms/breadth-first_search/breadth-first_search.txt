@@ -50,10 +50,10 @@ BFS(G, s)
     s.predecessor = NULL
     
     // Create a queue structure and insert s into it, note that it wil be removed in the first line of the while loop.
-    // If s is the only vertex in V, then we exit the while loop.
     Q = empty queue
     ENQUEUE(Q, s)
     
+    // If s is the only vertex in V, then we exit the while loop.
     while Q is not empty
         u = DEQUEUE(Q)
         // Look at each adjacent vertex of u

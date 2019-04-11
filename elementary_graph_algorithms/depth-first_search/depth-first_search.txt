@@ -20,6 +20,8 @@ Attributes of a vertex v
     v.d < v.f
     
     Vertex u is white before u.d, gray between time u.d and u.f, and black thereafter.
+    
+Run time of BFS and DFS: Theta(V + E)
 
 Note: this algorithm is mostly used as a subroutine in other algorithms.
 
@@ -87,7 +89,7 @@ DFS_VISIT_STACK_VERSION(G, u)
 //-----------------------------------------------
  Print front, cross, and back edges that form from the DFS spanning tree
 //-----------------------------------------------
-DFS-VISIT-PRINT(G, u)
+DFS_VISIT_PRINT(G, u)
     time = time + 1
     u.d = time
     u.color = "gray"
@@ -95,7 +97,7 @@ DFS-VISIT-PRINT(G, u)
         if v.color == "white"
             print "(u, v) is a tree edge."
             v.predecessor = u
-            DFS-VISIT-PRINT(G, v)
+            DFS_VISIT_PRINT(G, v)
         else if v.color == "gray"
             print "(u, v) is a back edge."
         else
@@ -103,3 +105,29 @@ DFS-VISIT-PRINT(G, u)
                 print "(u, v) is a forward edge."
             else 
                 print "(u, v) is a cross edge."
+
+
+
+Edge classifications (see scanned doc for a more visual presentation)
+//-----------------------------------------------
+When tracing the traversal of a depth-first search on a graph, 
+for a particular traversal sequence, you have a depth-first spanning tree.
+    - In these spanning trees, the source vertex s is the root, 
+    and then its descendants are the vertices pushed to the stack in order at which they were pushed.
+
+Classifications:
+    - Tree edges: 
+        These are the "normal" lines connecting consecutive vertices, no skipping or jumping around branches.
+        You get these when, from u, you discover v (make edge (u, v)).
+
+    - Back edges: 
+        A vertex u is not a direct descendant of some ancestor vertex v, u points up to v, skipping at least one vertex.
+        The book considers loops (occur in directed graphs) to be back edges.
+            - Back edges indicate cycles in the original graph.
+
+    - Forward edges:
+        A vertex v is a descendant of and is connected to u, but u and v do not make an edge.
+        
+    - Cross edges:
+        "All other edges", meaning one vertex cannot be the descendant of the other.
+        ex: two vertices connected across two branches.

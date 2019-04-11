@@ -102,9 +102,9 @@ MATRIX_CHAIN_MULTIPLY(A, s, i, j)
         return A[i]
     if i + 1 == j
         return A[i] * A[j]
-    b = MATRIX_CHAIN_MULTIPLY(A, s, i, s[i][j])
-    c = MATRIX_CHAIN_MULTIPLY(A, s, s[i][j] + 1, j)
-    return b * c
+    l = MATRIX_CHAIN_MULTIPLY(A, s, i, s[i][j])
+    r = MATRIX_CHAIN_MULTIPLY(A, s, s[i][j] + 1, j)
+    return l * r
 
 //-----------------------------------------------
  Print an optimal parenthesization of a sequence of n matrices, given the s table computed by MATRIX_CHAIN_ORDER and the indices i and j.
