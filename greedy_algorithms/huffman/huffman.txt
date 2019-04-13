@@ -1,0 +1,14 @@
+//***********************************************
+ Huffman codes.
+//***********************************************
+
+HUFFMAN(C)
+    n = |C|
+    queue Q = C
+    for i = 1 to n-1
+        allocate a new node z
+        z.left = x = EXTRACT_MIN(Q)
+        z.right = y = EXTRACT_MIN(Q)
+        z.freq = x.freq + y.freq
+        INSERT(Q, z)
+    return EXTRACT_MIN(Q)   // return the root of the tree

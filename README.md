@@ -47,9 +47,14 @@ I used the above source to take notes, write pseudo code, and implement many of 
   
   * __Matrix-chain multiply__: some notes, pseudo code, and C++ implementation (NOT COMPLETE).
 
-* __Greedy Algorithms__: in progress.
+* __Greedy Algorithms__: general notes on topic.
+  * __Activity select__: notes and psuedo code.
+
+  * __Huffman codes__: IN PROGRESS.
 
 * __Elementary graph algorithms__: general notes on topic.
   * __Breadth-first search__: pseudo code with notes.
 
-  * __Depth-first search__: coming soon.
+  * __Depth-first search__: COMING SOON.
+
+* __Minimum spanning trees__: COMING SOON.

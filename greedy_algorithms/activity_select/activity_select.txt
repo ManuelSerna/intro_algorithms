@@ -7,22 +7,30 @@ Statement: schedule several competing activities that require exclusive use of a
         - Each activity has a start time s and finish time f where
             0 <= s < f < (infinity) for each activity i.
     Activities must be sorted by increasing finish time.
+    
+Making a greedy choice
+    - We can choose an activity to add to the optimal solution without solving every subproblem.
+    - Instead of computing a bunch of subproblems, we could instead, by intuition, choose the activity that ends first, leaving the resource available for as many other activities as possible.
+    Since all activities are (should be) sorted by increasing finish time, we choose the first task in the sequence of activities.
+
+//===============================================
+ Pseudo code notes.
+//===============================================
+Recursive activity selector--uses greedy top-down approach to find max set of mutually comaptible activities.
+
+Parameters:
+    - s[] --array of start times
+    - f[] --array of finish times
+
+Variables:
+    - A --array that holds activities--activity a(i)
+    
+Run time:   Theta(n) time given n activities
+
+Returns:    max-size set of mutually compatible activities in S
 
 //-----------------------------------------------
-/*
-    Recursive activity selector--uses greedy top-down approach to find max set of mutually comaptible activities.
-
-    Parameters:
-        - s[] --array of start times
-        - f[] --array of finish times
-
-    Variables:
-        - A --array that holds activities--activity a(i)
-        
-    Run time:   Theta(n) time given n activities
-    
-    Returns:    max-size set of mutually compatible activities in S
-*/
+ Iterative activity selector.
 //-----------------------------------------------
 GREEDY_ACTIVITY_SELECTOR(s, f)
     n = s.length
