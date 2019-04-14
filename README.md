@@ -50,11 +50,15 @@ I used the above source to take notes, write pseudo code, and implement many of 
 * __Greedy Algorithms__: general notes on topic.
   * __Activity select__: notes and psuedo code.
 
-  * __Huffman codes__: IN PROGRESS.
+  * __Huffman codes__: notes and psuedo code.
 
 * __Elementary graph algorithms__: general notes on topic.
-  * __Breadth-first search__: pseudo code with notes.
+  * __Breadth-first search__: notes and pseudo code.
 
-  * __Depth-first search__: COMING SOON.
+  * __Depth-first search__: notes and pseudo code.
+
+  * __Topological sort__: IN PROGRESS.
+
+  * __Strongly connected components__: IN PROGRESS.
 
 * __Minimum spanning trees__: COMING SOON.

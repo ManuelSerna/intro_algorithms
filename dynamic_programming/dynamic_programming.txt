@@ -59,4 +59,6 @@ Informally, the running time of a dynamic-programming algorithm depends on the p
 
  Overlapping Subproblems
 ------------------------
-x
+When a recursive algorithm revisits the same problem repeatedly, the optimization problem has overlapping subproblems.
+    - In contrast, divide and conquer generates new subproblems at each recursion.
+    Dynamic programming takes advantage of overlapping subproblems by storing new solutions. 

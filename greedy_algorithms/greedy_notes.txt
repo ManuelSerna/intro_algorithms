@@ -43,4 +43,54 @@ Unfortunately there is no one way of telling if a greedy approach can solve all 
         We can usually make the greedy choice more efficiently than when we have to consider a wider set of choices. By preprocessing the input or by using an appropriate data structure (often a priority queue), we often can make greedy choices quickly, thus yielding an efficient algorithm.
     
     2. Optimal substructure
-        *
+        * A problem exhibits optimal substructure if an optimal solution to the problem contains within it optimal solutions to subproblems.
+        
+        We have the luxury of assuming that we arrived at a subproblem by having made the greedy choice in the original problem. All we really need to do is argue that an optimal solution to the subproblem, combined with the greedy choice already made, yields an optimal solution to the original problem. This scheme implicitly uses induction on the subproblems to prove that making the greedy choice at every step produces an optimal solution.
+
+
+//-----------------------------------------------
+ Greedy vs dynamic programming
+//-----------------------------------------------
+
+It can be difficult to distinguish when to apply greedy or dynamic programming; to better illustrate the subtleties between the two techniques, let's look at the knapsack problem.
+
+* Knapsack problem:  A thief robbing a store finds n items. The ith item is worth i dollars and weighs w(i) pounds, where i and w(i) are integers. The thief wants to take as valuable a load as possible, but he can carry at most W pounds in his knapsack, for some integer W . Which items should he take?
+    - There are two versions of this question, the 0-1 and fractional knapsack problems.
+    
+    * 0-1: take a whole item.
+        - Consider the most valuable load that weighs at most W pounds, If we remove item j from this load, the remaining load must be the most valuable load weighing at most W-w(j) that the thief can take from the n-1 original items excluding j.
+        - Can't solve this problem with greedy strategy, look at the example below:
+        
+            item 1: 10 lbs, $60
+            item 2: 20 lbs, $100
+            item 3: 30 lbs, $120
+            knapsack: 50 lbs limit.
+            
+            solutions:
+                i.
+                    item 1 + item 2,
+                    10 lbs ($60) + 20 lbs ($100) = $160
+                
+                ii.
+                    item 1 + item 3,
+                    10 lbs ($60) + 30 lbs ($120) = $160
+                
+                - So any solution with item 1 is suboptimal. The value per pound of item 1 is 6 dollars per pound, higher than the other items. Thus, the greedy strategy would take you to item 1 first.
+                
+                iii. the actual optimal solution.
+                
+                    item 2 + item 3
+                    20 lbs ($100) + 30 lbs ($120) = $220
+    
+    * Fractional: can take a fraction of an item.
+        - Can use greedy strategy to solve.
+        - Consider that if we remove a weight w of one item j from the optimal load, the remaining load must be the most valuable load weighing at most W-w that the thief can take from the n-1 original items plus w(j)-w pounds of item j .
+
+        - To solve this problem, first compute the value per pound for each item. The thief takes the item with the most value per pound, he takes as many of this item, and then moves on to the next most valuable item until the weight reaches W.
+            - By sorting items by value per pound, the greedy algorithm runs in O(n lg n).
+            
+        - Solution:
+            item 1 + item 1 + item 3 (2/3)
+            10 lbs ($60) + 20 lbs ($100) + 20/30 lbs ($80) = $240
+            
+    - In the 0-1 problem, when we consider to add an item in the knapsack, we have to compare the solutions to the subproblems that include and exclude that item. The problem formulated in this way gives rise to many overlapping subproblems--which is how you do dynamic programming.
