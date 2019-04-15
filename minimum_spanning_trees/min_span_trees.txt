@@ -1,1 +1,10 @@
- 
+//***********************************************
+ Minimum Spanning Trees notes.
+//***********************************************
+
+Suppose you have a graph G, and G contains sets V (contains all the 
+vertices in G) and E (possible edges that connect any two vertices in V), for each edge (u, v) (u and v vertices) there is an associated weight, denoted w(u, v) specifying the cost to traverse the edge.
+
+* Minimum spanning tree problem: given E, we want to find an acyclic subset T of E where all vertices are connected and the total weight is minimized.
+
+In here a "generic" method for growing a minimum spanning tree is introduced, the Kruskal and Prim algorithms implement this generic method.
