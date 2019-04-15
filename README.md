@@ -57,8 +57,8 @@ I used the above source to take notes, write pseudo code, and implement many of 
 
   * __Depth-first search__: notes and pseudo code.
 
-  * __Topological sort__: IN PROGRESS.
+  * __Topological sort__: notes and pseudo code.
 
-  * __Strongly connected components__: IN PROGRESS.
+  * __Strongly connected components__: notes and pseudo code.
 
 * __Minimum spanning trees__: COMING SOON.
