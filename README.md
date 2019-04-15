@@ -61,4 +61,5 @@ I used the above source to take notes, write pseudo code, and implement many of 
 
   * __Strongly connected components__: notes and pseudo code.
 
-* __Minimum spanning trees__: COMING SOON.
+* __Minimum spanning trees__: notes
+  * __Kruskal and Prim algorithms__: IN PROGRESS.
