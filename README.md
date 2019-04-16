@@ -62,4 +62,10 @@ I used the above source to take notes, write pseudo code, and implement many of 
   * __Strongly connected components__: notes and pseudo code.
 
 * __Minimum spanning trees__: notes
-  * __Kruskal and Prim algorithms__: IN PROGRESS.
+  * __Kruskal's algorithm__: notes and pseudo code.
+
+  * __Prim's algorithm__: notes and pseudo code.
+
+* __Single-source shortest paths__: general notes COMING SOON.
+
+  * __Bellman-Ford algorithm__: COMING SOON.
