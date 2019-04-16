@@ -1,0 +1,5 @@
+//***********************************************
+ Prim's algorithm notes.
+//***********************************************
+
+- Prim's algorithm operates much like Dijkstra's algorithm for finding shortest paths in a graph.

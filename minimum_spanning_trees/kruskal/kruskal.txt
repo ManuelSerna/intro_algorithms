@@ -1,0 +1,42 @@
+//***********************************************
+ Kruskal's algorithm notes.
+//***********************************************
+* Kruskal's algorithm is a minimum spanning tree (and greedy) algorithm that finds a minimum spanning tree for a connected weighted graph.
+    - It finds a safe edge to add to the growing forest by finding, of all the edges that connect any two trees in the forest, an edge (u, v) of least weight.
+        - When the algorithm ends, each vertex will be connected in a way that each edge will the optimally minimized.
+    - It is greedy because at each step it adds to the forest an edge of least possible weight.
+
+
+//-----------------------------------------------
+ Kruskal's algorithm pseudo code.
+//-----------------------------------------------
+#DEFINE G = (V, E)  // graph with sets of vertices (V) and edges (E)
+#DEFINE w           // weight function between two vertices u and v
+
+MST_KRUSKAL(G, w)
+    // initialize min span tree A to be empty, will add min edges
+    A = empty set
+    
+    // create |V| trees, one containing each vertex, this is how you will merge "sub trees" to create the min span tree (returned as A)
+    for each vertex v that exists in G.V
+        MAKE_SET(v)
+    
+    // Next step is to sort:
+    sort the edges of G.E into nondecreasing order by weight w
+    
+    // Examine edges in order of weight (lowest->highest)
+    for each edge (u, v) that exists in G.E, taken in nondecreasing order by weight
+        // Check if vertices u and v belong to the same tree, if they do, then edge (u, v) cannot be added to the forest without creating a cycle
+        if FIND_SET(u) != FIND_SET(v)
+            A = A U {(u, v)}    // add edge to A
+            UNION(u, v)         // merge the vertices in the two trees
+    return A
+
+
+Further notes
+------------------------
+
+Running time:
+    - depends on disjoint data structure is implemented, for this pseudo code assume disjoint-set-forest implementation with the union-by-rank and path-compression heuristics.
+    
+    - Doing some math, running time of Kruskal's algorithm can be stated as O(E lgV).
