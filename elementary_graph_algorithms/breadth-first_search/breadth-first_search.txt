@@ -1,7 +1,6 @@
-//***********************************************
- Breadth-first search notes.
-//***********************************************
-
+*************************************************
+Breadth-first search (BFS)
+*************************************************
 - Given a graph G = (V, E) and a distinguished source vertex s, breadth-first search systematically explores the edges of G to "discover" every vertex that is reachable from s. 
 - It computes the distance (smallest number of edges) from s to each reachable vertex. 
 
@@ -9,7 +8,7 @@
 
 - This algorithm works for directed and undirected graphs.
 
-To keep track of progress, breadth-first search colors each vertex:
+- To keep track of progress, breadth-first search colors each vertex:
     - White vertex:
         All vertices are initially white, this color means "undiscovered".
     
@@ -25,16 +24,16 @@ To keep track of progress, breadth-first search colors each vertex:
         that is, all vertices adjacent to black vertices have been discovered
 
 
-The pseudo code for BFS assumes that the input graph G = (V, E) is represented using adjacency lists. 
+- The pseudo code for BFS assumes that the input graph G = (V, E) is represented using adjacency lists. 
 Color for a vertex u is stored in u.color and the predecessor in u.p (NULL if there is no predecessor).
 The attribute u.d holds the distance from the source s to vertex u computed by the algorithm, 
 and this procedure uses a queue to manage gray vertices.
 
 Note: this procedure is used to find the shortest path distances between two vertices.
 
-//-----------------------------------------------
- BFS pseudo code
-//-----------------------------------------------
+
+BFS pseudo code
+-------------------------------------------------
 #DEFINE MAX // max number supported by hardware
 #DEFINE s   // source (starting) vertex when procedure first starts
 

@@ -1,24 +1,19 @@
-//***********************************************
- Topological sort notes.
-//***********************************************
-
+*************************************************
+Topological sort
+*************************************************
 * A topological sort of a directed acyclic graph, or "dag", G = (V, E) is a linear ordering of all its vertices such that if G contains an edge (u, v), then u appears before v in the ordering.
     - If the graph contains a cycle, then no linear ordering is possible.
     - Can be viewed as a graph's vertices in an order such that all directed edges go from left to right
     
-//-----------------------------------------------
- Topological sort pseudo code.
-//-----------------------------------------------
+
+Topological sort pseudo code
+-------------------------------------------------
 #DEFINE G = (V, E)  // graph G with a set of vertices V and set of edges E
 
 TOPOLOGICAL_SORT(G)
-    // Call to compute finishing times of v.f for each vertex v
-    DFS(G)
-    
-    // As each vertex is finished, insert it onto the front of a linked list
-    
+    call DFS(G) to compute finishing times of v.f for each vertex v
+    as each vertex is finished, insert it onto the front of a linked list
     return the linked list of vertices
 
-//-----------------------------------------------
 
-Topological sort, using this procedure, can be done in Theta(V + E) time, since depth-first search takes Theta(V + E) time and O(1) time to add each vertex in V to the linked list.
+- Topological sort, using this procedure, can be done in Theta(V + E) time, since depth-first search takes Theta(V + E) time and O(1) time to add each vertex in V to the linked list.

@@ -1,21 +1,21 @@
-//***********************************************
- Depth-first search notes.
-//***********************************************
-The objective of the depth-first strategy is to go as deep into the graph as possible, and then backtrack.
+*************************************************
+Depth-first search
+*************************************************
+- The objective of the depth-first strategy is to go as deep into the graph as possible, and then backtrack.
 
-Basic steps:
+* Basic steps:
     - Depth-first explores edges out of the most recently discovered vertex v that still has unexplored edges leaving it.
     - Once all of v's edges have been explored, the search "backtracks" to explore edges leaving from which v was discovered, then continue until all vertices connected to source vertex.
     - If there are vertices yet to be discovered, the algorithm selects one as a new source and repeats this traversal process.
 
-Vertices are colored:
+* Vertices are colored:
     - White: every vertex originally white, "undiscovered"
     - Gray: "discovered" vertex during search
     - Black: vertex blackened when finished (when adjacency list as been examined completely)
     
     This guarantees that each vertex ends up exactly once spanning tree if searching from mutliple source vertices
 
-Attributes of a vertex v
+* Attributes of a vertex v
     - d: records when v was first discovered and grayed
     - f: records when search finishes examining v's adjacency list and blackens v
     
@@ -23,14 +23,15 @@ Attributes of a vertex v
     
     Vertex u is white before u.d, gray between time u.d and u.f, and black thereafter.
     
-Run time of BFS and DFS: Theta(V + E)
+- Run time of BFS and DFS: Theta(V + E)
 
-Note: this algorithm is mostly used as a subroutine in other algorithms.
+- Note: this algorithm is mostly used as a subroutine in other algorithms.
+    Graph G can be directed or undirected, with time being a global variable.
 
-//-----------------------------------------------
- DFS pseudo code, graph G can be directed or undirected, with time being a global variable.
-//-----------------------------------------------
-#DEFINE time    // system time
+
+DFS pseudo code
+-------------------------------------------------
+#DEFINE time // system time
 
 // Using recursion
 DFS(G)
@@ -55,9 +56,8 @@ DFS_VISIT(G, u)
     u.f = time
 
 
-//-----------------------------------------------
- DFS procedure that uses a stack instead of recursion.
-//-----------------------------------------------
+DFS procedure that uses a stack instead of recursion
+-------------------------------------------------
 // Same initial call
 DFS(G)
     // Each vertex starts off as white
@@ -87,9 +87,8 @@ DFS_VISIT_STACK_VERSION(G, u)
             x.color = "black"
 
 
-//-----------------------------------------------
- Print front, cross, and back edges that form from the DFS spanning tree
-//-----------------------------------------------
+Print front, cross, and back edges that form from the DFS spanning tree
+-------------------------------------------------
 DFS_VISIT_PRINT(G, u)
     time = time + 1
     u.d = time
@@ -109,14 +108,13 @@ DFS_VISIT_PRINT(G, u)
 
 
 
-Edge classifications (see scanned doc for a more visual presentation)
-//-----------------------------------------------
-When tracing the traversal of a depth-first search on a graph, 
-for a particular traversal sequence, you have a depth-first spanning tree.
+- For edge classifications (see scanned doc for a more visual presentation)
+
+- When tracing the traversal of a depth-first search on a graph, for a particular traversal sequence, you have a depth-first spanning tree.
     - In these spanning trees, the source vertex s is the root, 
     and then its descendants are the vertices pushed to the stack in order at which they were pushed.
 
-Classifications:
+* Classifications:
     - Tree edges: 
         These are the "normal" lines connecting consecutive vertices, no skipping or jumping around branches.
         You get these when, from u, you discover v (make edge (u, v)).

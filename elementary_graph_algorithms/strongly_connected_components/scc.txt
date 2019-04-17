@@ -1,26 +1,25 @@
-//***********************************************
- Strongly connected components notes.
-//***********************************************
-
-Now consider a classic application of depth-first search: decomposing a directed graph into its strongly connected components.
+*************************************************
+Strongly connected components notes.
+*************************************************
+- Now consider a classic application of depth-first search: decomposing a directed graph into its strongly connected components.
     - Many algorithms that work with directed graphs begin with such a decomposition.
 
 * Strongly connected components: a subset of vertices in G that have edges creating a cycle through these vertices.
     - A single vertex with a loop also can count.
     
-The algorithm for finding strongly connected components uses the transpose of the given graph G = (V, E). (G is a graph with sets V of vertices and E edges).
+- The algorithm for finding strongly connected components uses the transpose of the given graph G = (V, E). (G is a graph with sets V of vertices and E edges).
     * The transpose of a directed graph takes a graph G and reverses the directions of each edge in E.
         - G and G (transposed) have the same strongly connected components (directions are just reversed).
         
-The following linear-time Theta(V + E) algorithm computes the stronly connected components of a directed graph G = (V, E) using two depth-first searches, one on G and G (transposed).
+- The following linear-time Theta(V + E) algorithm computes the stronly connected components of a directed graph G = (V, E) using two depth-first searches, one on G and G (transposed).
 
-//-----------------------------------------------
- Find strongly connected components (SCC) pseudo code.
-//-----------------------------------------------
+
+Strongly connected components pseudo code
+-------------------------------------------------
 #DEFINE G   // graph containing sets of edges and vertices.
 
 SCC(G)
     DFS(G)  // compute finishing times u.f for each vertex u
-    compute G (transpose)
+    compute transpose of G
     call DFS(G (transpose)), but in the main loop of DFS, consider the vertices in order of decreasing u.f
     output the vertices of each tree in the depth-first forest formed in the previous line as a separate scc
