@@ -1,7 +1,9 @@
 //***********************************************
  Depth-first search notes.
 //***********************************************
-The objective of the depth-first strategy is to go as deep into the graph as possible.
+The objective of the depth-first strategy is to go as deep into the graph as possible, and then backtrack.
+
+Basic steps:
     - Depth-first explores edges out of the most recently discovered vertex v that still has unexplored edges leaving it.
     - Once all of v's edges have been explored, the search "backtracks" to explore edges leaving from which v was discovered, then continue until all vertices connected to source vertex.
     - If there are vertices yet to be discovered, the algorithm selects one as a new source and repeats this traversal process.
@@ -28,8 +30,7 @@ Note: this algorithm is mostly used as a subroutine in other algorithms.
 //-----------------------------------------------
  DFS pseudo code, graph G can be directed or undirected, with time being a global variable.
 //-----------------------------------------------
-
-#DEFINE time
+#DEFINE time    // system time
 
 // Using recursion
 DFS(G)
@@ -57,7 +58,7 @@ DFS_VISIT(G, u)
 //-----------------------------------------------
  DFS procedure that uses a stack instead of recursion.
 //-----------------------------------------------
-// Same call
+// Same initial call
 DFS(G)
     // Each vertex starts off as white
     for each vertex u that exists in G.V
@@ -66,7 +67,7 @@ DFS(G)
     for each u that exists in G.V
         if u.color == "white"
             DFS_VISIT_STACK(G, u)   // use stack, not recursion
-            
+
 DFS_VISIT_STACK_VERSION(G, u)
     S = empty stack
     S.push(u)
@@ -126,7 +127,7 @@ Classifications:
             - Back edges indicate cycles in the original graph.
 
     - Forward edges:
-        A vertex v is a descendant of and is connected to u, but u and v do not make an edge.
+        A vertex v is a descendant of and is connected to vertex u, but u and v do not make an edge.
         
     - Cross edges:
         "All other edges", meaning one vertex cannot be the descendant of the other.

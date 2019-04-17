@@ -2,27 +2,28 @@
  Breadth-first search notes.
 //***********************************************
 
-Given a graph G = (V, E) and a distinguished source vertex s, breadth-first search 
-systematically explores the edges of G to "discover" every vertex that is reachable from s. 
-It computes the distance (smallest number of edges) from s to each reachable vertex. 
-It also produces a "breadth-first tree" with s being the root, and the root's descendants are all the reachable vertices. 
+- Given a graph G = (V, E) and a distinguished source vertex s, breadth-first search systematically explores the edges of G to "discover" every vertex that is reachable from s. 
+- It computes the distance (smallest number of edges) from s to each reachable vertex. 
 
-This algorithm works for directed and undirected graphs.
+- It also produces a "breadth-first tree" with s being the root, and the root's descendants are all the reachable vertices. 
+
+- This algorithm works for directed and undirected graphs.
 
 To keep track of progress, breadth-first search colors each vertex:
-    - White:
+    - White vertex:
         All vertices are initially white, this color means "undiscovered".
     
     When a vertex is discovered, it becomes nonwhite, 
     gray and black colors mean a certain node has been discovered already.
     
     If (u, v) exist in E...
-    - Gray:
+    - Gray vertex:
         May have some adjacent white vertices, these can represent the "frontier" between discovered and undiscovered vertices.
     
-    - Black:
+    - Black vertex:
         If vertex u is black, then vertex v is either gray or black; 
         that is, all vertices adjacent to black vertices have been discovered
+
 
 The pseudo code for BFS assumes that the input graph G = (V, E) is represented using adjacency lists. 
 Color for a vertex u is stored in u.color and the predecessor in u.p (NULL if there is no predecessor).
@@ -34,7 +35,8 @@ Note: this procedure is used to find the shortest path distances between two ver
 //-----------------------------------------------
  BFS pseudo code
 //-----------------------------------------------
-#DEFINE MAX = max number supported by prog lang
+#DEFINE MAX // max number supported by hardware
+#DEFINE s   // source (starting) vertex when procedure first starts
 
 // Note: some set notation used
 BFS(G, s)
