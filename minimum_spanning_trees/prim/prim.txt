@@ -3,3 +3,34 @@
 //***********************************************
 
 - Prim's algorithm operates much like Dijkstra's algorithm for finding shortest paths in a graph.
+
+- Prim's algorithm has the property that the edges in the set A always form a single tree.
+    - Each step adds to the tree A a light edge that connects A to an isolated vertex--one on which no edge of A is incident.
+    - When the algorithm terminates, the edges in A form a minimum spanning tree.
+    - This is a greedy algorithm since at each step it adds to the tree an edge that contributes the minimum amount possible to the tree's weight.
+    - During execution of the algorithm, all vertices that are NOT in the tree reside in a min-priority queue Q based on a key attribute.
+    
+//-----------------------------------------------
+ Prim's algorithm.
+//-----------------------------------------------
+#DEFINE G = (V, E)  // Graph G with sets of vertices V and edges E
+#DEFINE w           // weight function for edge (u, v)
+#DEFINE r           // root vertex (where you start from)
+#DEFINE MAX         // max value of an integer allowed in hardware
+
+MST_PRIM(G, w, r)
+    for each u that exists in G.V
+        u.key = MAX
+        u.predecessor = NULL
+    r.key = 0
+    queue Q = G.V
+    while !Q.isEmpty()
+        u = EXTRACT_MIN(Q)
+        for each v that exists in G.Adj[u]
+            if v exists in Q and w(u, v) < v.key
+                v.predecessor = u
+                v.key = w(u, v)
+
+
+- The running time of Prim's algorithm depends on how we implement the min-priority queue Q.
+- The total time for Prim's algorithm is O(V*lgV + E*lgE) = O(E*lgV), which is asymptotically the same as for the implementation of Kruskal's algorithm.
