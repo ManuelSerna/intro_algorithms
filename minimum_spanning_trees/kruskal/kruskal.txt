@@ -1,15 +1,15 @@
-//***********************************************
- Kruskal's algorithm notes.
-//***********************************************
+*************************************************
+Kruskal's algorithm
+*************************************************
 * Kruskal's algorithm is a minimum spanning tree (and greedy) algorithm that finds a minimum spanning tree for a connected weighted graph.
-    - It finds a safe edge to add to the growing forest by finding, of all the edges that connect any two trees in the forest, an edge (u, v) of least weight.
-        - When the algorithm ends, each vertex will be connected in a way that each edge will the optimally minimized.
-    - It is greedy because at each step it adds to the forest an edge of least possible weight.
+    - Sort all edges by increasing weight, this can be put in an array
+    - Starting with the smallest edge, if adding this edge does not form a cycle with the current graph, add it.
+    - Repeat the above step until all edges are connected.
+        - There will be |V| vertices and |E-1| edges, with optimal minimum weight.
 
 
-//-----------------------------------------------
- Kruskal's algorithm pseudo code.
-//-----------------------------------------------
+Kruskal's algorithm pseudo code
+-------------------------------------------------
 #DEFINE G = (V, E)  // graph with sets of vertices (V) and edges (E)
 #DEFINE w           // weight function between two vertices u and v
 
@@ -17,7 +17,7 @@ MST_KRUSKAL(G, w)
     // initialize min span tree A to be empty, will add min edges
     A = empty set
     
-    // create |V| trees, one containing each vertex, this is how you will merge "sub trees" to create the min span tree (returned as A)
+    // create |V| number of "trees", one containing each vertex, this is how you will merge "sub trees" to create the min span tree (returned as A).
     for each vertex v that exists in G.V
         MAKE_SET(v)
     
@@ -33,10 +33,8 @@ MST_KRUSKAL(G, w)
     return A
 
 
-Further notes
-------------------------
-
-Running time:
-    - depends on disjoint data structure is implemented, for this pseudo code assume disjoint-set-forest implementation with the union-by-rank and path-compression heuristics.
+- More on for loop on line 21: this is a formal way of connecting vertices, these vertices will eventually be connected by edges. At first these edges will be scattered, but as you go through the array/table of sorted weights, the min span tree will become more apparent.
     
+Running time:
+    - depends on disjoint data structure is implemented, for this pseudo code assume disjoint-set-forest implementation with the union-by-rank and path-compression heuristics.    
     - Doing some math, running time of Kruskal's algorithm can be stated as O(E lgV).

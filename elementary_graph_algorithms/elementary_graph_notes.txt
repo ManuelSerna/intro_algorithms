@@ -14,6 +14,12 @@ Elementary Graphs
 - Refer to my notes on graph representations on computers (since I can't draw here).
 
 - Given graph G = (V, E)
-    G = graph
-    V = set of vertices
-    E = set of edges
+    G: graph
+    V: set of vertices
+    E: set of edges
+    Adj: array of |V| lists
+        - For each u in V, the adjacency list Adj[u] contains all the vertices v such that there is an edge (u, v) in E (it contains all the vertices adjacent to u).
+        - In the transpose procedure below, Adj[u] contains pointers to the vertices to make implemenatation easier.
+    n: number of indices in Adj
+
+                

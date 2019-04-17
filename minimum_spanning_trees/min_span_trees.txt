@@ -1,43 +1,36 @@
-//***********************************************
- Minimum Spanning Trees (MST) notes.
-//***********************************************
-
-Suppose you have a graph G = (V, E), and G contains sets V (contains all the vertices in G) and E (possible edges that connect any two vertices in V), for each edge (u, v) (u and v vertices) there is an associated weight, denoted w(u, v) specifying the cost to traverse the edge.
+*************************************************
+Minimum Spanning Trees (MST)
+*************************************************
+- Suppose you have a graph G = (V, E), and G contains sets V (contains all the vertices in G) and E (possible edges that connect any two vertices in V), for each edge (u, v) (u and v vertices) there is an associated weight, denoted w(u, v) specifying the cost to traverse the edge.
 
 * Minimum spanning tree problem: given E, we want to find an acyclic subset T of E where all vertices are connected and the total weight is minimized.
 
-In here a "generic" method for growing a minimum spanning tree is introduced, the Kruskal and Prim algorithms implement this generic method.
-    - They are both greedy algorithms
+- The generic method below manages a set of edges, call it, and it must maintain the loop invariant (meaning this condition must hold until the loop is done).
+    - Prior to each iteration, A is a subset of some minimum spanning tree.
 
-
-The generic method below manages a set of edges, call it, and it must maintain the loop invariant (meaning this condition must hold until the loop is done).
-    
-    Prior to each iteration, A is a subset of some minimum spanning tree.
-
-At each step, try to add some edge (u, v) that does not violate the invariant, consequently, A U {(u, v)} should also be a subset of a minimum spanning tree.
+- At each step, try to add some edge (u, v) that does not violate the invariant, consequently, A U {(u, v)} should also be a subset of a minimum spanning tree.
     * Safe edge: can safely add an edge (u, v) and not violate the invariant.
 
-//-----------------------------------------------
- Generic procedure for building a mst.
-//-----------------------------------------------
+
+Generic procedure for building a mst.
+-------------------------------------------------
 GENERIC_MST(G, w)
     A = empty set of edges
     while A does not form a spanning tree
         find an edge (u, v) that is safe for A
         A = A U {(u, v)}
     return A // at this point, A is a mst since all edges were added to A
-    
-* Cut: a cut (S, V - S) of an undirected graph G = (V, E) is a partition of V.
-    - (S) and (V-S) are distinct sets of vertices, and may have edges between them (accounted for below).
 
-* Cross: an edge (u, v) that exists in E crosses the cut (S, V-S) if one of its endpoints is in S and the other in V-S.
 
-* Respect: a cut respects a set of A edges if no edge in A crosses the cut.
+- Terminology
+    * Cut: a cut (S, V - S) of an undirected graph G = (V, E) is a partition of V.
+        - (S) and (V-S) are distinct sets of vertices, and may have edges between them (accounted for below).
 
-* Light edge: an edge is a light edge crossing a cut if its weight is the minimum of any edge crossing the cut.
-    - There can be more than one light edge in the case of ties.
-    
-* Safe edge:
-    Let G = (V, E) be a connected, undirected graph with a real-valued weight function w defined on E. Let A be a subset of E that is included in some minimum spanning tree for G, let (S, V - S) be any cut of G that respects A, and let (u, v) be a light edge crossing (S, V - S) Then, edge (u, v) is safe for A.
-    
-    
+    * Cross: an edge (u, v) that exists in E crosses the cut (S, V-S) if one of its endpoints is in S and the other in V-S.
+
+    * Respect: a cut respects a set of A edges if no edge in A crosses the cut.
+
+    * Light edge: an edge is a light edge crossing a cut if its weight is the minimum of any edge crossing the cut.
+        - There can be more than one light edge in the case of ties.
+        
+    * Safe edge: Let G = (V, E) be a connected, undirected graph with a real-valued weight function w defined on E. Let A be a subset of E that is included in some minimum spanning tree for G, let (S, V - S) be any cut of G that respects A, and let (u, v) be a light edge crossing (S, V - S). Then, edge (u, v) is safe for A.

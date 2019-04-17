@@ -1,7 +1,6 @@
-//***********************************************
- Prim's algorithm notes.
-//***********************************************
-
+*************************************************
+Prim's algorithm
+*************************************************
 - Prim's algorithm operates much like Dijkstra's algorithm for finding shortest paths in a graph.
 
 - Prim's algorithm has the property that the edges in the set A always form a single tree.
@@ -9,10 +8,10 @@
     - When the algorithm terminates, the edges in A form a minimum spanning tree.
     - This is a greedy algorithm since at each step it adds to the tree an edge that contributes the minimum amount possible to the tree's weight.
     - During execution of the algorithm, all vertices that are NOT in the tree reside in a min-priority queue Q based on a key attribute.
-    
-//-----------------------------------------------
- Prim's algorithm.
-//-----------------------------------------------
+
+
+Prim's algorithm pseudo code
+-------------------------------------------------
 #DEFINE G = (V, E)  // Graph G with sets of vertices V and edges E
 #DEFINE w           // weight function for edge (u, v)
 #DEFINE r           // root vertex (where you start from)
