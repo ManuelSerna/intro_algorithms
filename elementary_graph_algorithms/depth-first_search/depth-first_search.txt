@@ -51,7 +51,7 @@ DFS_VISIT(G, u)
         if v.color == "white"
             v.predecessor = u
             DFS_VISIT(G, v)
-    u.color = "black"       // blacken u; it is finished
+    u.color = "black"   // blacken u; it is finished (done searching form this vertex)
     time = time + 1
     u.f = time
 

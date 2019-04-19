@@ -57,7 +57,7 @@ BFS(G, s)
     // If s is the only vertex in V, then we exit the while loop.
     while Q is not empty
         u = DEQUEUE(Q)
-        // Look at each adjacent vertex of u
+        // Look at each adjacent vertex v of u
         for each v that exists in G.Adj[u]
             if v.color == "white"
                 v.color = "gray"    // discovered vertex is gray now

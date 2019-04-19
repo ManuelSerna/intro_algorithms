@@ -1,13 +1,18 @@
 *************************************************
 Prim's algorithm
 *************************************************
-- Prim's algorithm operates much like Dijkstra's algorithm for finding shortest paths in a graph.
+- Prim's algorithm maintains two sets of vertices:
+    1. Set of vertices already included in the mst.
+    2. Set of vertices not yet included.
 
-- Prim's algorithm has the property that the edges in the set A always form a single tree.
-    - Each step adds to the tree A a light edge that connects A to an isolated vertex--one on which no edge of A is incident.
-    - When the algorithm terminates, the edges in A form a minimum spanning tree.
-    - This is a greedy algorithm since at each step it adds to the tree an edge that contributes the minimum amount possible to the tree's weight.
-    - During execution of the algorithm, all vertices that are NOT in the tree reside in a min-priority queue Q based on a key attribute.
+- Between these two sets there will be cuts, the idea is to pick the smallest one and proceed to add all vertices to the first set until all vertices are included.
+
+- Steps for Prim algorithm:
+    - Create a set for the mst to keep track of vertices included in the MST.
+    - Give the starting vertex a value of 0 so that it is selected first in the min-priority queue. All other vertices are initialized with a sentinel value of infinity.
+    - Keep including vertices if the set for the mst is not full, always pick the smallest weight in the cut.
+
+- During execution of the algorithm, all vertices that are NOT in the tree reside in a min-priority queue Q based on a key attribute.
 
 
 Prim's algorithm pseudo code
@@ -22,7 +27,7 @@ MST_PRIM(G, w, r)
         u.key = MAX
         u.predecessor = NULL
     r.key = 0
-    queue Q = G.V
+    min queue Q = G.V
     while !Q.isEmpty()
         u = EXTRACT_MIN(Q)
         for each v that exists in G.Adj[u]
