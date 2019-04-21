@@ -1,0 +1,33 @@
+*************************************************
+Single-source shortest paths
+*************************************************
+- Continuing with graph theory, the single-source shortest paths problem tries to find the path between two vertices that has the least cost.
+
+- Formally, we are given a weighted, directed graph G =(V, E), with weight function w that maps edges to real-valued weights.
+    - The weight of a path p is the sum of the weights of its constituent edges. 
+    - The shortest-path weight d(u, v) from u to v is defined as the minimum value of any path, if one exists, from u to v. 
+    - A shortest path from vertex u to vertex v is then defined as any path p with weight w(p) = d(u, v).
+    
+- Examples of edge representations: road distance, time, cost, penalties, loss, etc.
+
+- It is a good idea to review breath-first search.
+
+
+- The algorithms discussed in this topic can also be applied to variants of this problem:
+    * Single-destination shortest-paths problem: find a shortest path to a given destination vertex from any vertex. Reversing all directions gives us single-source shortest paths.
+    
+    * Single-pair shortest-path problem: find the shortest path between two given vertices. Can solve single-source problem (starting at one of the vertices) to solve this also.
+    
+    * All-pairs shortest-paths problem: find a shortest path from u to v for every pair of vertices. This problem is described in more detail in its own directory.
+
+
+- Shortest-paths algorithms typically rely on the property that a shortest path between two vertices contains other shortest paths within it.
+    - Basically, a bunch of shortest paths will make an absolute shortest path for the graph overall.
+
+
+- In certain cases we may encounter graphs with edges that have negative values.
+    - In these cases, be wary of traversing edges with negative weights. These edges can cause infinite traversal as by subtracting weight will make you go on to negative infinity (infinitely recursive).
+    
+- No shortest path can contain a negative-weight cycle, nor a positive-weight cycle.
+
+- continue on representing shortest paths

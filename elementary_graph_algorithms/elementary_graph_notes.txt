@@ -22,4 +22,24 @@ Elementary Graphs
         - In the transpose procedure below, Adj[u] contains pointers to the vertices to make implemenatation easier.
     n: number of indices in Adj
 
+- Use a node structure to hold the linked list implemenatation for the adjacency 
+
                 
+transpose pseudo code
+-------------------------------------------------
+TRANSPOSE(G)
+    let G' be the transpose of G and G'.Adj[] is the size of G
+    for i = 1 up to |G.V|
+        let temp be a new node at G.Adj[i]
+        while temp != NULL
+            if G'.Adj[temp.vertex] == NULL
+                let transpose be a new node to insert into the adjacency list
+                transpose.vertex = i
+                transpose.next = NULL
+                G'.Adj[temp.vertex] = transpose
+            else
+                let transpose be a new node
+                transpose.vertex = i
+                transpose.next = G'.Adj[temp.vertex]
+                G'.Adj[temp.vertex] = transpose
+            temp = temp.next
