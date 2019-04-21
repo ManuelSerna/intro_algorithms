@@ -5,12 +5,14 @@ Single-source shortest paths
 
 - Formally, we are given a weighted, directed graph G =(V, E), with weight function w that maps edges to real-valued weights.
     - The weight of a path p is the sum of the weights of its constituent edges. 
-    - The shortest-path weight d(u, v) from u to v is defined as the minimum value of any path, if one exists, from u to v. 
-    - A shortest path from vertex u to vertex v is then defined as any path p with weight w(p) = d(u, v).
+    * The shortest-path weight, denoted D(u, v), from u to v is defined as the minimum value of any path, if one exists, from u to v. 
+        - A shortest path from vertex u to vertex v is then defined as any path p with weight w(p) = D(u, v).
     
 - Examples of edge representations: road distance, time, cost, penalties, loss, etc.
 
-- It is a good idea to review breath-first search.
+
+- A subpath of a shortest path is a shortest path.
+    - Can use cut and paste to prove this (as you already have an absolute shortest path).
 
 
 - The algorithms discussed in this topic can also be applied to variants of this problem:
@@ -21,13 +23,26 @@ Single-source shortest paths
     * All-pairs shortest-paths problem: find a shortest path from u to v for every pair of vertices. This problem is described in more detail in its own directory.
 
 
-- Shortest-paths algorithms typically rely on the property that a shortest path between two vertices contains other shortest paths within it.
-    - Basically, a bunch of shortest paths will make an absolute shortest path for the graph overall.
-
-
 - In certain cases we may encounter graphs with edges that have negative values.
     - In these cases, be wary of traversing edges with negative weights. These edges can cause infinite traversal as by subtracting weight will make you go on to negative infinity (infinitely recursive).
     
-- No shortest path can contain a negative-weight cycle, nor a positive-weight cycle.
+- If there are negative-weight edges in the graph, shortest paths may not exist. Let s be the source vertex.
+    - If you find a negative cycle that is reachable from s, that is, a cycle whose total weight ends up being negative, you will NOT have a shortest path since you can go around this cycle more and more times. You artificially "decrease" the weight to negative infinity.
+    - There can be negative-weight edges, however, so long as there are no cycles.
+    
+- There can also be no paths, if the graph is empty.
 
-- continue on representing shortest paths
+
+* Algorithms in the book and therefore in these notes use the term "relaxation". 
+    - We maintain the attribute v.d--the shortest-path estimate.
+    - Starting from a source vertex s (to destination v), the process of "relaxing" some edge (u, v) means testing if including vertex u will give us the shortest path.
+    - We obviously want the smaller value, so update v.d to be that.
+    
+    
+    Relaxation pseudo code on edge (u, v)
+    ---------------------------------------------
+    RELAX(u, v, w)
+        if v.d > u.d + w(u, w)
+            v.d = v.d + w(u, v)
+            v.predecessor = u
+
