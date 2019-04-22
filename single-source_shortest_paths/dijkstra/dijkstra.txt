@@ -12,7 +12,7 @@ Dijkstra's Algorithm
 * My explanation:
     - Start from a source vertex s, label its cost zero, and label the cost to all the vertices connected to s, label all other vertices to be infinity.
     - From s, choose the vertex, call it u, that will add the least cost to your current cost (zero). Add u to S (which now has s and u).
-    - From all vertices in S, relax all connected vertices, meaning compare the cost of getting to some other vertex to your current cost. Pick the vertex that adds the least cost (if at all). Repeat this step until S contains all vertices in V.
+    - From all vertices in S, relax all connected edges (to vertices not in S), meaning compare the cost of getting to some other vertex to your current cost. Pick the vertex that adds the least cost (if at all). Repeat this step until S contains all vertices in V.
     
 
 Dijkstra's algorithm pseudo code

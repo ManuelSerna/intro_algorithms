@@ -30,7 +30,7 @@ Single-source shortest paths
 - There can also be no paths if the graph is empty.
 
 
-* Relaxing a vertex
+* Relaxing an edge
     - We maintain the attribute v.d--the shortest-path value from some source vertex to v. In order for the algorithms discussed here to work, we must initialize all other vertices to infinity with null predecessors.
     
     
