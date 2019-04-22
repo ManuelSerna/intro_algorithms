@@ -1,4 +1,34 @@
 *************************************************
 Dijkstra's Algorithm
 *************************************************
-x
+- Dijkstra's algorithm solves the single-source shortest-paths problem on a weighted, directed graph G = (V, E) for the case in which all edge weights are nonnegative.
+
+- A good implementation will make this procedure faster than Bellman-Ford.
+
+* A formal explanation: Dijkstra's algorithm maintains a set of S vertices whose final shortest-path weights from the source s have already been determined. The algorithm repeatedly selects the vertex u in the set of vertices (V - S) with the minimum shortest-path estimate, adds u to S, and relaxes all edges leaving u.
+    - A min-priority queue of vertices, keyed on their d attributes, can be used in the implementation.
+
+
+* My explanation:
+    - Start from a source vertex s, label its cost zero, and label the cost to all the vertices connected to s, label all other vertices to be infinity.
+    - From s, choose the vertex, call it u, that will add the least cost to your current cost (zero). Add u to S (which now has s and u).
+    - From all vertices in S, relax all connected vertices, meaning compare the cost of getting to some other vertex to your current cost. Pick the vertex that adds the least cost (if at all). Repeat this step until S contains all vertices in V.
+    
+
+Dijkstra's algorithm pseudo code
+-------------------------------------------------
+DIJKSTRA(G, w, s)
+    INITIALIZE_SINGLE_SOURCE(G, s)
+    let S be an empty set of vertices
+    let min-priority queue Q hold all d values in G.V
+    while Q is not empty
+        u = EXTRACT_MIN(Q)
+        S = S U {u}
+        for each vertex v that exists in G.Adj[u]
+            RELAX(u, v, w)
+
+            
+- Refer to single-source shortest paths notes for definitions on subroutines.
+
+
+- Because Dijkstra's algorithm always chooses the "lightest" or "closest" vertex in V - S to add to set S, we say that it uses a greedy strategy.
