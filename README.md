@@ -66,6 +66,10 @@ I used the above source to take notes, write pseudo code, and implement many of 
 
   * __Prim's algorithm__: notes and pseudo code.
 
-* __Single-source shortest paths__: general notes COMING SOON.
+* __Single-source shortest paths__: general notes.
 
-  * __Bellman-Ford algorithm__: COMING SOON.
+  * __Bellman-Ford algorithm__: notes and pseudo code.
+
+  * __Dijkstra's algorithm__: notes and pseudo code.
+
+* __All-pairs shortest paths__: COMING SOON.
