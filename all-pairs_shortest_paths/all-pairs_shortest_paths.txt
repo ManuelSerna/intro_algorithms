@@ -1,0 +1,19 @@
+*************************************************
+All-pairs shortest paths
+*************************************************
+- For this problem we want to find the shortest paths between all pairs of vertices in a given graph. Think of it like finding the distance between every city on a map.
+    - Specifically, we will be given a weighted, directed graph G = (V, E), with sets of vertices V and edges E, of course, each edge has a weight given by a function w.
+
+* Formally, we wish to find, for every pair of vertices u, v that exist in V, a shortest (least-weight) path from u to v, where the weight of a path is the sum of the weights of its constituent edges.
+    - We can represent the output in tabular form, at u's row and v's column would be the shortest path from u to v--edge (u, v).
+
+- We could solve this problem by running single-source shortest paths algorithms |V| times. But this will take quite a while, there are better algorithms for this.
+
+- Most of the algorithms covered will use the adjacency-matrix representation of the graph. For convenience, we assume vertices are numbered 1, 2,..., |V|, so that the input is a n x n matrix W representing the edge weights of an n-vertex directed graph G = (V, E).
+- Given edge (i, j)
+    - On the main diagonal, where i = j, 0 means no cost to go to the same vertex.
+    - If an edge (i, j) is in G, the entry in W[i][j] would contain the weight for that edge.
+    - If an edge (i, j) is not in G, W[i][j] will have a sentinel value of infinity (since it will take "forever" to go down a path that does not exist).
+
+
+- LEFT OF AT PG. 685
