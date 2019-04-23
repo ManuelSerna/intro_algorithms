@@ -72,4 +72,9 @@ I used the above source to take notes, write pseudo code, and implement many of 
 
   * __Dijkstra's algorithm__: notes and pseudo code.
 
-* __All-pairs shortest paths__: COMING SOON.
+* __All-pairs shortest paths__: general notes, NEED TO FINISH.
+  * __Shortest paths and matrix multiplication__: COMING SOON.
+  
+  * __Johnson's algorithm__: COMING SOON.
+  
+  * __Floyd-Warshall algorithm: COMING SOON.
