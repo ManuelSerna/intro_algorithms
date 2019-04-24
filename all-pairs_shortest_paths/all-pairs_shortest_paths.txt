@@ -15,5 +15,18 @@ All-pairs shortest paths
     - If an edge (i, j) is in G, the entry in W[i][j] would contain the weight for that edge.
     - If an edge (i, j) is not in G, W[i][j] will have a sentinel value of infinity (since it will take "forever" to go down a path that does not exist).
 
+- We should also compute a predecessor matrix, lets call this P, and we can think of it like a 2D array.
+    - At P[i][j], we have:
+        NIL if either i = j or there is not path from i to j,
+        otherwise, the entry is the predecessor of j on some shortest path from i.
 
-- LEFT OF AT PG. 685
+- The procedure below prints a shortest path from vertex i to vertex j.
+
+PRINT_ALL_PAIRS_SHORTEST_PATH(P, i, j)
+    if i == j
+        print i
+    else if P[i][j] == NIL
+        print "no path from " i " to " j " exists"
+    else
+        PRINT_ALL_PAIRS_SHORTEST_PATH(P, i, P[i][j])
+        print j
