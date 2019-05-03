@@ -5,7 +5,7 @@ All-pairs shortest paths
     - Specifically, we will be given a weighted, directed graph G = (V, E), with sets of vertices V and edges E, of course, each edge has a weight given by a function w.
 
 * Formally, we wish to find, for every pair of vertices u, v that exist in V, a shortest (least-weight) path from u to v, where the weight of a path is the sum of the weights of its constituent edges.
-    - We can represent the output in tabular form, at u's row and v's column would be the shortest path from u to v--edge (u, v).
+    - We can represent the output in tabular form, the entry in u's row and v's column would be the shortest path from u to v--edge (u, v).
 
 - We could solve this problem by running single-source shortest paths algorithms |V| times. But this will take quite a while, there are better algorithms for this.
 
