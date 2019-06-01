@@ -1,0 +1,28 @@
+DFS procedure that uses a stack instead of recursion
+-------------------------------------------------
+DFS(G)
+    // Each vertex starts off as white
+    for each vertex u that exists in G.V
+        u.color = "white"
+        u.p = NULL
+    for each u that exists in G.V
+        if u.color == "white"
+            DFS_VISIT_STACK(G, u)   // use stack, not recursion
+
+DFS_VISIT_STACK_VERSION(G, u)
+    S = empty stack
+    S.push(u)
+    while stack is not empty
+        x = S.pop()
+        if x.color == "white"
+            time = time + 1
+            x.color = "gray"
+            S.push(x)       // store x in stack to keep track of backtracing
+            for each v in x.adjacent()
+                if v.color == "white"
+                    v.predecessor = x
+                    stack.push(v)
+        else if x.color == "gray"
+            time = time + 1
+            x.f = time
+            x.color = "black" 
