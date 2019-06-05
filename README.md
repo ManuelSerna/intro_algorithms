@@ -1,32 +1,26 @@
 # intro_algorithms
 
-After my finals, I will completely overhaul the content here. My wish is to have properly formatted notes written in something like LATEX for each topic I covered, in addition, I would also like to implement everything useful that I covered in my course, ideally in a single programming language, but I may do several for the same algorithm or data structure. 
-
-I hope to be done with this ambitious project by the end of August 2019, I will steadily work on this, update other repos, and work an internship over the summer. I want to help others as much as I can, although I am not the best at this topic, I still desire to help others succeed, hopefully my work will help somebody, and that will make me happy. For any that are reading this, patience!
-
 ## Sorting algorithms and data structures covered:
- Here is what directories I think I should have:
- 
-    Content (chapters reference my primary resource)
+Planned Structure
     * Analysis: "analysis". Purpose: mathematics with algorithms
         |-> chapter 2 content
         |-> chapter 3 content
     
-    * Algorithm Design: "algorithm_design". Purpose: techniques learned
+    * Algorithm Design: "algorithm_design"
         |-> chapter 4 content
         |-> dynamic programming
         |-> greedy algorithms
     
-    * Sorting Algorithms: "sorting_algorithms". Purpose: any sorting algorithms
-        |-> insertion sort
-        |-> merge sort
-        |-> heapsort (and other ch. 6 stuff)
+    * Sorting Algorithms: "sorting_algorithms"
+        |-> insertion sort (code only)
+        |-> merge sort (code only)
         |-> quicksort
         |-> counting sort
         |-> radix sort
         |-> bucket sort
+	(heap sort will be included in the heaps data structure topic)
         
-    * Data Structures: "data_structures". Purpose: any data structure procedures/definitions
+    * Data Structures: "data_structures"
         |-> elementary data structures
             |-> stacks
             |-> queues
@@ -36,7 +30,7 @@ I hope to be done with this ambitious project by the end of August 2019, I will 
         |-> red-black trees
         |-> augmenting data structures
     
-    * Graph Algorithms: "graph_algorithms". Purpose: any graph-related algorithms
+    * Graph Algorithms: "graph_algorithms"
         |-> elementary graph algorithms
             |-> representations of graphs
             |-> breadth-first search
@@ -56,12 +50,12 @@ I hope to be done with this ambitious project by the end of August 2019, I will 
     Content
     ---------------------------------------------
     * Chapter 2: getting started
-        - insertion sort (update--more implementations, .tex notes)
-        - analyzing and designing algorithms--the other two sections (need to create .tex notes).
+        - insertion sort (latex)
+        - analyzing and designing algorithms (latex)
         
-    * Chapter 3: growth of functions (need to create .tex notes)
-        - asymptotic notation
-        - standard notations and common functions
+    * Chapter 3: growth of functions
+        - asymptotic notation (latex)
+        - standard notations and common functions (latex)
 
     * Chapter 4: Recurrences (need to create .tex notes for the last 3 sections)
         - maximum subarray problem 
@@ -104,11 +98,6 @@ I hope to be done with this ambitious project by the end of August 2019, I will 
         - insertion
         - deletion
     
-    * Chapter 14: Augmenting Data Structures (need to create .tex notes) (***THIS IS A LEAST PRIORITY)
-        - dynamic order statistics
-        - how to augment a data structure
-        - interval trees
-    
     * Chapter 15: Dynamic Programming (need to create .tex notes)
         - rod cutting problem
         - matrix-chain multiplication
@@ -142,11 +131,8 @@ I hope to be done with this ambitious project by the end of August 2019, I will 
         - floyd-warshall algorithm
         - johnson's algorithm for sparse graphs
     
-    Topics I may cover
-    * Chapter 26: Maximum Flow
-    
-    * Chapter 33: Computational Geometry
-
+    I will add other topics/chapters I find interesting to this in the future.
+My plan is to finish the chapters specified above by August for sure.
 
 ## Reference
 Cormen, T. H., Leiserson, C. E., Rivest, R. L., & Stein, C. (n.d.). Introduction to algorithms (3rd ed.).
