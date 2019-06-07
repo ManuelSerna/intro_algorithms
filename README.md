@@ -143,4 +143,4 @@ Planned Structure
 ## Reference
 Cormen, T. H., Leiserson, C. E., Rivest, R. L., & Stein, C. (n.d.). Introduction to algorithms (3rd ed.).
 
-I got many definitions, figures, graphs, code, etc. from this book and defined it in my notes.
+I got many definitions, figures, graphs, code, etc. from this book--"Introduction to Algorithms", another worthwhile (whilst lengthy read) is Dr. Donald Knuth's books on the "Art of Computer Programming".
