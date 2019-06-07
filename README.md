@@ -1,9 +1,15 @@
 # intro_algorithms
 
+This is a collection of my notes and code for various algorithms, data structures, and the like. If anyone finds this, feel free to look at what I have and perhaps also add improvements.
+
+## Notes before reading any notes
+  * Whenever I use ```log n```, I mean the common logarithm (log base 10).
+
 ## Sorting algorithms and data structures covered:
 Planned Structure
+
     * Analysis: "analysis". Purpose: mathematics with algorithms
-        |-> chapter 2 content
+        |-> chapter 2 content --DONE
         |-> chapter 3 content
     
     * Algorithm Design: "algorithm_design"
@@ -12,14 +18,14 @@ Planned Structure
         |-> greedy algorithms
     
     * Sorting Algorithms: "sorting_algorithms"
-        |-> insertion sort (code only)
-        |-> merge sort (code only)
+        |-> insertion sort (code only) --DONE
+        |-> merge sort (code only) --DONE
         |-> quicksort
         |-> counting sort
         |-> radix sort
         |-> bucket sort
 	(heap sort will be included in the heaps data structure topic)
-        
+
     * Data Structures: "data_structures"
         |-> elementary data structures
             |-> stacks
@@ -52,7 +58,7 @@ Planned Structure
     * Chapter 2: getting started
         - insertion sort (latex)
         - analyzing and designing algorithms (latex)
-        
+
     * Chapter 3: growth of functions
         - asymptotic notation (latex)
         - standard notations and common functions (latex)
@@ -130,9 +136,11 @@ Planned Structure
     * Chapter 25: All-Pairs Shortest Paths (need to create .tex notes)
         - floyd-warshall algorithm
         - johnson's algorithm for sparse graphs
-    
+
     I will add other topics/chapters I find interesting to this in the future.
-My plan is to finish the chapters specified above by August for sure.
+    My plan is to finish the chapters specified above by August for sure.
 
 ## Reference
 Cormen, T. H., Leiserson, C. E., Rivest, R. L., & Stein, C. (n.d.). Introduction to algorithms (3rd ed.).
+
+I got many definitions, figures, graphs, code, etc. from this book and defined it in my notes.
