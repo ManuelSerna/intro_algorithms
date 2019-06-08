@@ -85,7 +85,7 @@ T(n) & = c_1n + c_2(n-1) + c_3(n-1) + c_4\sum_{j=2}^{n} t_j + c_5\sum_{j=2}^{n} 
 \end{equation*}
 This can be expressed as $an^2 + bn + c$, and will give the form of $\Theta(n)$, the worst case.
 \\
-\newpage
+
 \section*{Merge Sort--Divide and Conquer}
 Many algorithms are recursive, meaning their procedure calls itself over and over to reduce the size of the problem until the problem is then small enough to solve. More broadly, the problem in question is small enough to solve when some terminating condition is reached. This is the structure of divide and conquer algorithms.
 \\
@@ -100,16 +100,27 @@ Merge sort, another sorting algorithm, utilizes this divide and conquer approach
 \\
 \\
 Starting with some sequence of numbers, start dividing the given array $A$ in half into left-half and right-half arrays, call them $L$ and $R$ respectively. Keep dividing in half until all arrays have one value in them. Next, merge these single-element arrays by copying values into a new array, call it $B$. One way to copy values is to keep track of of the indices in all three arrays, compare which of the two values in $L$ and $R$ is smaller, and insert that smaller value into $B$, increment the index of the array you just copied from and repeat this process. This will eventually get you your final array.
-\newpage
+
 \begin{figure}[ht]
 \centering
 \includegraphics[scale=0.5]{merge}
 \caption{
-The process of merge sort as shown by the book.
+Merge sort being performed on an example array, note the figure starts with values already in single-element arrays.
 }
 \label{fig:merge_sort}
 \end{figure}
 
-With this approach, merge sort's worst and best-case running time is $\Theta{(\log n)}$ due to splitting in half until bottoming out, and then inserting values into the new arrays such that they are sorted.
+\newpage
+
+\begin{figure}[ht]
+\centering
+\includegraphics[scale=0.5]{merge_analysis}
+\caption{
+Recursion tree of merge sort.
+}
+\label{fig:merge_analysis}
+\end{figure}
+
+Following figure 3, we get the $\log_2{n}$ by constantly splitting our arrays in half until we get to single-element arrays. The height of the tree is $\log_2{n} + 1$, times $n$ $c$'s, and adding each level up gives us $cn$, thus our total cost being $cn \log_2{n} + cn$, which is $\Theta{(n \log_2 n)}$.
 
 \end{document}
