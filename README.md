@@ -1,6 +1,6 @@
 # intro_algorithms
 
-This is a collection of my notes and code for various algorithms, data structures, and the like. If anyone finds this, feel free to look at what I have and perhaps also add improvements.
+This is a collection of my notes and code for various algorithms, data structures, and the like. If anyone finds this, feel free to look at what I have and perhaps also add improvements. Also, I would recommend others read the book with these notes so as to make sense of what the authors were trying to convey.
 
 ## Notes before reading any notes
   * Whenever I use ```log n```, I mean the common logarithm (log base 10).
@@ -140,7 +140,12 @@ Planned Structure
     I will add other topics/chapters I find interesting to this in the future.
     My plan is to finish the chapters specified above by August for sure.
 
-## Reference
+## Resources
+Overleaf's documentation on LaTeX.
+https://www.overleaf.com/learn
+
+
+## References
 Cormen, T. H., Leiserson, C. E., Rivest, R. L., & Stein, C. (n.d.). Introduction to algorithms (3rd ed.).
 
 I got many definitions, figures, graphs, code, etc. from this book--"Introduction to Algorithms", another worthwhile (whilst lengthy read) is Dr. Donald Knuth's books on the "Art of Computer Programming".
