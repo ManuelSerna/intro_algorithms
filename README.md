@@ -5,13 +5,7 @@ This is a collection of my notes and code for various algorithms, data structure
 ## Notes before reading any notes
   * Whenever I use ```log n```, I mean the common logarithm (log base 10).
 
-## Sorting algorithms and data structures covered:
-Planned Structure
-
-    * Analysis: "analysis". Purpose: mathematics with algorithms
-        |-> chapter 2 content --DONE
-        |-> chapter 3 content
-    
+## Sorting algorithms and data structures covered: 
     * Algorithm Design: "algorithm_design"
         |-> chapter 4 content
         |-> dynamic programming
@@ -55,14 +49,6 @@ Planned Structure
     
     Content
     ---------------------------------------------
-    * Chapter 2: getting started
-        - insertion sort (latex)
-        - analyzing and designing algorithms (latex)
-
-    * Chapter 3: growth of functions
-        - asymptotic notation (latex)
-        - standard notations and common functions (latex)
-
     * Chapter 4: Recurrences (need to create .tex notes for the last 3 sections)
         - maximum subarray problem 
         - strassen's algorithm for matrix multiplication 
@@ -143,7 +129,6 @@ Planned Structure
 ## Resources
 Overleaf's documentation on LaTeX.
 https://www.overleaf.com/learn
-
 
 ## References
 Cormen, T. H., Leiserson, C. E., Rivest, R. L., & Stein, C. (n.d.). Introduction to algorithms (3rd ed.).
