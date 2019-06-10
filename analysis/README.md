@@ -7,3 +7,6 @@ This section focuses on introducing the reader to the analysis of algorithms and
 
 ### Asymptotic Notation
 This section builds on asymptotic notation introduced in _Getting Started_, it talks about theta, big-O, big-omega, little-o, and little-omega notations. I also wrote down some properties.
+
+### Further Notes
+This is a miscellaneous document with notes on comparing growth rates between different general forms of functions with examples. Logarithm rules are also included.
