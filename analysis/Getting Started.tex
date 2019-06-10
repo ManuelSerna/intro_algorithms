@@ -83,44 +83,6 @@ T(n) & = c_1n + c_2(n-1) + c_3(n-1) + c_4\sum_{j=2}^{n} t_j + c_5\sum_{j=2}^{n} 
   & = \bigg(\frac{c_4}{2} + \frac{c_5}{2} + \frac{c_6}{2}\bigg)n^2 + \bigg(c_1 + c_2 + c_3 + \frac{c_4}{2} - \frac{c_5}{2} - \frac{c_6}{2}\bigg)n - (c_2 + c_3 + c_4 + c_7)
 \end{split}
 \end{equation*}
-This can be expressed as $an^2 + bn + c$, and will give the form of $\Theta(n)$, the worst case.
-\\
-
-\section*{Merge Sort--Divide and Conquer}
-Many algorithms are recursive, meaning their procedure calls itself over and over to reduce the size of the problem until the problem is then small enough to solve. More broadly, the problem in question is small enough to solve when some terminating condition is reached. This is the structure of divide and conquer algorithms.
-\\
-\\
-Divide and conquer algorithms can be broken down into several steps:
-\begin{itemize}
-  \item Divide the problem into a number of subproblems that are smaller instances of the same number.
-  \item Conquer the subproblems by solving them recursively. If the subproblem sizes are small enough, however, just solve the subproblems in a straightforward manner.
-  \item Combine the solutions to the sub problems into the solution for the original problem.
-\end{itemize}
-Merge sort, another sorting algorithm, utilizes this divide and conquer approach. It divides each sequence of elements in half, then after dividing n elements, each subsequence is sorted and then these sorted subsequences are combined, or "merged" (ha, get it?).
-\\
-\\
-Starting with some sequence of numbers, start dividing the given array $A$ in half into left-half and right-half arrays, call them $L$ and $R$ respectively. Keep dividing in half until all arrays have one value in them. Next, merge these single-element arrays by copying values into a new array, call it $B$. One way to copy values is to keep track of of the indices in all three arrays, compare which of the two values in $L$ and $R$ is smaller, and insert that smaller value into $B$, increment the index of the array you just copied from and repeat this process. This will eventually get you your final array.
-
-\begin{figure}[ht]
-\centering
-\includegraphics[scale=0.5]{merge}
-\caption{
-Merge sort being performed on an example array, note the figure starts with values already in single-element arrays.
-}
-\label{fig:merge_sort}
-\end{figure}
-
-\newpage
-
-\begin{figure}[ht]
-\centering
-\includegraphics[scale=0.5]{merge_analysis}
-\caption{
-Recursion tree of merge sort.
-}
-\label{fig:merge_analysis}
-\end{figure}
-
-Following figure 3, we get the $\log_2{n}$ by constantly splitting our arrays in half until we get to single-element arrays. The height of the tree is $\log_2{n} + 1$, times $n$ $c$'s, and adding each level up gives us $cn$, thus our total cost being $cn \log_2{n} + cn$, which is $\Theta{(n \log_2 n)}$.
+This can be expressed as $an^2 + bn + c$, and will give the form of $\Theta(n^2)$, the worst case.
 
 \end{document}
