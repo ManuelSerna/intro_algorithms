@@ -7,13 +7,10 @@ This is a collection of my notes and code for various algorithms, data structure
 
 ## TEMP: Sorting algorithms and data structures covered: 
     * Algorithm Design: "algorithm_design"
-        |-> chapter 4 content
         |-> dynamic programming
         |-> greedy algorithms
     
     * Sorting Algorithms: "sorting_algorithms"
-        |-> insertion sort (code only) --DONE
-        |-> merge sort (code only) --DONE
         |-> quicksort
         |-> counting sort
         |-> radix sort
@@ -49,13 +46,6 @@ This is a collection of my notes and code for various algorithms, data structure
     
     Content
     ---------------------------------------------
-    * Chapter 4: Recurrences (need to create .tex notes for the last 3 sections)
-        - maximum subarray problem 
-        - strassen's algorithm for matrix multiplication 
-        - substitution method
-        - recursion tree method
-        - master method
-    
     * Chapter 6: Heapsort (need to create .tex notes for all sections, and implement)
         - heaps
         - maintaining the heap property
