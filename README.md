@@ -25,7 +25,6 @@ This is a collection of my notes and code for various algorithms, data structure
         |-> hash tables
         |-> binary search trees
         |-> red-black trees
-        |-> augmenting data structures
     
     * Graph Algorithms: "graph_algorithms"
         |-> elementary graph algorithms
