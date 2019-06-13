@@ -3,7 +3,7 @@
 This is a collection of my notes and code for various algorithms, data structures, and the like. If anyone finds this, feel free to look at what I have and perhaps also add improvements. Also, I would recommend others read the book with these notes so as to make sense of what the authors were trying to convey.
 
 ## Before reading my notes
-  * Whenever I use ```log n```, I mean the common logarithm (log base 10). I will write the natural log as ```ln(n)```. The logarithm with base 2 will be written normally, although the book writes it as ```lg n```.
+  * Whenever I use ```log(n)```, I mean the common logarithm (log base 10). I will write the natural log as ```ln(n)```. The logarithm with base 2 will be written normally, although the book writes it as ```lg(n)```.
 
 ## TEMP: Sorting algorithms and data structures covered: 
     * Algorithm Design: "algorithm_design"
@@ -116,13 +116,13 @@ This is a collection of my notes and code for various algorithms, data structure
     My plan is to finish the chapters specified above by August for sure.
 
 ## Resources
-Overleaf's documentation on LaTeX.
+Overleaf's documentation on LaTeX and my tool for writing LaTeX documents.
 https://www.overleaf.com/learn
 
 MIT OpenCourseWare
 https://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-006-introduction-to-algorithms-fall-2011/
 
 ## References
-Cormen, T. H., Leiserson, C. E., Rivest, R. L., & Stein, C. (n.d.). Introduction to algorithms (3rd ed.).
+I fully credit a good portion of the content, structure, figures, and analysis to _Introduction to Algorithms_. 
 
-I got many definitions, figures, graphs, code, etc. from this book--"Introduction to Algorithms", another worthwhile (whilst lengthy read) is Dr. Donald Knuth's books on the "Art of Computer Programming".
+Cormen, T. H., Leiserson, C. E., Rivest, R. L., & Stein, C. (n.d.). Introduction to algorithms (3rd ed.).
