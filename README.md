@@ -5,6 +5,18 @@ This is a collection of my notes and code for various algorithms, data structure
 ## Before reading my notes
   * Whenever I use ```log(n)```, I mean the common logarithm (log base 10). I will write the natural log as ```ln(n)```. The logarithm with base 2 will be written normally, although the book writes it as ```lg(n)```.
 
+## Reading Order (for most essential material)
+### Analysis
+1. Getting Started
+2. Asymptotic Notation
+
+### Algorithm Design
+3. Divide and Conquer
+
+### Sorting Algorithms
+4. Sorting
+5. Heapsort
+
 ## TEMP: Sorting algorithms and data structures covered: 
     * Algorithm Design: "algorithm_design"
         |-> dynamic programming
@@ -15,7 +27,6 @@ This is a collection of my notes and code for various algorithms, data structure
         |-> counting sort
         |-> radix sort
         |-> bucket sort
-	(heap sort will be included in the heaps data structure topic)
 
     * Data Structures: "data_structures"
         |-> elementary data structures
@@ -45,13 +56,6 @@ This is a collection of my notes and code for various algorithms, data structure
     
     Content
     ---------------------------------------------
-    * Chapter 6: Heapsort (need to create .tex notes for all sections, and implement)
-        - heaps
-        - maintaining the heap property
-        - building a heap
-        - heapsort algorithm
-        - priority queues
-    
     * Chapter 7: Quicksort (need to create .tex notes for both sections)
         - description of quicksort
         - performance of quicksort
