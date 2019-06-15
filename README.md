@@ -24,7 +24,6 @@ This is a collection of my notes and code for various algorithms, data structure
         |-> greedy algorithms
     
     * Sorting Algorithms: "sorting_algorithms"
-        |-> quicksort
         |-> counting sort
         |-> radix sort
         |-> bucket sort
@@ -56,11 +55,7 @@ This is a collection of my notes and code for various algorithms, data structure
             |-> johnson
     
     Content
-    ---------------------------------------------
-    * Chapter 7: Quicksort (need to create .tex notes for both sections)
-        - description of quicksort
-        - performance of quicksort
-    
+    ---------------------------------------------    
     * Chapter 8: Sorting in Linear Time (need to create .tex notes for all sections)
         - lower bounds for sorting (need to create .tex notes)
         - counting sort
