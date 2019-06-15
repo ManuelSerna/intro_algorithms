@@ -16,6 +16,7 @@ This is a collection of my notes and code for various algorithms, data structure
 ### Sorting Algorithms
 4. Sorting
 5. Heapsort
+6. Quicksort
 
 ## TEMP: Sorting algorithms and data structures covered: 
     * Algorithm Design: "algorithm_design"
