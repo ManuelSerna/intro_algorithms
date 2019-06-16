@@ -15,8 +15,9 @@
 
 \maketitle
 
+%================================================
 \section*{Introduction}
-% section 7.1 content with all 3 figures added
+%================================================
 Quicksort is a very popular sorting algorithm, despite its worst-case running time being $\Theta{(n^2)}$, it is nonetheless very effecient on average with an expected running time of $\Theta{(n \cdot \log_2(n))}$. The constant factors hidden by the asymptotic notation are small. Assuming distinct input elements, its expected running time is $O{(n \cdot \log_2(n))}$.
 \\ \\
 Like merge sort, quicksort utilizes the divide-and-conquer paradigm, taking in an array $A[p \twodots r]$, it performs the following steps.
@@ -30,6 +31,9 @@ Like merge sort, quicksort utilizes the divide-and-conquer paradigm, taking in a
 
 Here are the procedures for quicksort.
 
+%------------------------------------------------
+% Quicksort procedure
+%------------------------------------------------
 \begin{codebox}
 \Procname{\proc{quicksort}$(A, p, r)$}
 \li \If $p < r$
@@ -42,6 +46,9 @@ Here are the procedures for quicksort.
 
 To sort an entire array $A$, the initial call is $\proc{quicksort}(A, 1, \attrib{A}{length})$.
 
+%------------------------------------------------
+% Partition called by quicksort
+%------------------------------------------------
 \begin{codebox}
 \Procname{\proc{partition}$(A, p, r)$}
 \li $x = A[r]$ \Comment this partition procedure always picks the right-most element 
@@ -100,7 +107,9 @@ Figure 1 shows how the partition procedure works on an example 8-element array. 
 
 \newpage
 
+%================================================
 \section*{Performance}
+%================================================
 The \textbf{best case} of quicksort occurs when $\proc{partition}$ evenly splits the array every time it is called. The actual sizes of the splits are $\lfloor n/2 \rfloor$ and $\lfloor n/2 \rfloor - 1$ since we do not include the partition value when we recurse. Even so, we can simplify the sizes to be the same since the time cost will pretty much be the same. This ideal situation gives the recurrence
 
 \begin{equation*}
