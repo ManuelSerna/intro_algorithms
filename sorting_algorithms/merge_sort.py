@@ -11,13 +11,18 @@ def merge_sort(A, verbose):
         mid = len(A)//2
         L = A[:mid]
         R = A[mid:]
-        if verbose: print("left partition: ", L, ", right partition: ", R)
+        if verbose:
+            print("A: ", A)
+            print("Partitioning into:")
+            print("  left: ", L)
+            print("  right: ", R, "\n")
 
         # Keep splitting sub arrays until arrays are of size 1. This process takes Theta(lg n) time.
         merge_sort(L, verbose)
         merge_sort(R, verbose)
 
         if verbose:
+            print("A: ", A)
             print("left array:  ", L)
             print("right array: ", R)
         
@@ -30,14 +35,16 @@ def merge_sort(A, verbose):
         # See which value in L and R is smaller, insert that smaller element into A. This process takes Theta(n) time.
         while i < len(L) and j < len(R):
             if L[i] < R[j]:
+                if verbose: 
+                    print("inserting {} into index={} in A: {}".format(L[i], k, A))
                 A[k] = L[i]
                 i += 1
             else:
+                if verbose: 
+                    print("inserting {} into index={} in A: {}".format(R[j], k, A))
                 A[k] = R[j]
                 j += 1
             k += 1
-            if verbose: print("inserting", A[k], "into array", A)
-        
         # Copy any remaining elements to A, obviously from smaller (L) to bigger (R)
         while i < len(L):
             A[k] = L[i]
@@ -47,7 +54,11 @@ def merge_sort(A, verbose):
             A[k] = R[j]
             j += 1
             k += 1
-    if verbose: print("sorted array: ", A)
+    if verbose: 
+        print("sorted array: ", A)
+        if len(A) == 1:
+            print("  recursion bottomed out")
+        print("")
 
 #================================================
 # Sort some test arrays.
