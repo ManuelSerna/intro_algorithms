@@ -13,3 +13,6 @@ This section contains an analysis of the quicksort's procedures as well as an an
 
 ### Linear Time Sorting
 This section goes over three non-comparison sorting algorithms--counting sort, radix sort, and bucket sort. Each of their procedures and running times are analyzed, along with example cases.
+
+### Pseudocode
+This document contains pseudocode to all the sorting algorithms mentioned in the book: insertion sort, merge sort, all the max-heap and min-heap operations along with heapsort, quicksort, counting sort, radix sort, and bucket sort along with analysis of their procedures. All of the sorting algorithms are implemented with Python.
