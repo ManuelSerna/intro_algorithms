@@ -22,11 +22,6 @@ This is a collection of my notes and code for various algorithms, data structure
     * Algorithm Design: "algorithm_design"
         |-> dynamic programming
         |-> greedy algorithms
-    
-    * Sorting Algorithms: "sorting_algorithms"
-        |-> counting sort
-        |-> radix sort
-        |-> bucket sort
 
     * Data Structures: "data_structures"
         |-> elementary data structures
@@ -55,12 +50,10 @@ This is a collection of my notes and code for various algorithms, data structure
             |-> johnson
     
     Content
-    ---------------------------------------------    
-    * Chapter 8: Sorting in Linear Time (need to create .tex notes for all sections)
-        - lower bounds for sorting (need to create .tex notes)
-        - counting sort
-        - radix sort
-        - bucket sort
+    ---------------------------------------------
+    * Chapter 10: Elementary data structures
+        - stack and queues
+        - linked lists
     
     * Chapter 11: Hash tables (need to create .tex notes)
         - direct-address table
