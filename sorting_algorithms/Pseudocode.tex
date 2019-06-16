@@ -1,0 +1,424 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+
+\title{Pseudocode for Sorting Algorithms}
+\author{}
+\date{}
+\setlength{\parindent}{0pt} % ensure indents don't happen
+
+\usepackage{natbib}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{clrscode3e} % use this to better format pseudocode
+
+\begin{document}
+
+\maketitle
+
+This is a collection of all the pseudocode for the sorting algorithms discussed.
+
+%------------------------------------------------
+% Insertion sort
+%------------------------------------------------
+\begin{codebox}
+\Procname{$\proc{Insertion-Sort}(A)$}
+\li \For $j \gets 2$ \To $\attrib{A}{length}$
+\li     \Do
+            $\id{key} \gets A[j]$
+\li         \Comment Insert $A[j]$ into the sorted sequence $A[1 \twodots j-1]$.
+\li         $i \gets j-1$
+\li         \While $i > 0$ and $A[i] > \id{key}$
+\li             \Do
+                    $A[i + 1] = A[i]$
+\li                 $i \gets i-1$
+                \End
+\li         $A[i+1] \gets \id{key}$
+        \End
+\end{codebox}
+
+%------------------------------------------------
+% Merge sort
+%------------------------------------------------
+\begin{codebox}
+\Procname{\proc{merge-sort}$(A)$}
+\li \If $\attrib{A}{length} > 1$
+\li \Then
+        $m = \lfloor \attrib{A}{length}/2 \rfloor$
+\li     $L = A[0 \twodots m-1]$
+\li     $R = A[m \twodots \attrib{A}{length}]$
+\li     \proc{merge-sort}$(L)$ \Comment keep splitting subarrays, takes $\Theta{(log_2{n})}$ time
+\li     \proc{merge-sort}$(R)$
+\li     let $i, j, k = 0$ \Comment initialize indices for $A$ and subarrays
+\li     \Comment Copy smallest value from $L[i]$ or $R[j]$ into $A[k]$
+\li     \While $i < \attrib{L}{length}$ and $j < \attrib{R}{length}$
+\li     \Do
+            \If $L[i] < R[j]$
+\li         \Then
+                $A[k] = L[i]$
+\li             $i = i + 1$
+\li         \Else
+\li             $A[k] = R[j]$
+\li             $j = j + 1$
+            \End
+\li     $k = k + 1$
+        \End+
+\li     \While $i < \attrib{L}{length}$
+\li     \Do
+            $A[k] = L[i]$ \Comment copy remaining elements
+\li         $i = i + 1$
+\li         $k = k + 1$
+        \End
+\li     \While $j < \attrib{R}{length}$
+\li     \Do
+            $A[k] = R[j]$ \Comment copy remaining elements
+\li         $j = j + 1$
+\li         $k = k + 1$
+        \End
+    \End
+\end{codebox}
+
+\newpage
+
+%------------------------------------------------
+% Parent of element at index i
+%------------------------------------------------
+\begin{codebox}
+\Procname{\proc{parent}$(i)$}
+\li \Return $\lfloor i/2 \rfloor$
+\end{codebox}
+
+%------------------------------------------------
+% Left child of element at index i
+%------------------------------------------------
+\begin{codebox}
+\Procname{\proc{left}$(i)$}
+\li \Return $2i$
+\end{codebox}
+
+%------------------------------------------------
+% Right child of element at index i
+%------------------------------------------------
+\begin{codebox}
+\Procname{\proc{right}$(i)$}
+\li \Return $2i + 1$
+\end{codebox}
+
+%------------------------------------------------
+% Max-heapify
+%------------------------------------------------
+\begin{codebox}
+\Procname{$\proc{max-heapify}(A, i)$}
+\li $l \gets \proc{left}(i)$
+\li $r \gets \proc{right}(i)$
+\li \If $l \leq \attrib{A}{heap-size}$ and $A[l] > A[i]$
+\li     \Then
+            $\id{largest} \gets l$ \Comment index of largest element is left child
+\li     \Else
+\li         $\id{largest} \gets i$ \Comment out of parent and left child, parent is larger
+    \End
+\li \Comment compare largest out of parent and left with the right (if it's in the valid heap)
+\li \If $r \leq \attrib{A}{heap-size}$ and $A[r] > A[largest]$
+\li     \Then
+            $\id{largest} = r$ \Comment right child has the largest value
+        \End
+\li \If $\id{largest} \neq i$
+\li     \Then 
+            \Comment largest node was a child, keep going down to ensure max-heap property is not violated
+\li         exchange $A[i]$ with $A[largest]$
+\li         \proc{max-heapify}$(A, \id{largest})$
+        \End
+\end{codebox}
+
+%------------------------------------------------
+% Iterative max heapify
+%------------------------------------------------
+\begin{codebox}
+\Procname{$\proc{max-heapify-iterative}(A, i)$}
+\li \While TRUE
+\li \Do
+        $l \gets \proc{left}(i)$
+\li     $r \gets \proc{right}(i)$
+\li     \If $l \leq \attrib{A}{heap-size}$ and $A[l] > A[i]$
+\li         \Then
+                $\id{largest} \gets l$
+\li         \Else
+\li             $\id{largest} \gets i$
+            \End
+\li     \If $r \leq \attrib{A}{heap-size}$ and $A[r] > A[i]$
+\li         \Then
+                $\id{largest} = r$
+            \End
+\li     \If $\id{largest} = i$
+\li         \Then
+                \Return
+            \End
+\li     exchange $A[i]$ with $A[largest]$
+\li     $i = \id{largest}$
+    \End
+\end{codebox}
+
+%------------------------------------------------
+% Build max heap
+%------------------------------------------------
+\begin{codebox}
+\Procname{$\proc{build-max-heap}(A)$}
+\li $\attrib{A}{heap-size} \gets \attrib{A}{length}$ 
+\li \For $i \gets \lfloor \attrib{A}{length}/2 \rfloor$ \Downto $1$
+\li \Do
+        $\proc{max-heapify}(A, i)$
+    \End
+\end{codebox}
+
+%------------------------------------------------
+% Heapsort
+%------------------------------------------------
+\begin{codebox}
+\Procname{$\proc{heapsort}(A)$}
+\li $\proc{build-max-heap}(A)$
+\li \For $i \gets \attrib{A}{length}$ \Downto $2$
+\li \Do
+        exchange $A[1]$ with $A[i]$
+\li     $\attrib{A}{heap-size} = \attrib{A}{heap-size}$
+\li     $\proc{meax-heapify}(A, 1)$
+    \End
+\end{codebox}
+
+%------------------------------------------------
+% Heap maximum
+%------------------------------------------------
+\begin{codebox}
+\Procname{$\proc{heap-maximum}(A)$}
+\li \Return $A[1]$
+\end{codebox}
+
+%------------------------------------------------
+% Heap extract max
+%------------------------------------------------
+\begin{codebox}
+\Procname{$\proc{heap-extract-max}(A)$}
+\li \If $\attrib{A}{heap-size} < 1$
+\li \Then
+        \Error ``heap underflow''
+    \End
+\li $\id{max} = A[1]$
+\li \Comment Now adjust max-heap by propagating largest value to A[1]
+\li $A[1] = A[\attrib{A}{heap-size}]$
+\li $\attrib{A}{heap-size} = \attrib{A}{heap-size} - 1$
+\li $\proc{max-heapify}(A, 1)$
+\li \Return $\id{max}$
+\end{codebox}
+
+%------------------------------------------------
+% Heap increase key
+%------------------------------------------------
+\begin{codebox}
+\Procname{$\proc{heap-increase-key}(A, i, \id{key})$}
+\li \If $\id{key} < A[i]$
+\li \Then
+        \Error ``new key is smaller than current key''
+    \End
+\li $A[i] = \id{key}$
+\li \Comment Compare parent and current values, go up to satisfy max-heap property
+\li \While $i >  1$ and $A[\proc{parent}(i)] < A[i]$
+\li \Do
+        exchange $A[i]$ with $A[\proc{parent}(i)]$
+\li     $i = \proc{parent}(i)$
+    \End
+\end{codebox}
+
+%------------------------------------------------
+% Max heap insert
+%------------------------------------------------
+\begin{codebox}
+\Procname{$\proc{max-heap-insert}(A, \id{key})$}
+\li $\attrib{A}{heap-size} = \attrib{A}{heap-size} + 1$
+\li $A[\attrib{A}{heap-size}] = -\infty$
+\li $\proc{heap-increase-key}(A, \attrib{A}{heap-size}, key)$
+\end{codebox}
+
+%------------------------------------------------
+% Heap delete
+%------------------------------------------------
+\begin{codebox}
+\Procname{$\proc{heap-delete}(A, i)$}
+\li swap $A[i]$ and $A[\attrib{A}{heap-size}]$
+\li $\attrib{A}{heap-size} = \attrib{A}{heap-size} - 1$
+\li \If $A[i] > A[\proc{parent}(i)]$
+\li \Then
+        $\proc{heap-increase-key}(A, i, A[i])$
+    \End
+\li \Else
+\li \Then
+        $\proc{max-heapify}(A, i)$ \Comment check if we need to stop or keep going down
+    \End
+\end{codebox}
+
+\newpage
+
+%------------------------------------------------
+% Min-heap minimum
+%------------------------------------------------
+\begin{codebox}
+\Procname{$\proc{min-heap-minimum}(A)$}
+\li \Return $A[1]$
+\end{codebox}
+
+%------------------------------------------------
+% Min-heapify
+%------------------------------------------------
+\begin{codebox}
+\Procname{$\proc{min-heapify}(A, i)$}
+\li $l = \proc{left}(i)$
+\li $r = \proc{right}(i)$
+\li \If $l \leq \attrib{A}{heap-size}$ and $A[l] < A[i]$
+\li     \Then
+            $\id{smallest} = l$
+\li     \Else
+            $\id{smallest} = i$
+        \End
+\li \If $r \leq \attrib{A}{heap-size}$ and $A[r] < A[smallest]$
+\li     \Then
+            $\id{smallest} = r$
+        \End
+\li \If $\id{smallest} \neq i$
+\li     \Then
+            exchange $A[i]$ with $A[\id{smallest}]$
+\li         $\proc{min-heapify}(A, smallest)$
+        \End
+\end{codebox}
+
+%------------------------------------------------
+% Min-heap extract min
+%------------------------------------------------
+\begin{codebox}
+\Procname{$\proc{min-heap-extract-min}(A)$}
+\li \If $\attrib{A}{heap-size} < 1$
+\li     \Then
+            \Error ``heap underflow''
+        \End
+\li $\id{min} = A[1]$
+\li $A[1] = A[\attrib{A}{heap-size}]$ \Comment violate min-heap property to re-adjust heap
+\li $\attrib{A}{heap-size} = \attrib{A}{heap-size} - 1$ \Comment decrease heap size, eliminating $min$ from valid heap
+\li $\proc{min-heapify}(A, 1)$
+\li \Return $\id{min}$
+\end{codebox}
+
+%------------------------------------------------
+% Min-heap decrease key
+%------------------------------------------------
+\begin{codebox}
+\Procname{$\proc{min-heap-decrease-key}(A, i, \id{key})$}
+\li \If $\id{key} > A[i]$
+\li     \Then
+            \Error ``new key is larger than current key''
+        \End
+\li $A[i] = \id{key}$
+\li \While $i > 1$ and $A[\proc{parent}(i)] > A[i]$
+\li     \Do
+            exchange $A[i]$ with A[\proc{parent}(i)]
+\li         $i = \proc{parent}(i)$
+        \End
+\end{codebox}
+
+%------------------------------------------------
+% Min-heap insert
+%------------------------------------------------
+\begin{codebox}
+\Procname{$\proc{min-heap-insert}(A, key)$}
+\li $\attrib{A}{heap-size} = \attrib{A}{heap-size} + 1$
+\li $A[\attrib{A}{heap-size}] = \infty$
+\li $\proc{min-heap-decrease-key}(A, \attrib{A}{heap-size}, \id{key})$
+\end{codebox}
+
+\newpage
+
+%------------------------------------------------
+% Quicksort
+%------------------------------------------------
+\begin{codebox}
+\Procname{\proc{partition}$(A, p, r)$}
+\li $x = A[r]$ \Comment this partition procedure always picks the right-most element 
+\li $i = p-1$
+\li \For $j \gets p$ \To $r-1$
+    \Do
+\li     \If $A[j] \leq x$
+            \Then
+\li             $i = i + 1$
+\li             exchange $A[i]$ with $A[j]$
+            \End
+    \End
+\li exchange $A[i+1]$ with $A[r]$
+\li \Return $i + 1$
+\end{codebox}
+
+\begin{codebox}
+\Procname{\proc{quicksort}$(A, p, r)$}
+\li \If $p < r$
+\li \Then
+        $q = \proc{partition}(A, p, r)$
+\li     $\proc{quicksort}(A, p, q-1)$
+\li     $\proc{quicksort}(A, q+1, r)$
+    \End
+\end{codebox}
+
+%------------------------------------------------
+% Counting Sort
+%------------------------------------------------
+\begin{codebox}
+\Procname{\proc{counting-sort}$(A, B, k)$}
+\li let $C[0 \twodots k]$ be a new array
+\li \For $i \gets 0$ \To $k$
+\li \Do 
+        $C[i] = 0$ \Comment initialize
+    \End
+\li \For $j \gets 1$ \To $\attrib{A}{length}$
+\li \Do
+        $C[A[j]] = C[A[j]] + 1$
+    \End
+\li \Comment $C[i]$ now contains the number of elements equal to $i$
+\li \For $i \gets 1$ \To $k$
+\li \Do
+        $C[i] = C[i] + C[i-1]$
+    \End
+\li \Comment $C[i]$ now contains the number of elements less than or equal to $i$
+\li \For $j \gets \attrib{A}{length}$ \Downto $1$
+\li \Do
+        $B[C[A[j]]] = A[j]$
+\li    $C[A[j]] = C[A[j]] - 1$
+    \End
+\end{codebox}
+
+%------------------------------------------------
+% Radix Sort
+%------------------------------------------------
+\begin{codebox}
+\Procname{\proc{radix-sort}$(A, d)$}
+\li \For $i \gets 1$ to $d$
+\li \Do
+        use a stable sort to sort array $A$ on digit $i$ \Comment like counting sort
+    \End
+\end{codebox}
+
+%------------------------------------------------
+% Bucket Sort
+%------------------------------------------------
+\begin{codebox}
+\Procname{\proc{bucket-sort}$(A)$}
+\li let $B[0 \twodots n-1]$ be a new array
+\li $n \gets \attrib{A}{length}$
+\li \For $i \gets 0$ to $n-1$
+\li     \Do
+            make $B[i]$ an empty list
+        \End
+\li \For $i \gets 1$ to $n$
+\li     \Do
+            insert A[i] into list $B[\lfloor n A[i] \rfloor]$
+        \End 
+\li \For $i \gets 0$ to $n-1$
+\li     \Do
+            sort list $B[i]$ with insertion sort
+        \End
+\li concatenate the lists $B[0], B[1], \ldots, B[n-1]$ together in order
+\end{codebox}
+
+\end{document}
