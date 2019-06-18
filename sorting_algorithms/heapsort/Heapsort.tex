@@ -164,7 +164,7 @@ The heapsort algorithm starts by calling $\proc{build-max-heap}$ to build a max 
 \li \For $i \gets \attrib{A}{length}$ \Downto $2$
 \li \Do
         exchange $A[1]$ with $A[i]$
-\li     $\attrib{A}{heap-size} = \attrib{A}{heap-size}$
+\li     $\attrib{A}{heap-size} = \attrib{A}{heap-size} - 1$
 \li     $\proc{meax-heapify}(A, 1)$
     \End
 \end{codebox}
