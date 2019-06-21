@@ -25,11 +25,6 @@ This is a collection of my notes and code for various algorithms, data structure
         |-> greedy algorithms
 
     * Data Structures: "data_structures"
-        |-> elementary data structures
-            |-> stacks
-            |-> queues
-            |-> linked lists
-        |-> hash tables
         |-> binary search trees
         |-> red-black trees
     
@@ -51,58 +46,48 @@ This is a collection of my notes and code for various algorithms, data structure
             |-> johnson
     
     Content
-    ---------------------------------------------
-    * Chapter 10: Elementary data structures
-        - stack and queues
-        - linked lists
-    
-    * Chapter 11: Hash tables (need to create .tex notes)
-        - direct-address table
-        - hash tables
-        - hash functions
-        - open addressing
-    
-    * Chapter 12: Binary Search Trees--review (need to create .tex notes)
+    ---------------------------------------------    
+    * Chapter 12: Binary Search Tree
         - what is a binary search tree?
         - querying a binary search tree
         - insertion and deletion
     
-    * Chapter 13: Red-Black Trees (need to create .tex notes)
+    * Chapter 13: Red-Black Trees
         - properties
         - rotations
         - insertion
         - deletion
     
-    * Chapter 15: Dynamic Programming (need to create .tex notes)
+    * Chapter 15: Dynamic Programming
         - rod cutting problem
         - matrix-chain multiplication
         - elements of dynamic programming
         - longest common subsequence
         - optimal binary search trees
     
-    * Chapter 16: Greedy Algorithms (need to create .tex notes)
+    * Chapter 16: Greedy Algorithms
         - activity selection problem
         - elements of greedy strategy
         - huffman codes
     
-    * Chapter 22: Elementary Graph Algorithms (need to create .tex notes)
+    * Chapter 22: Elementary Graph Algorithms
         - representations of graphs
         - BFS
         - DFS
         - topological sort
         - strongly-connected components
     
-    * Chapter 23: Minimum Spanning Trees (need to create .tex notes)
+    * Chapter 23: Minimum Spanning Trees
         - growing a min span tree
         - Kruskal
         - Prim
     
-    * Chapter 24: Single-Source Shortest Paths (need to create .tex notes)
+    * Chapter 24: Single-Source Shortest Paths
         - bellman-ford algorithm
         - single-source shortest paths in directed acyclic graphs
         - dijkstra's algorithm
     
-    * Chapter 25: All-Pairs Shortest Paths (need to create .tex notes)
+    * Chapter 25: All-Pairs Shortest Paths
         - floyd-warshall algorithm
         - johnson's algorithm for sparse graphs
 
