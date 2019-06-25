@@ -19,13 +19,15 @@ This is a collection of my notes and code for various algorithms, data structure
 6. Quicksort
 7. Linear Time Sorting
 
+### Data Structures
+8. Binary Search Trees
+
 ## TEMP: Sorting algorithms and data structures covered: 
     * Algorithm Design: "algorithm_design"
         |-> dynamic programming
         |-> greedy algorithms
 
     * Data Structures: "data_structures"
-        |-> binary search trees
         |-> red-black trees
     
     * Graph Algorithms: "graph_algorithms"
@@ -47,11 +49,6 @@ This is a collection of my notes and code for various algorithms, data structure
     
     Content
     ---------------------------------------------    
-    * Chapter 12: Binary Search Tree
-        - what is a binary search tree?
-        - querying a binary search tree
-        - insertion and deletion
-    
     * Chapter 13: Red-Black Trees
         - properties
         - rotations
