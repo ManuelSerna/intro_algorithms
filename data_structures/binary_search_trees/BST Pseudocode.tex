@@ -1,0 +1,225 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+
+\title{Binary Search Tree Pseudocode}
+\author{}
+\date{}
+\setlength{\parindent}{0pt}
+
+\usepackage{natbib}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{clrscode3e}
+
+\begin{document}
+
+\maketitle
+
+Here are the procedures for binary search trees discussed in the book.
+
+%--------------------------------------------
+% Inorder tree walk
+%--------------------------------------------
+\begin{codebox}
+\Procname{\proc{inorder-tree-walk}$(x)$}
+\li \If $x \neq \const{NIL}$
+\li \Then
+        $\proc{inorder-tree-walk}(\attrib{x}{left})$
+\li     print $\attrib{x}{key}$
+\li     $\proc{inorder-tree-walk}(\attrib{x}{right})$
+\end{codebox}
+
+%--------------------------------------------
+% Preorder tree walk
+%--------------------------------------------
+\begin{codebox}
+\Procname{\proc{preorder-tree-walk}$(x)$}
+\li \If $x \neq \const{NIL}$
+\li \Then
+        print $\attrib{x}{key}$
+\li     $\proc{inorder-tree-walk}(\attrib{x}{left})$
+\li     $\proc{inorder-tree-walk}(\attrib{x}{right})$
+\end{codebox}
+
+%--------------------------------------------
+% Postorder tree walk
+%--------------------------------------------
+\begin{codebox}
+\Procname{\proc{postorder-tree-walk}$(x)$}
+\li \If $x \neq \const{NIL}$
+\li \Then
+        $\proc{inorder-tree-walk}(\attrib{x}{left})$
+\li     $\proc{inorder-tree-walk}(\attrib{x}{right})$
+\li     print $\attrib{x}{key}$
+\end{codebox}
+
+%--------------------------------------------
+% Binary Search
+%--------------------------------------------
+\begin{codebox}
+\Procname{\proc{tree-search}$(x, k)$}
+\li \If $x \isequal \const{NIL} \text{ or } k \isequal \attrib{x}{key}$
+\li \Then
+        \Return $x$
+    \End
+\li \If $k < \attrib{x}{key}$ 
+\li \Then
+        \Return $\proc{tree-search}(\attrib{x}{left}, k)$
+\li \Else
+\li     \Return $\proc{tree-search}(\attrib{x}{right}, k)$
+    \End
+\end{codebox}
+
+%--------------------------------------------
+% Iterative Binary Search
+%--------------------------------------------
+\begin{codebox}
+\Procname{\proc{iterative-tree-search}$(x, k)$}
+\li \While $x \neq \const{NIL} \text{ and } k \neq \attrib{x}{key}$
+    \Do
+\li     \If $k < \attrib{x}{key}$ 
+        \Then
+\li         $x = \attrib{x}{left}$
+\li     \Else
+\li         $x = \attrib{x}{right}$ 
+        \End
+    \End
+\li \Return $x$
+\end{codebox}
+
+%--------------------------------------------
+% Minimum
+%--------------------------------------------
+\begin{codebox}
+\Procname{\proc{tree-minimum}$(x)$}
+\li \While $\attrib{x}{left} \neq \const{NIL}$
+    \Do
+    \li     $x = \attrib{x}{left}$
+    \End
+\li \Return $x$
+\end{codebox}
+
+%--------------------------------------------
+% Maximum
+%--------------------------------------------
+\begin{codebox}
+\Procname{\proc{tree-maximum}$(x)$}
+\li \While $\attrib{x}{right} \neq \const{NIL}$
+    \Do
+    \li     $x = \attrib{x}{right}$
+    \End
+\li \Return $x$
+\end{codebox}
+
+%--------------------------------------------
+% Predecessor
+%--------------------------------------------
+\begin{codebox}
+\Procname{\proc{tree-predecessor}$(x)$}
+\li \If $\attrib{x}{left} \neq \const{NIL}$
+\li \Then
+        \Return $\proc{tree-maximum}(\attrib{x}{left})$
+    \End
+\li $y = x.p$
+\li \While $y \neq \const{NIL}$ and $x \isequal \attrib{y}{left}$
+    \Do
+        \li $x = y$ 
+        \li $y = y.p$
+    \End
+\li \Return $y$
+\end{codebox}
+
+%--------------------------------------------
+% Successor
+%--------------------------------------------
+\begin{codebox}
+\Procname{\proc{tree-successor}$(x)$}
+\li \If $\attrib{x}{right} \neq \const{NIL}$
+\li \Then
+        \Return $\proc{tree-minimum}(\attrib{x}{right})$
+    \End
+\li $y = x.p$
+\li \While $y \neq \const{NIL}$ and $x \isequal \attrib{y}{right}$
+    \Do
+        \li $x = y$ 
+        \li $y = y.p$
+    \End
+\li \Return $y$
+\end{codebox}
+
+%--------------------------------------------
+% Insert
+%--------------------------------------------
+\begin{codebox}
+\Procname{\proc{tree-insert}$(T, x)$}
+\li $y = \const{NIL}$
+\li $x = \attrib{T}{root}$
+\li \While $x \neq \const{NIL}$
+    \Do
+    \li     $y = x$
+        \li \If $\attrib{z}{key} < \attrib{x}{key}$
+        \li \Then
+                $x = \attrib{x}{left}$
+        \li \Else
+        \li     $x = \attrib{x}{right}$
+            \End
+    \End
+\li $z.p = y$
+\li \If $y \isequal \const{NIL}$
+\li \Then
+        $\attrib{T}{root} = z$ \Comment tree $T$ was empty
+\li \ElseIf $\attrib{z}{key} < \attrib{y}{key}$
+\li \Then
+        $\attrib{y}{left} = z$
+\li \Else
+\li     $\attrib{y}{right} = z$
+    \End
+    
+\end{codebox}
+
+%--------------------------------------------
+% Transplant
+%--------------------------------------------
+\begin{codebox}
+\Procname{\proc{transplant}$(T, u, v)$}
+\li \If $\attrib{u}{p} \isequal \const{nil}$
+\li \Then
+        $\attrib{T}{root} \isequal v$
+\li \ElseIf $u \isequal \attrib{u}{\attrib{p}{left}}$
+\li \Then
+        $\attrib{u}{\attrib{p}{left}} \isequal v$
+\li \Else
+\li     $\attrib{u}{\attrib{p}{right}} \isequal v$
+    \End
+\li \If $v \neq \const{nil}$
+\li \Then
+        $\attrib{v}{p} = \attrib{u}{p}$
+    \End
+\end{codebox}
+
+%--------------------------------------------
+% Delete
+%--------------------------------------------
+\begin{codebox}
+\Procname{\proc{tree-delete}$(T, z)$}
+\li \If $\attrib{z}{left} \isequal \const{nil}$
+\li \Then
+        $\proc{transplant}(T, z, \attrib{z}{right})$
+\li \ElseIf $\attrib{z}{right} \isequal \const{nil}$
+\li \Then
+        $\proc{transplant}(T, z, \attrib{z}{left})$
+\li \Else
+\li     $y = \proc{tree-minimum}(\attrib{z}{right})$
+\li     \If $\attrib{y}{p} \neq z$
+\li     \Then
+            $\proc{transplant}(T, y, \attrib{y}{right})$
+\li         $\attrib{y}{right} = \attrib{z}{right}$
+\li         $\attrib{y}{\attrib{right}{p}} = y$
+        \End
+\li     $\proc{transplant}(T, z, y)$
+\li     $\attrib{y}{left} = \attrib{z}{left}$
+\li     $\attrib{y}{\attrib{left}{p}} = y$
+    \End
+\end{codebox}
+
+\end{document}
