@@ -92,13 +92,25 @@ This is a collection of my notes and code for various algorithms, data structure
     My plan is to finish the chapters specified above by August for sure.
 
 ## Resources
-Overleaf's documentation on LaTeX and my tool for writing LaTeX documents.
-https://www.overleaf.com/learn
+#### Content
+I fully credit a good portion of the content, structure, figures, and analysis to _Introduction to Algorithms_. 
+
+Cormen, T. H., Leiserson, C. E., Rivest, R. L., & Stein, C. (n.d.). Introduction to algorithms (3rd ed.).
 
 MIT OpenCourseWare
 https://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-006-introduction-to-algorithms-fall-2011/
 
-## References
-I fully credit a good portion of the content, structure, figures, and analysis to _Introduction to Algorithms_. 
+#### LaTeX
+Overleaf's documentation on LaTeX and my tool for writing LaTeX documents.
+https://www.overleaf.com/learn
 
-Cormen, T. H., Leiserson, C. E., Rivest, R. L., & Stein, C. (n.d.). Introduction to algorithms (3rd ed.).
+Useful LaTeX math symbols.
+https://oeis.org/wiki/List_of_LaTeX_mathematical_symbols  
+
+TeXample: site with many useful figures written with TikZ.
+http://www.texample.net/tikz/ 
+
+  * Red-black tree example: http://texample.net/tikz/examples/red-black-tree/ 
+ 
+LaTeX4Technics: Online LaTeX equation calculator.
+https://www.latex4technics.com/
