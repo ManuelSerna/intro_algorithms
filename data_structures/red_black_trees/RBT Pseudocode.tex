@@ -1,0 +1,289 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+
+\title{Red-Black Tree Pseudocode}
+\author{}
+\date{}
+
+\usepackage{natbib}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{clrscode3e}
+
+\begin{document}
+
+\maketitle
+
+Here are the procedures for red-black trees discussed in the book.
+
+%--------------------------------------------
+% left rotate
+%--------------------------------------------
+\begin{codebox}
+\Procname{$\proc{left-rotate}(T, x)$}
+\li $y \gets{\attrib{x}{right}}$ \Comment set y
+\li $\attrib{x}{right} \gets{\attrib{y}{left}}$ \Comment turn $y$'s left subtree into $x$'s right subtree
+\li \If $\attrib{y}{left} \neq \attrib{T}{nil}$
+\li \Then
+        $\attrib{y}{\attrib{left}{p}} \gets{x}$
+    \End
+\li $\attrib{y}{p} \gets{\attrib{x}{p}}$ \Comment link $x$'s parent to $y$
+\li \If $\attrib{x}{p} \isequal \attrib{T}{nil}$
+\li \Then
+        $\attrib{T}{root} \gets{y}$
+\li \ElseIf $x \isequal \attrib{x}{\attrib{p}{left}}$
+\li \Then
+        $\attrib{x}{\attrib{p}{left}} \gets{y}$
+\li \Else
+\li     $\attrib{x}{\attrib{p}{right}} \gets{y}$
+    \End
+\li $\attrib{y}{left} \gets{x}$ \Comment put $x$ on $y$'s left
+\li $\attrib{x}{p} \gets{y}$
+\end{codebox}
+
+%--------------------------------------------
+% right rotate
+%--------------------------------------------
+\begin{codebox}
+\Procname{$\proc{right-rotate}(T, x)$}
+\li $x \gets{\attrib{y}{left}}$ \Comment set $x$
+\li $\attrib{y}{left} \gets{\attrib{x}{right}}$ \Comment turn $x$'s left subtree $\beta$ into $y$'s right subtree
+\li \If $\attrib{x}{right} \neq \attrib{T}{nil}$ \Comment if $\beta$ is a populated subtree, $y$ points to $x$
+\li \Then
+        $\attrib{x}{\attrib{right}{p}} \gets{y}$
+    \End
+\li $\attrib{x}{p} \gets{\attrib{y}{p}}$ \Comment link $y$'s parent to $x$
+\li \If $\attrib{y}{p} \isequal \attrib{T}{nil}$ \Comment make $x$ new root if $y$ was the root
+\li \Then
+        $\attrib{T}{root} \gets{x}$
+\li \ElseIf $y \isequal \attrib{y}{\attrib{p}{right}}$
+\li \Then
+        $\attrib{y}{\attrib{p}{right}} \gets{x}$
+\li \Else
+\li     $\attrib{y}{\attrib{p}{left}} \gets{x}$
+    \End
+\li $\attrib{x}{right} \gets{y}$ \Comment put $y$ on $x$'s right
+\li $\attrib{y}{p} \gets{x}$
+\end{codebox}
+
+%--------------------------------------------
+% minimum
+%--------------------------------------------
+\begin{codebox}
+\Procname{\proc{tree-minimum}$(x)$}
+\li \While $\attrib{x}{left} \neq \const{NIL}$
+    \Do
+    \li     $x = \attrib{x}{left}$
+    \End
+\li \Return $x$
+\end{codebox}
+
+%--------------------------------------------
+% rb insert
+%--------------------------------------------
+\begin{codebox}
+\Procname{$\proc{rb-insert}(T, z)$}
+\li $y \gets{\attrib{T}{nil}}$
+\li $x \gets{\attrib{T}{root}}$
+\li \While $x \neq \attrib{T}{nil}$ \Comment perform regular binary search
+    \Do
+\li     $y \gets{x}$
+\li     \If $\attrib{z}{key} < \attrib{x}{key}$
+\li     \Then
+            $x \gets{\attrib{x}{left}}$
+\li     \Else
+\li         $x \gets{\attrib{x}{right}}$
+        \End
+    \End
+\li $\attrib{z}{p} \gets{y}$ \Comment make $y$ the parent, insert $z$ in the appropriate place
+\li \If $y \isequal \attrib{T}{nil}$
+\li \Then
+        $\attrib{T}{root} \gets{z}$
+\li \ElseIf $\attrib{z}{key} < \attrib{y}{key}$
+\li \Then
+        $\attrib{y}{left} \gets{z}$
+\li \Else
+\li     $\attrib{y}{right} \gets{z}$
+    \End
+\li $\attrib{z}{left} \gets{\attrib{T}{nil}}$
+\li $\attrib{z}{right} \gets{\attrib{T}{nil}}$
+\li $\attrib{z}{color} \gets{\const{red}}$
+\li $\proc{rb-insert-fixup}(T, z)$
+\end{codebox}
+
+%--------------------------------------------
+% rb insert fixup
+%--------------------------------------------
+\begin{codebox}
+\Procname{$\proc{rb-insert-fixup}(T, z)$}
+\li \While $\attrib{z}{\attrib{p}{color} \isequal \const{red}}$
+    \Do
+\li     \If $\attrib{z}{p} \isequal \attrib{z}{\attrib{p}{\attrib{p}{left}}}$
+\li     \Then
+            $y \gets{\attrib{z}{\attrib{p}{\attrib{p}{right}}}}$
+\li         \If $\attrib{y}{color} \gets{\const{red}}$ \Comment case 1
+\li         \Then
+                $\attrib{z}{\attrib{p}{color}} \gets{\const{black}}$
+\li             $\attrib{y}{color} \gets{\const{black}}$
+\li             $\attrib{z}{\attrib{p}{\attrib{p}{color}}} \gets{\const{red}}$
+\li             $z \gets{\attrib{z}{\attrib{p}{p}}}$
+\li         \Else
+\li             \If $z \isequal \attrib{z}{\attrib{p}{right}}$ \Comment case 2
+\li             \Then
+                    $z \gets{\attrib{z}{p}}$
+\li                 $\proc{left-rotate}(T, z)$
+                \End
+\li             $\attrib{z}{\attrib{p}{color}}
+\gets{\const{black}}$ \Comment case 2 leads into case 3
+\li             $\attrib{z}{\attrib{p}{\attrib{p}{color}}} \gets{\const{red}}$
+\li             $\proc{right-rotate}(T, \attrib{z}{\attrib{p}{p}})$
+            \End
+% Same as then clause with "right" and "left" exchanged
+\li     \Else
+\li         $y \gets{\attrib{z}{\attrib{p}{\attrib{p}{left}}}}$
+\li         \If $\attrib{y}{color} \gets{\const{red}}$ \Comment case 1
+\li         \Then
+                $\attrib{z}{\attrib{p}{color}} \gets{\const{black}}$
+\li             $\attrib{y}{color} \gets{\const{black}}$
+\li             $\attrib{z}{\attrib{p}{\attrib{p}{color}}} \gets{\const{red}}$
+\li             $z \gets{\attrib{z}{\attrib{p}{p}}}$
+\li         \Else
+\li             \If $z \isequal \attrib{z}{\attrib{p}{left}}$ \Comment case 2
+\li             \Then
+                    $z \gets{\attrib{z}{p}}$
+\li                 $\proc{right-rotate}(T, z)$
+                \End
+\li             $\attrib{z}{\attrib{p}{color}} \gets{\const{black}}$ \Comment case 2 leads into case 3
+\li             $\attrib{z}{\attrib{p}{\attrib{p}{color}}} \gets{\const{red}}$
+\li             $\proc{left-rotate}(T, \attrib{z}{\attrib{p}{p}})$
+            \End
+        \End
+    \End
+\li $\attrib{T}{\attrib{root}{black} \isequal \const{black}}$
+\end{codebox}
+
+%--------------------------------------------
+% rb transplant
+%--------------------------------------------
+\begin{codebox}
+\Procname{$\proc{rb-transplant}(T, u, v)$}
+\li \If $\attrib{u}{p} \isequal \attrib{T}{nil}$
+\li \Then
+        $\attrib{T}{root} \gets{v}$
+\li \ElseIf $u \isequal \attrib{u}{\attrib{p}{left}}$
+\li \Then
+        $\attrib{u}{\attrib{p}{left}} \gets{v}$
+\li \Else
+\li     $\attrib{u}{\attrib{p}{right}} \gets{v}$
+    \End
+\li $\attrib{v}{p} \gets{\attrib{u}{p}}$
+\end{codebox}
+
+%--------------------------------------------
+% rb delete
+%--------------------------------------------
+\begin{codebox}
+\Procname{$\proc{rb-delete}(T, u, v)$}
+\li $y \gets{z}$
+\li $\id{y-original-color} \gets{\attrib{y}{color}}$
+\li \If $\attrib{z}{left} \isequal \attrib{T}{nil}$
+\li \Then
+        $x \gets{\attrib{z}{right}}$
+\li     $\proc{rb-transplant}(T, z, \attrib{z}{right})$ \Comment replace $z$ with right non-nil subtree
+\li \ElseIf $\attrib{z}{right} \isequal \attrib{T}{nil}$
+\li \Then
+        $x \gets{\attrib{z}{left}}$
+\li     $\proc{rb-transplant}(T, z, \attrib{z}{left})$ \Comment replace $z$ with left non-nil subtree
+\li \Else
+\li     $y \gets{\proc{tree-minimum}(\attrib{z}{right})}$
+\li     $\id{y-original-color} \gets{\attrib{y}{color}}$
+\li     $x \gets{\attrib{y}{right}}$
+\li     \If $\attrib{y}{p} \isequal z$
+\li     \Then
+            $\attrib{x}{p} \gets{y}$
+\li     \Else
+            $\proc{rb-transplant}(T, y, \attrib{y}{right})$
+\li         $\attrib{y}{right} \gets{\attrib{z}{right}}$
+\li         $\attrib{y}{\attrib{right}{p}} \gets{y}$
+        \End
+\li     $\proc{rb-transplant}(T, z, y)$
+\li     $\attrib{y}{left} \gets{\attrib{z}{left}}$
+\li     $\attrib{y}{\attrib{left}{p}} \gets{y}$
+\li     $\attrib{y}{color} \gets{\attrib{z}{color}}$
+    \End
+\li \If $\id{y-original-color} \isequal \const{black}$
+\li \Then
+        $\proc{rb-delete-fixup}(T, x)$
+    \End
+\end{codebox}
+
+%--------------------------------------------
+% rb delete fixup
+%--------------------------------------------
+\begin{codebox}
+\Procname{$\proc{rb-delete-fixup}(T, u, v)$}
+\li \While $x \neq \attrib{T}{root}$ and $\attrib{x}{color} \isequal \const{black}$
+\li \Do
+        \If $x \isequal \attrib{x}{\attrib{p}{left}}$
+\li     \Then
+            $w \gets{\attrib{x}{\attrib{p}{right}}}$
+\li         \If $\attrib{w}{color} \isequal \const{red}$ \Comment case 1 in then clause
+\li         \Then
+                $\attrib{w}{color} \gets{\const{black}}$
+\li             $\attrib{x}{\attrib{p}{color}} \gets{red }$
+\li             $\proc{left-rotate}(T, \attrib{x}{p})$
+\li             $w \gets{\attrib{x}{\attrib{p}{right}}}$
+            \End
+\li         \If $\attrib{w}{\attrib{left}{color}} \isequal \const{black}$ and $\attrib{w}{\attrib{right}{color}} \isequal \const{black}$ \Comment case 2
+\li         \Then
+                $\attrib{w}{color} \gets{red}$
+\li             $x \gets{\attrib{x}{p}}$
+\li         \Else
+\li             \If $\attrib{w}{\attrib{right}{color}} \isequal \const{black}$ \Comment case 3
+\li             \Then
+                    $\attrib{w}{\attrib{left}{color}} \gets{\const{black}}$
+\li                 $\attrib{w}{color} \gets{red}$
+\li                 $\proc{right-rotate}(T, w)$
+\li                 $w \gets{\attrib{x}{\attrib{p}{right}}}$
+                \End
+\li             $\attrib{w}{color} \gets{\attrib{x}{\attrib{p}{color}}}$ \Comment case 4
+\li             $\attrib{x}{\attrib{p}{color}} \gets{\const{black}}$
+\li             $\attrib{w}{\attrib{right}{color}} \gets{\const{black}}$
+\li             $\proc{left-rotate}(T, \attrib{x}{p})$
+\li             $x \gets{\attrib{T}{root}}$
+            \End
+% same as then clause with "right" and "left" exchanged
+\li     \Else
+\li         $w \gets{\attrib{x}{\attrib{p}{left}}}$
+\li         \If $\attrib{w}{color} \isequal \const{red}$ \Comment case 1 in then clause
+\li         \Then
+                $\attrib{w}{color} \gets{\const{black}}$
+\li             $\attrib{x}{\attrib{p}{color}} \gets{red }$
+\li             $\proc{right-rotate}(T, \attrib{x}{p})$
+\li             $w \gets{\attrib{x}{\attrib{p}{left}}}$
+            \End
+\li         \If $\attrib{w}{\attrib{right}{color}} \isequal \const{black}$ and $\attrib{w}{\attrib{left}{color}} \isequal \const{black}$ \Comment case 2
+\li         \Then
+                $\attrib{w}{color} \gets{red}$
+\li             $x \gets{\attrib{x}{p}}$
+\li         \Else
+\li             \If $\attrib{w}{\attrib{left}{color}} \isequal \const{black}$ \Comment case 3
+\li             \Then
+                    $\attrib{w}{\attrib{right}{color}} \gets{\const{black}}$
+\li                 $\attrib{w}{color} \gets{red}$
+\li                 $\proc{left-rotate}(T, w)$
+\li                 $w \gets{\attrib{x}{\attrib{p}{left}}}$
+                \End
+\li             $\attrib{w}{color} \gets{\attrib{x}{\attrib{p}{color}}}$ \Comment case 4
+\li             $\attrib{x}{\attrib{p}{color}} \gets{\const{black}}$
+\li             $\attrib{w}{\attrib{left}{color}} \gets{\const{black}}$
+\li             $\proc{right-rotate}(T, \attrib{x}{p})$
+\li             $x \gets{\attrib{T}{root}}$
+            \End
+        \End
+    \End
+\li $\attrib{x}{color} \gets{\const{black}}$
+\end{codebox}
+
+\end{document}
+
