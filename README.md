@@ -5,7 +5,7 @@ This is a collection of my notes and code for various algorithms, data structure
 ## Before reading my notes
   * Whenever I use ```log(n)```, I mean the common logarithm (log base 10). I will write the natural log as ```ln(n)```. The logarithm with base 2 will be written normally, although the book writes it as ```lg(n)```.
 
-## Reading Order (for most essential material)
+## Essential Readings
 ### Analysis
 1. Getting Started
 2. Asymptotic Notation
@@ -21,14 +21,12 @@ This is a collection of my notes and code for various algorithms, data structure
 
 ### Data Structures
 8. Binary Search Trees
+9. Red-Black Trees
 
 ## TEMP: Sorting algorithms and data structures covered: 
     * Algorithm Design: "algorithm_design"
         |-> dynamic programming
         |-> greedy algorithms
-
-    * Data Structures: "data_structures"
-        |-> red-black trees
     
     * Graph Algorithms: "graph_algorithms"
         |-> elementary graph algorithms
@@ -48,13 +46,7 @@ This is a collection of my notes and code for various algorithms, data structure
             |-> johnson
     
     Content
-    ---------------------------------------------    
-    * Chapter 13: Red-Black Trees
-        - properties
-        - rotations
-        - insertion
-        - deletion
-    
+    ---------------------------------------------
     * Chapter 15: Dynamic Programming
         - rod cutting problem
         - matrix-chain multiplication
