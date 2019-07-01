@@ -1,0 +1,376 @@
+\documentclass{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage{tikz}
+
+\setlength{\parindent}{0pt}
+
+\tikzset{state/.style={draw,circle}}
+
+\usetikzlibrary{arrows, automata}
+\usetikzlibrary{positioning}
+
+%**************************************************
+% Node definitions for figures
+%**************************************************
+% Black node 
+\tikzstyle{black_node} = [
+    circle, 
+    white, 
+    font=\bfseries, 
+    draw=black, 
+    fill=black, 
+    align=center, 
+    inner sep=2pt, % 2pt is good for two digits
+    text width=1.5em, 
+    text centered
+]
+
+% Red node
+\tikzstyle{red_node} = [
+    circle, 
+    white, 
+    font=\bfseries, 
+    draw=black,
+    fill=red,
+    align=center, 
+    inner sep=2pt, % 2pt is good for two digits
+    text width=1.5em, 
+    text centered
+]
+
+% NIL node - drawn as black rounded rectangles
+\tikzstyle{nil} = [
+    rounded corners, 
+    white,
+    draw=black, 
+    fill=black,
+    align=center, 
+    inner sep=0pt, 
+    minimum width=1.0em, 
+    minimum height=1.0em
+]
+
+\begin{document}
+
+\textbf{CLRS Problem 13.3-2:} insert nodes into an empty red-black tree.
+\\ \\
+%**************************************************
+% Problem 13.3-2
+%**************************************************
+\textbf{\emph{Note: NIL nodes shown as black rounded-corner rectangles.}}\\
+%--------------------------------------------------
+% 41
+%--------------------------------------------------
+\textbf{Insert: 41}
+\\
+Always insert new nodes as red.
+\\ \\
+\begin{tikzpicture}[
+    level/.style={
+        sibling distance = 2.5cm/#1, 
+        level distance = 1.25cm
+    }
+] 
+\node [red_node] {41}
+; 
+\end{tikzpicture}
+\\ \\
+Inserting into an emtpy tree, the root must be black.
+\\ \\
+\begin{tikzpicture}[
+    level/.style={
+        sibling distance = 2.5cm/#1, 
+        level distance = 1.00cm
+    }
+] 
+\node [black_node] {41}
+    child{ node [nil] {}}
+    child{ node [nil] {}}
+; 
+\end{tikzpicture}
+\\ \\ \\
+%--------------------------------------------------
+% 38
+%--------------------------------------------------
+\textbf{Insert: 38}
+\\
+Simply insert 38 as a red node.
+\\ \\
+\begin{tikzpicture}[
+    level/.style={
+        sibling distance = 2.5cm/#1, 
+        level distance = 1.00cm
+    }
+] 
+\node [black_node] {41}
+    child{ node [red_node] {38}
+        child{ node [nil] {}}
+        child{ node [nil] {}}
+    }
+    child{ node [nil] {}}
+; 
+\end{tikzpicture}
+\\ \\ \\
+%--------------------------------------------------
+% 31
+%--------------------------------------------------
+\textbf{Insert: 31}
+\\ \\
+\begin{tikzpicture}[
+    level/.style={
+        sibling distance = 2.5cm/#1, 
+        level distance = 1.00cm
+    }
+] 
+\node [black_node] {41}
+    child{ node [red_node] {38}
+        child{ node [red_node] {31}
+            child{ node [nil] {}}
+            child{ node [nil] {}}
+        }
+        child{ node [nil] {}}
+    }
+    child{ node [nil] {}}
+; 
+\end{tikzpicture}
+\\ \\
+Uncle (NIL) is black, rotate grandparent in opposite direction of node inserted, in this case, rotate right on node with key 41.
+\\ \\
+\begin{tikzpicture}[
+    level/.style={
+        sibling distance = 2.5cm/#1, 
+        level distance = 1.00cm
+    }
+] 
+\node [black_node] {38}
+    child{ node [red_node] {31}
+        child{ node [nil] {}}
+        child{ node [nil] {}}
+    }
+    child{ node [red_node] {41}
+        child{ node [nil] {}}
+        child{ node [nil] {}}
+    }
+; 
+\end{tikzpicture}
+\\ \\ \\
+%--------------------------------------------------
+% 12
+%--------------------------------------------------
+\textbf{Insert: 12}
+\\ \\
+\begin{tikzpicture}[
+    level/.style={
+        sibling distance = 2.5cm/#1, 
+        level distance = 1.00cm
+    }
+] 
+\node [black_node] {38}
+    child{ node [red_node] {31}
+        child{ node [red_node] {12}
+            child{ node [nil] {}}
+            child{ node [nil] {}}
+        }
+        child{ node [nil] {}}
+    }
+    child{ node [red_node] {41}
+        child{ node [nil] {}}
+        child{ node [nil] {}}
+    }
+; 
+\end{tikzpicture}
+\\ \\
+Uncle is red, recolor parent, uncle, and grandparent. 
+\\ \\
+\begin{tikzpicture}[
+    level/.style={
+        sibling distance = 2.5cm/#1, 
+        level distance = 1.00cm
+    }
+] 
+\node [red_node] {38}
+    child{ node [black_node] {31}
+        child{ node [red_node] {12}
+            child{ node [nil] {}}
+            child{ node [nil] {}}
+        }
+        child{ node [nil] {}}
+    }
+    child{ node [black_node] {41}
+        child{ node [nil] {}}
+        child{ node [nil] {}}
+    }
+; 
+\end{tikzpicture}
+\\ \\
+The root must be black, recolor it black.
+\\ \\
+\begin{tikzpicture}[
+    level/.style={
+        sibling distance = 2.5cm/#1, 
+        level distance = 1.00cm
+    }
+] 
+\node [black_node] {38}
+    child{ node [black_node] {31}
+        child{ node [red_node] {12}
+            child{ node [nil] {}}
+            child{ node [nil] {}}
+        }
+        child{ node [nil] {}}
+    }
+    child{ node [black_node] {41}
+        child{ node [nil] {}}
+        child{ node [nil] {}}
+    }
+; 
+\end{tikzpicture}
+\newpage
+%--------------------------------------------------
+% 19
+%--------------------------------------------------
+\textbf{Insert: 19}
+\\ \\
+\begin{tikzpicture}[
+    level/.style={
+        sibling distance = 2.5cm/#1, 
+        level distance = 1.00cm
+    }
+] 
+\node [black_node] {38}
+    child{ node [black_node] {31}
+        child{ node [red_node] {12}
+            child{ node [nil] {}}
+            child{ node [red_node] {19}
+                child{ node [nil] {}}
+                child{ node [nil] {}}
+            }
+        }
+        child{ node [nil] {}}
+    }
+    child{ node [black_node] {41}
+        child{ node [nil] {}}
+        child{ node [nil] {}}
+    }
+; 
+\end{tikzpicture}
+\\ \\
+Uncle (NIL) is black, ``triangle'' case, thus, rotate 19's parent (node with key 12).
+\\ \\
+\begin{tikzpicture}[
+    level/.style={
+        sibling distance = 2.5cm/#1, 
+        level distance = 1.00cm
+    }
+] 
+\node [black_node] {38}
+    child{ node [black_node] {31}
+        child{ node [red_node] {19}
+            child{ node [red_node] {12}
+                child{ node [nil] {}}
+                child{ node [nil] {}}
+            }
+            child{ node [nil] {}}
+        }
+        child{ node [nil] {}}
+    }
+    child{ node [black_node] {41}
+        child{ node [nil] {}}
+        child{ node [nil] {}}
+    }
+; 
+\end{tikzpicture}
+\\ \\
+Uncle (NIL) is black, ``line'' case, thus, rotate right on 12's grandfather.
+\\ \\
+\begin{tikzpicture}[
+    level/.style={
+        sibling distance = 2.5cm/#1, 
+        level distance = 1.00cm
+    }
+] 
+\node [black_node] {38}
+    child{ node [black_node] {19}
+        child{ node [red_node] {12}
+            child{ node [nil] {}}
+            child{ node [nil] {}}
+        }
+        child{ node [red_node] {31}
+            child{ node [nil] {}}
+            child{ node [nil] {}}
+        }
+    }
+    child{ node [black_node] {41}
+        child{ node [nil] {}}
+        child{ node [nil] {}}
+    }
+; 
+\end{tikzpicture}
+
+\newpage
+
+%--------------------------------------------------
+% 8
+%--------------------------------------------------
+\textbf{Insert: 8}
+\\ \\
+\begin{tikzpicture}[
+    level/.style={
+        sibling distance = 2.5cm/#1, 
+        level distance = 1.00cm
+    }
+] 
+\node [black_node] {38}
+    child{ node [black_node] {19}
+        child{ node [red_node] {12}
+            child{ node [red_node] {8}
+                child{ node [nil] {}}
+                child{ node [nil] {}}
+            }
+            child{ node [nil] {}}
+        }
+        child{ node [red_node] {31}
+            child{ node [nil] {}}
+            child{ node [nil] {}}
+        }
+    }
+    child{ node [black_node] {41}
+        child{ node [nil] {}}
+        child{ node [nil] {}}
+    }
+; 
+\end{tikzpicture}
+\\ \\
+Uncle is red, recolor parent, uncle, and grandparent.
+\\ \\
+\begin{tikzpicture}[
+    level/.style={
+        sibling distance = 2.5cm/#1, 
+        level distance = 1.00cm
+    }
+] 
+\node [black_node] {38}
+    child{ node [red_node] {19}
+        child{ node [black_node] {12}
+            child{ node [red_node] {8}
+                child{ node [nil] {}}
+                child{ node [nil] {}}
+            }
+            child{ node [nil] {}}
+        }
+        child{ node [black_node] {31}
+            child{ node [nil] {}}
+            child{ node [nil] {}}
+        }
+    }
+    child{ node [black_node] {41}
+        child{ node [nil] {}}
+        child{ node [nil] {}}
+    }
+; 
+\end{tikzpicture}
+\\ \\
+Done!
+
+\end{document}
