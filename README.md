@@ -89,20 +89,20 @@ I fully credit a good portion of the content, structure, figures, and analysis t
 
 Cormen, T. H., Leiserson, C. E., Rivest, R. L., & Stein, C. (n.d.). Introduction to algorithms (3rd ed.).
 
-MIT OpenCourseWare
+_MIT OpenCourseWare_:
 https://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-006-introduction-to-algorithms-fall-2011/
 
 #### LaTeX
-Overleaf's documentation on LaTeX and my tool for writing LaTeX documents.
+_Overleaf's documentation on LaTeX and my tool for writing LaTeX documents_:
 https://www.overleaf.com/learn
 
-Useful LaTeX math symbols.
+_Useful LaTeX math symbols_:
 https://oeis.org/wiki/List_of_LaTeX_mathematical_symbols  
 
-TeXample: site with many useful figures written with TikZ.
+_TeXample_:
 http://www.texample.net/tikz/ 
 
   * Red-black tree example: http://texample.net/tikz/examples/red-black-tree/ 
  
-LaTeX4Technics: Online LaTeX equation calculator.
+_LaTeX4Technics: Online LaTeX equation calculator_:
 https://www.latex4technics.com/
