@@ -283,12 +283,12 @@ To move subtrees around, the book defines a neat subroutine called $\proc{transp
 \Procname{\proc{transplant}$(T, u, v)$}
 \li \If $\attrib{u}{p} \isequal \const{nil}$
 \li \Then
-        $\attrib{T}{root} \isequal v$
+        $\attrib{T}{root} \gets{v}$
 \li \ElseIf $u \isequal \attrib{u}{\attrib{p}{left}}$
 \li \Then
-        $\attrib{u}{\attrib{p}{left}} \isequal v$
+        $\attrib{u}{\attrib{p}{left}} \gets{v}$
 \li \Else
-\li     $\attrib{u}{\attrib{p}{right}} \isequal v$
+\li     $\attrib{u}{\attrib{p}{right}} \gets{v}$
     \End
 \li \If $v \neq \const{nil}$
 \li \Then
