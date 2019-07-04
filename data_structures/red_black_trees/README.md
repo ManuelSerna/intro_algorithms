@@ -11,3 +11,6 @@ https://en.wikipedia.org/wiki/Red%E2%80%93black_tree
 
 _Geeks for Geeks introduction of red-black trees_: 
 https://www.geeksforgeeks.org/red-black-tree-set-1-introduction-2/
+
+Credit to print method goes to Geeks for Geeks:
+https://www.geeksforgeeks.org/print-binary-tree-2-dimensions/
