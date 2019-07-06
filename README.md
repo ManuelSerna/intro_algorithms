@@ -12,22 +12,23 @@ This is a collection of my notes and code for various algorithms, data structure
 
 ### Algorithm Design
 3. Divide and Conquer
+4. Dynamic Programming 
+5. Greedy Algorithms
 
 ### Sorting Algorithms
-4. Sorting
-5. Heapsort
-6. Quicksort
-7. Linear Time Sorting
+6. Sorting
+7. Heapsort
+8. Quicksort
+9. Linear Time Sorting
 
 ### Data Structures
-8. Binary Search Trees
-9. Red-Black Trees
+10. Binary Search Trees
+11. Red-Black Trees
 
 ## TEMP: Sorting algorithms and data structures covered: 
     * Algorithm Design: "algorithm_design"
         |-> dynamic programming
         |-> greedy algorithms
-    
     * Graph Algorithms: "graph_algorithms"
         |-> elementary graph algorithms
             |-> representations of graphs
@@ -44,7 +45,6 @@ This is a collection of my notes and code for various algorithms, data structure
         |-> all-pairs shortest paths
             |-> floyd-warshall
             |-> johnson
-    
     Content
     ---------------------------------------------
     * Chapter 15: Dynamic Programming
@@ -53,33 +53,27 @@ This is a collection of my notes and code for various algorithms, data structure
         - elements of dynamic programming
         - longest common subsequence
         - optimal binary search trees
-    
     * Chapter 16: Greedy Algorithms
         - activity selection problem
         - elements of greedy strategy
         - huffman codes
-    
     * Chapter 22: Elementary Graph Algorithms
         - representations of graphs
         - BFS
         - DFS
         - topological sort
         - strongly-connected components
-    
     * Chapter 23: Minimum Spanning Trees
         - growing a min span tree
         - Kruskal
         - Prim
-    
     * Chapter 24: Single-Source Shortest Paths
         - bellman-ford algorithm
         - single-source shortest paths in directed acyclic graphs
         - dijkstra's algorithm
-    
     * Chapter 25: All-Pairs Shortest Paths
         - floyd-warshall algorithm
         - johnson's algorithm for sparse graphs
-
     I will add other topics/chapters I find interesting to this in the future.
     My plan is to finish the chapters specified above by August for sure.
 
