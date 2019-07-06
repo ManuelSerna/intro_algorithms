@@ -58,9 +58,9 @@ void BinarySearchTree::Inorder(Node *x)
 {
 	if (x != NULL)
 	{
-		Inorder(x->right);
-		cout << x->key << endl;
 		Inorder(x->left);
+		cout << x->key << endl;
+		Inorder(x->right);
 	}
 }
 
@@ -69,8 +69,8 @@ void BinarySearchTree::Preorder(Node *x)
 	if (x != NULL)
 	{
 		cout << x->key << endl;
-		Inorder(x->right);
 		Inorder(x->left);
+		Inorder(x->right);
 	}
 }
 
@@ -78,8 +78,8 @@ void BinarySearchTree::Postorder(Node *x)
 {
 	if (x != NULL)
 	{
-		Inorder(x->right);
 		Inorder(x->left);
+		Inorder(x->right);
 		cout << x->key << endl;
 	}
 }
