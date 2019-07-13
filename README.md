@@ -2,32 +2,41 @@
 
 This is a collection of my notes and code for various algorithms, data structures, and the like. If anyone finds this, feel free to look at what I have and perhaps also add improvements. Also, I would recommend others read the book with these notes so as to make sense of what the authors were trying to convey.
 
-## Before reading my notes
-  * Whenever I use ```log(n)```, I mean the common logarithm (log base 10). I will write the natural log as ```ln(n)```. The logarithm with base 2 will be written normally, although the book writes it as ```lg(n)```.
-
-## Essential Readings
+## Content
 ### Analysis
-1. Getting Started
-2. Asymptotic Notation
+* Getting Started: starting notes for CLRS
+* Asymptotic Notation: an introduction to asymptotic notation
+* Further Notes: miscellaneous notes on growth rates and log rules
 
 ### Algorithm Design
-3. Divide and Conquer
-4. Dynamic Programming 
-5. Greedy Algorithms
+* Divide and Conquer: personal notes and some examples
+* Dynamic Programming: some examples provided
+* Greedy Algorithms: some examples provided
 
 ### Sorting Algorithms
-6. Sorting
-7. Heapsort
-8. Quicksort
-9. Linear Time Sorting
+Note: all the sections here have notes and implementations.
+
+* Sorting: general notes on sorting algorithms
+* Insertion sort: implementation (discussed in Getting Started)
+* Merge sort: implementation (discussed in Divide and Conquer)
+* Heapsort: heap data structures and heapsort algorithm
+* Quicksort
+* Linear Time Sorting: includes...
+  * Counting sort
+  * Radix sort
+  * Bucket sort
 
 ### Data Structures
-10. Binary Search Trees
-11. Red-Black Trees
+* Elementary Data Structures: implementations of stack and queue
+* Hashing: implementation of open-addressing methods (old homework)
+* Binary Search Trees: notes and implementation
+* Red-Black Trees: notes and implementation
+
+### Select Topics
+Interesting stuff from CLRS not discussed from my course.
 
 ## TEMP: Sorting algorithms and data structures covered: 
     * Algorithm Design: "algorithm_design"
-        |-> dynamic programming
         |-> greedy algorithms
     * Graph Algorithms: "graph_algorithms"
         |-> elementary graph algorithms
@@ -47,16 +56,9 @@ This is a collection of my notes and code for various algorithms, data structure
             |-> johnson
     Content
     ---------------------------------------------
-    * Chapter 15: Dynamic Programming
-        - rod cutting problem
-        - matrix-chain multiplication
-        - elements of dynamic programming
-        - longest common subsequence
-        - optimal binary search trees
     * Chapter 16: Greedy Algorithms
         - activity selection problem
         - elements of greedy strategy
-        - huffman codes
     * Chapter 22: Elementary Graph Algorithms
         - representations of graphs
         - BFS
