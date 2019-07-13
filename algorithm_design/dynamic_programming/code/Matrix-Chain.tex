@@ -1,0 +1,382 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+
+\title{Matrix-chain Multiplication}
+\author{Manuel Serna-Aguilera}
+\date{}
+
+\usepackage{natbib}
+\usepackage{graphicx}
+\usepackage{clrscode3e}
+\usepackage{amsmath}
+
+\setlength{\parindent}{0pt}
+
+\begin{document}
+
+\maketitle
+
+\section*{Problem}
+Given sequence of matrices
+
+\begin{equation*}
+    A_1 \times A_2 \times A_3 \times A_4,
+\end{equation*}
+
+with dimensions
+
+\begin{equation*}
+    A_{5\times4} \times A_{4\times6} \times A_{6\times2} \times A_{2\times7},
+\end{equation*}
+
+we want to minimize the cost of multiplying the matrices. 
+\\ \\
+\subsection*{Finding Cost}
+Given two matrices $A$ and $B$, to find the cost or number of scalar multiplications of the matrix product $A \times B = C$, multiply the dimension of the rows and columns of $A$ with the dimension of the columns of $B$. For example, given 
+
+\begin{equation*}
+    A_{5 \times 4} \times B_{4 \times 3} = C_{5 \times 3}
+\end{equation*}
+
+The number of scalar multiplications would be: $5 \cdot 4 \cdot 3 = 60$. Using a bottom-up approach, we start with single matrices, then move up to multiply pairs, and then sets of three, and so on, to get the cost of the entire sequence.
+\\ \\
+Now, create tables $m$ and $s$ with row $i$ and column $j$,
+\begin{itemize}
+    \item $m$: at $m[i, j]$, the minimum cost is stored when multiplying matrices from $A_i$ to $A_j$. We want to get to $m[1, 4]$, since we have $4$ matrices.
+    
+    \item $s$: at $s[i, j]$, row $i$ will give the sequence of the optimal ordering; basically, it tells us how to parenthesize the sequence of matrices from $i$ to $j$.
+\end{itemize}
+
+\newpage
+
+%-------------------------------------------------
+% m and s tables--initial
+%-------------------------------------------------
+\begin{center}
+\label*{$m$}
+\begin{tabular}{ c|c|c|c|c| }
+    % Label columns
+    \multicolumn{1}{c}{}
+    & \multicolumn{1}{c}{1}
+    & \multicolumn{1}{c}{2}
+    & \multicolumn{1}{c}{3}
+    & \multicolumn{1}{c}{4}\\
+
+    % Label rows
+    \cline{2-5}
+        1 &  &  &  &  \\
+    \cline{2-5}
+        2 &  &  &  &  \\
+    \cline{2-5}
+        3 &  &  &  &  \\
+    \cline{2-5}
+        4 &  &  &  &  \\
+    \cline{2-5}
+\end{tabular}
+\end{center}
+
+\begin{center}
+\label*{$s$}
+\begin{tabular}{ c|c|c|c|c| }
+    % Label columns
+    \multicolumn{1}{c}{}
+    & \multicolumn{1}{c}{1}
+    & \multicolumn{1}{c}{2}
+    & \multicolumn{1}{c}{3}
+    & \multicolumn{1}{c}{4}\\
+
+    % Label rows
+    \cline{2-5}
+        1 &  &  &  &  \\
+    \cline{2-5}
+        2 &  &  &  &  \\
+    \cline{2-5}
+        3 &  &  &  &  \\
+    \cline{2-5}
+        4 &  &  &  &  \\
+    \cline{2-5}
+\end{tabular}
+\end{center}
+
+For the procedure, we only need to fill out half of the table along the diagonal going top-left to bottom-right, as cases below are symmetrical.
+\\ \\
+%-------------------------------------------------
+% Diagonal i = j
+%-------------------------------------------------
+Start at $m[i, j]$, where $i=j$.
+\begin{itemize}
+    \item The cost is zero, just having one matrix by itself would not cost anything to multiply. This is trivial, but for this diagonal, fill in all zeros.
+\end{itemize}
+
+\begin{center}
+\label*{$m$}
+\begin{tabular}{ c|c|c|c|c| }
+    % Label columns
+    \multicolumn{1}{c}{}
+    & \multicolumn{1}{c}{1}
+    & \multicolumn{1}{c}{2}
+    & \multicolumn{1}{c}{3}
+    & \multicolumn{1}{c}{4}\\
+
+    % Label rows
+    \cline{2-5}
+        1 & 0 &  &  &  \\
+    \cline{2-5}
+        2 &  & 0 &  &  \\
+    \cline{2-5}
+        3 &  &  & 0 &  \\
+    \cline{2-5}
+        4 &  &  &  & 0 \\
+    \cline{2-5}
+\end{tabular}
+\end{center}
+
+%-------------------------------------------------
+% Diagonal i = j + 1
+%-------------------------------------------------
+Move up to the next diagonal.
+\begin{itemize}
+    \item $m[1, 2]$: multiply matrices $A_1$ and $A_2$.\\
+    $(A_{5 \times 4}) \times A_{4 \times 6}$ gives a cost of $5 \cdot 4 \cdot 6 = 120$. \\
+    Thus, $m[1, 2] = 120$.\\
+    Place value of 1 in $s[1, 2]$ since we split the sequence at $A_1$.
+    
+    \item $m[2, 3]$: multiply matrices $A_2$ and $A_3$.\\
+    $(A_{4 \times 6}) \times A_{6 \times 2}$ gives a cost of $4 \cdot 6 \cdot 2 = 48$. \\
+    Thus, $m[2, 3] = 48$.\\
+    Place value of 2 in $s[2, 3]$ since we split the sequence at $A_2$.
+    
+    \item $m[3, 4]$: multiply matrices $A_3$ and $A_4$.\\
+    $(A_{6 \times 2}) \times A_{2 \times 7}$ gives a cost of $6 \cdot 2 \cdot 7 = 84$. \\
+    Thus, $m[3, 4] = 84$.\\
+    Place value of 3 in $s[3, 4]$ since we split the sequence at $A_3$.
+\end{itemize}
+
+\newpage
+
+This gives the updated tables $m$ and $s$.
+
+\begin{center}
+\label*{$m$}
+\begin{tabular}{ c|c|c|c|c| }
+    % Label columns
+    \multicolumn{1}{c}{}
+    & \multicolumn{1}{c}{1}
+    & \multicolumn{1}{c}{2}
+    & \multicolumn{1}{c}{3}
+    & \multicolumn{1}{c}{4}\\
+
+    % Label rows
+    \cline{2-5}
+        1 & 0 & 120 &  &  \\
+    \cline{2-5}
+        2 &  & 0 & 48 &  \\
+    \cline{2-5}
+        3 &  &  & 0 & 84 \\
+    \cline{2-5}
+        4 &  &  &  & 0 \\
+    \cline{2-5}
+\end{tabular}
+\end{center}
+
+\begin{center}
+\label*{$s$}
+\begin{tabular}{ c|c|c|c|c| }
+    % Label columns
+    \multicolumn{1}{c}{}
+    & \multicolumn{1}{c}{1}
+    & \multicolumn{1}{c}{2}
+    & \multicolumn{1}{c}{3}
+    & \multicolumn{1}{c}{4}\\
+
+    % Label rows
+    \cline{2-5}
+        1 &  & 1 &  &  \\
+    \cline{2-5}
+        2 &  &  & 2 &  \\
+    \cline{2-5}
+        3 &  &  &  & 3 \\
+    \cline{2-5}
+        4 &  &  &  &  \\
+    \cline{2-5}
+\end{tabular}
+\end{center}
+
+%-------------------------------------------------
+% Diagonal i = j + 2
+%-------------------------------------------------
+
+Now we have calculated the cost of multiplying all pairs possible. Now lets calculate the cost of multiplying sequences with three matrices.
+
+\begin{itemize}
+    \item $m[1, 3]$: Consider two possibilities.
+    \begin{enumerate}
+        \item $A_{5 \times 4} \times ( A_{4 \times 6} \times A_{6 \times 2} ) = A_{5 \times 4} \times A_{4 \times 2}$\\
+        Now, get the cost of $A_1$, a single matrix, plus the cost of $A_2 \times A_3$ (the inner multiplication), and getting the overall cost with this specific sequence. Recall $m[1, 1]$ and $m[2, 3]$ have already been calculated.
+        \begin{equation*}
+            m[1, 1] + m[2, 3] + 5\cdot4\cdot2 = 0 + 48 + 40 = 88
+        \end{equation*}
+        \item $( A_{5 \times 4} \times A_{4 \times 6} ) \times A_{6 \times 2} = A_{5 \times 6} \times A_{6 \times 2}$
+        \begin{equation*}
+            m[1, 2] + m[3, 3] + 5\cdot6\cdot2 = 120 + 0 + 60 = 180
+        \end{equation*}
+        
+        Now, take the smaller cost, which is 88, thus $m[1, 3]=88$. Also, $s[1, 3]=1$ since $A_1$ was our cut-off.
+    \end{enumerate}
+    
+    \item $m[2, 4]$: Consider two possibilities again.
+    \begin{enumerate}
+        \item $A_{4 \times 6} \times ( A_{6 \times 2} \times A_{2 \times 7} ) = A_{4 \times 6} \times A_{6 \times 7}$
+        \begin{equation*}
+            m[2, 2] + m[3, 4] + 4\cdot6\cdot7 = 0 + 84 + 168 = 252
+        \end{equation*}
+        \item $( A_{4 \times 6} \times A_{6 \times 2} ) \times A_{2 \times 7} = A_{4 \times 2} \times A_{2 \times 7}$
+        \begin{equation*}
+            m[2, 3] + m[4, 4] + 4\cdot2\cdot7 = 48 + 0 + 56 = 104
+        \end{equation*}
+        Now, take the smaller cost, which is 104, thus $m[2, 4]=104$. Also, $s[2, 4]=3$ since $A_3$ separates $A_2 \times A_3$ from $A_4$.
+    \end{enumerate}
+\end{itemize}
+
+\newpage
+
+That gives us the updated tables.
+\begin{center}
+\label*{$m$}
+\begin{tabular}{ c|c|c|c|c| }
+    % Label columns
+    \multicolumn{1}{c}{}
+    & \multicolumn{1}{c}{1}
+    & \multicolumn{1}{c}{2}
+    & \multicolumn{1}{c}{3}
+    & \multicolumn{1}{c}{4}\\
+
+    % Label rows
+    \cline{2-5}
+        1 & 0 & 120 & 88 &  \\
+    \cline{2-5}
+        2 &  & 0 & 48 & 104 \\
+    \cline{2-5}
+        3 &  &  & 0 & 84 \\
+    \cline{2-5}
+        4 &  &  &  & 0 \\
+    \cline{2-5}
+\end{tabular}
+\end{center}
+
+\begin{center}
+\label*{$s$}
+\begin{tabular}{ c|c|c|c|c| }
+    % Label columns
+    \multicolumn{1}{c}{}
+    & \multicolumn{1}{c}{1}
+    & \multicolumn{1}{c}{2}
+    & \multicolumn{1}{c}{3}
+    & \multicolumn{1}{c}{4}\\
+
+    % Label rows
+    \cline{2-5}
+        1 &  & 1 & 1 &  \\
+    \cline{2-5}
+        2 &  &  & 2 & 3 \\
+    \cline{2-5}
+        3 &  &  &  & 3 \\
+    \cline{2-5}
+        4 &  &  &  &  \\
+    \cline{2-5}
+\end{tabular}
+\end{center}
+
+%-------------------------------------------------
+% m[1,4]
+%-------------------------------------------------
+
+Now, calculate the cost of the entire sequence, $m[1, 4]$.
+
+\begin{equation*}
+    \begin{split}
+        m[1, 4] = & \min\{ m[1, 1] + m[2, 4] + 5\cdot4\cdot7,\\
+                  & m[1, 2] + m[3, 4] + 5\cdot6\cdot7, \\
+                  & m[1, 3] + m[4, 4] + 5\cdot2\cdot7 \\
+                = & \min\{ 0+104+140,\\
+                  & 120+84+210, \\
+                  & 88+0+70 \}\\
+                = & \min\{ 244, 414, 158\}\\
+        m[1, 4] = & 158
+    \end{split}
+\end{equation*}
+
+Since our solution comes from splitting $A_1 \cdot A_2 \cdot A_3$ from $A_4$, $s[1, 4] = 3$. This gives our final tables $m$ and $s$.
+
+\begin{center}
+\label*{$m$}
+\begin{tabular}{ c|c|c|c|c| }
+    % Label columns
+    \multicolumn{1}{c}{}
+    & \multicolumn{1}{c}{1}
+    & \multicolumn{1}{c}{2}
+    & \multicolumn{1}{c}{3}
+    & \multicolumn{1}{c}{4}\\
+
+    % Label rows
+    \cline{2-5}
+        1 & 0 & 120 & 88 & 158 \\
+    \cline{2-5}
+        2 &  & 0 & 48 & 104 \\
+    \cline{2-5}
+        3 &  &  & 0 & 84 \\
+    \cline{2-5}
+        4 &  &  &  & 0 \\
+    \cline{2-5}
+\end{tabular}
+\end{center}
+
+\begin{center}
+\label*{$s$}
+\begin{tabular}{ c|c|c|c|c| }
+    % Label columns
+    \multicolumn{1}{c}{}
+    & \multicolumn{1}{c}{1}
+    & \multicolumn{1}{c}{2}
+    & \multicolumn{1}{c}{3}
+    & \multicolumn{1}{c}{4}\\
+
+    % Label rows
+    \cline{2-5}
+        1 &  & 1 & 1 & 3 \\
+    \cline{2-5}
+        2 &  &  & 2 & 3 \\
+    \cline{2-5}
+        3 &  &  &  & 3 \\
+    \cline{2-5}
+        4 &  &  &  &  \\
+    \cline{2-5}
+\end{tabular}
+\end{center}
+
+\newpage
+
+\subsection*{Solution}
+This is the general formula for finding the ideal sequence to multiply matrices $i$ to $j$, with dimensions for rows and columns labeled with $d$.
+
+\begin{equation*}
+    m[i, j] = \min_{i \leq k \leq j}\{ m[i, k] + m[k+1, j] + d_{i-1} \cdot d_k \cdot d_j \}
+\end{equation*}
+
+Given $n$ matrices, we will have $n+1$ dimensions. Here is the optimal parenthesization.
+
+\begin{equation*}
+    (A_1 \cdot A_2 \cdot A_3) \cdot (A_4)
+\end{equation*}
+Cut off the sequence at third matrix since $s[1, 4] = 3$. \\
+\begin{equation*}
+    \big((A_1) \cdot (A_2 \cdot A_3)\big) \cdot (A_4)
+\end{equation*}
+Cut off the sequence at first matrix since $s[1, 3] = 1$.
+\\ \\
+Thus, this is the sequence of matrices that requires the least number of scalar multiplications.
+\begin{equation*}
+    \big((A_{5\times4}) \times (A_{4\times6} \times A_{6\times2})\big) \times (A_{2\times7})
+\end{equation*}
+
+\end{document}
