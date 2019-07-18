@@ -36,8 +36,6 @@ Note: all the sections here have notes and implementations.
 Interesting stuff from CLRS not discussed from my course.
 
 ## TEMP: Sorting algorithms and data structures covered: 
-    * Algorithm Design: "algorithm_design"
-        |-> greedy algorithms
     * Graph Algorithms: "graph_algorithms"
         |-> elementary graph algorithms
             |-> representations of graphs
@@ -56,9 +54,6 @@ Interesting stuff from CLRS not discussed from my course.
             |-> johnson
     Content
     ---------------------------------------------
-    * Chapter 16: Greedy Algorithms
-        - activity selection problem
-        - elements of greedy strategy
     * Chapter 22: Elementary Graph Algorithms
         - representations of graphs
         - BFS
