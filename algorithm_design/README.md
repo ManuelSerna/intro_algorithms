@@ -17,4 +17,4 @@ These are the implementations for dynamic programming problems:
 	Matrix-chain: https://www.youtube.com/watch?v=prx1psByp7U
 
 ### Greedy Algorithms
-I will have a couple of problems related to greedy algorithms soon.
+I have the activity selection problem implemented in Python.
