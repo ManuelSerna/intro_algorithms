@@ -1,5 +1,4 @@
-# intro_algorithms
-
+# Introduction to Algorithms Notes
 This is a collection of my notes and code for various algorithms, data structures, and the like. Feel free to look at what I have and perhaps also add improvements. I would recommend others read the book with these notes so as to make sense of what the authors were trying to convey.
 
 ## Content
@@ -43,7 +42,7 @@ Interesting stuff from CLRS not discussed from my course.
 
 ## Resources
 #### Content
-I fully credit a good portion of the content, structure, figures, and analysis to _Introduction to Algorithms_. 
+I fully credit a good portion of the content, structure, figures, and analysis to _Introduction to Algorithms_. Figure images that I have taken from the book have "CLRS" in the file name.
 
 Cormen, T. H., Leiserson, C. E., Rivest, R. L., & Stein, C. (n.d.). Introduction to algorithms (3rd ed.).
 
