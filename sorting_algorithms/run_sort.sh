@@ -7,49 +7,49 @@ echo ""
 echo "************************************"
 echo "Insertion sort                     *"
 echo "************************************"
-python3 insertion_sort.py
+python3 src/insertion_sort.py
 echo ""
 read -n 1 -s -r -p "Press any key to continue."
 echo ""
 echo "************************************"
 echo "Merge sort                         *"
 echo "************************************"
-python3 merge_sort.py
+python3 src/merge_sort.py
 echo ""
 read -n 1 -s -r -p "Press any key to continue."
 echo ""
 echo "************************************"
 echo "Quicksort                          *"
 echo "************************************"
-python3 quicksort/quicksort.py
+python3 quicksort/src/quicksort.py
 echo ""
 read -n 1 -s -r -p "Press any key to continue."
 echo ""
 echo "************************************"
 echo "Heapsort                           *"
 echo "************************************"
-python3 heapsort/heapsort.py
+python3 heapsort/src/heapsort.py
 echo ""
 read -n 1 -s -r -p "Press any key to continue."
 echo ""
 echo "************************************"
 echo "Counting sort                      *"
 echo "************************************"
-python3 linear_time_sorting/counting_sort.py
+python3 linear_time_sorting/src/counting_sort.py
 echo ""
 read -n 1 -s -r -p "Press any key to continue."
 echo ""
 echo "************************************"
 echo "Radix sort                         *"
 echo "************************************"
-python3 linear_time_sorting/radix_sort.py
+python3 linear_time_sorting/src/radix_sort.py
 echo ""
 read -n 1 -s -r -p "Press any key to continue."
 echo ""
 echo "************************************"
 echo "Bucket sort                        *"
 echo "************************************"
-python3 linear_time_sorting/bucket_sort.py
+python3 linear_time_sorting/src/bucket_sort.py
 echo ""
 echo ""
 echo "Done."
