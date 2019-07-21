@@ -4,39 +4,39 @@ This is a collection of my notes and code for various algorithms, data structure
 
 ## Content
 ### Analysis
-* __Getting Started__: starting notes for CLRS
-* __Asymptotic Notation__: an introduction to asymptotic notation
-* __Further Notes__: miscellaneous notes on growth rates and log rules
+* __Getting Started__: starting notes for CLRS.
+* __Asymptotic Notation__: an introduction to asymptotic notation.
+* __Further Notes__: miscellaneous notes on growth rates and log rules.
 
 ### Algorithm Design
-* __Divide and Conquer__: personal notes and some examples
-* __Dynamic Programming__: some examples provided
-* __Greedy Algorithms__: some examples provided
+* __Divide and Conquer__: personal notes and some examples.
+* __Dynamic Programming__: some examples provided.
+* __Greedy Algorithms__: some examples provided.
 
 ### Sorting Algorithms
 Note: all the sections here have notes and implementations.
 
-* __Sorting__: general notes on sorting algorithms
-* __Insertion sort__: implementation (discussed in Getting Started)
-* __Merge sort__: implementation (discussed in Divide and Conquer)
-* __Heapsort__: heap data structures and heapsort algorithm
+* __Sorting__: general notes on sorting algorithms.
+* __Insertion sort__: implementation (discussed in Getting Started).
+* __Merge sort__: implementation (discussed in Divide and Conquer).
+* __Heapsort__: heap data structures and heapsort algorithm.
 * __Quicksort__
-* __Linear Time Sorting__: includes...
+* __Linear Time Sorting__: includes
   * Counting sort
   * Radix sort
   * Bucket sort
 
 ### Data Structures
-* __Elementary Data Structures__: implementations of stack and queue
-* __Hashing__: implementation of open-addressing methods (old homework)
-* __Binary Search Trees__: notes and implementation
-* __Red-Black Trees__: notes and implementation
+* __Elementary Data Structures__: implementations of stack and queue.
+* __Hashing__: implementation of open-addressing methods (old homework).
+* __Binary Search Trees__: notes and implementation.
+* __Red-Black Trees__: notes and implementation.
 
 ### Graph Algorithms
-* __Elementary Graph Algorithms__
-* __Minimum Spanning Trees__
-* __Single-Source Shortest Paths__
-* __All-Pairs Shortest Paths__
+* __Elementary Graph Algorithms__: coming soon.
+* __Minimum Spanning Trees__: coming soon.
+* __Single-Source Shortest Paths__: coming soon.
+* __All-Pairs Shortest Paths__: coming soon.
 
 ### Select Topics
 Interesting stuff from CLRS not discussed from my course.
