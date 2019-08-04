@@ -2,7 +2,7 @@
 # Adjacency-matrix representation of a graph.
 #************************************************
 
-class AdjacencyMatrix():
+class adjmatrix():
     # Create |V| x |V| (n x n) matrix adj
     def __init__(self, n):
         self.n = n
