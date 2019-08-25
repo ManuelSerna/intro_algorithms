@@ -1,6 +1,7 @@
 #************************************************
 # Stack class
-# Note: LIFO
+# LIFO
+# This implementation uses lists, not arrays.
 #************************************************
 
 class Stack():

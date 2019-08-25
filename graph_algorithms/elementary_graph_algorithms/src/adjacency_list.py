@@ -8,31 +8,40 @@ infty = 999999
 #================================================
 '''
     The vertex class contains attributes:
+        index: the number label for each vertex in the graph, these will be integers.
+    
         color: color of vertex in the graph, these are treated as single characters, it is white by default. Possible values:
             - w: white--vertex not discovered yet.
             - g: grey--vertex discovered, but may still be connected to undiscovered (w) vertices.
             - b: black--nothing left to discover, we are done with the current vertex.
+        
         d: discovery time for the vertex. Will be assigned when vertex is made grey, assigned sentinel value of infinity. Will be an integer.
+        
         f: finish time. Will be assigned when vertex is assigned color black, null by default.
 
     * To access these vertices, create a list V, and that will denote which vertex is which. How many vertices there are and thus how long V is will be determined by the variable `n` in the adjlist class constructor.
 '''
 #================================================
 class vertex():
-    def __init__(self, color='w', f=None, v=None, pred=None):
+    def __init__(self, index, color='w', f=None, v=None, pred=None):
+        self.index=index
         self.color = color
         self.d = infty
         self.f = f
         self.pred = pred
+    
+    # Print all the info of this vertex in one line.
+    def get_info(self):
+        print("Index: {}\nColor: {}\nDiscovery Time: {}\nFinish Time: {}\nPredecessor: {}\n".format(self.index, self.color, self.d, self.f, self.pred))
 
 
 
 #================================================
 '''
     The edge class contains attributes:
-        u: start vertex of edge (u, v).
-        v: end vertex of edge (u, v).
-        w: weight of edge, 1 by default.
+        u: start vertex of edge (u, v), integer.
+        v: end vertex of edge (u, v), integer.
+        w: weight of edge, 1 by default, integer.
 
     * In the adjlist class, the list adj will be created and will house these objects in it.
 '''
@@ -47,7 +56,7 @@ class edge():
         if show_w:
             return "({}, {}, w={})".format(self.v, self.u, self.w)
         else:
-            return "({}, {})".format(self.v, self.u)
+            return "{}".format(self.v) # only return end edge
 
 
 
@@ -67,7 +76,7 @@ class adjlist():
         # Crate set of vertices V
         self.V = []
         for i in range(n):
-            self.V.append(vertex())
+            self.V.append(vertex(index=i))
 
         # Create list of edges adj for each vertex i
         self.adj = []
@@ -83,6 +92,7 @@ class adjlist():
             for j in range(len(edges)):
                 paths += "->{}".format(edges[j].get(show_w))
             print(paths)
+        print()
 
     # Insert edge (u, v) with weight (if directed) into adj.
     def insert(self, u, v, w=1):

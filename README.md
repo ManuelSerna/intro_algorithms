@@ -32,7 +32,9 @@ Note: all the sections here have notes and implementations.
 * __Red-Black Trees__: notes and implementation.
 
 ### Graph Algorithms
-* __Elementary Graph Algorithms__: coming soon.
+* __Elementary Graph Algorithms__:
+  * Adjacency matrix and list implementations
+  * Breadth-first search
 * __Minimum Spanning Trees__: coming soon.
 * __Single-Source Shortest Paths__: coming soon.
 * __All-Pairs Shortest Paths__: coming soon.

@@ -27,23 +27,44 @@ class Queue():
         self.tail = 0
         self.Q = []
         for i in range(length):
-            self.Q = self.Q + [-1]
+            self.Q = self.Q + [None]
 
-    def enqueue(self, x):
-        self.Q[self.tail] = x
-        if self.tail == self.length:
-            self.tail = 1
+    def is_full(self):
+        if self.head == self.tail and self.Q[self.tail] != None:
+            return True
         else:
-            self.tail += 1
+            return False
+    
+    def is_empty(self):
+        if self.Q[self.head] == None:
+            return True
+        else:
+            return False
+    
+    def enqueue(self, x):
+        if self.is_full():
+            raise Exception("overflow!")
+        else:
+            self.Q[self.tail] = x
+            if self.tail == self.length-1:
+                self.tail = 0
+            else:
+                self.tail += 1
 
     def dequeue(self):
-        x = self.Q[self.head]
-        self.Q[self.head] = -1
-        if self.head == self.length:
-            self.head = 1
+        if self.is_empty():
+            raise Exception("underflow!")
         else:
-            self.head += 1
-        return x
+            x = self.Q[self.head]
+            self.Q[self.head] = None
+            if self.head == self.length-1:
+                self.head = 0
+            else:
+                self.head += 1
+            return x
+    
+    def print(self):
+        print(self.Q)
 
 
 
@@ -52,15 +73,43 @@ class Queue():
     Breadth-first search.
     Parameters:
         G: graph with vertices and adjacency list.
-        s: starting vertex.
+        s: starting vertex (vertex object)
 '''
 #------------------------------------------------
-def bfs(G, s):
-    # Vertex values already assigned
+def bfs(G, start):
+    # Get vertex from G.V at index "start"
+    s = G.V[start]
+    
+    # Vertex values already assigned, no need to initialize each vertex
+    
     s.color = 'g'
     s.d = 0
-    #TODO: continue
-
+    # s.pred is already NIL (look in vertex class constructor)
+    
+    # Create empty queue
+    Q = Queue(G.n)
+    
+    # Keep exploring each vertex's adjacency list to look for gray vertices.
+    Q.enqueue(s)
+    
+    # Keep dequeuing vertices and see, in the adj array, which other vertices they are connected to, we refer to each vertice's attributes in the V list.
+    while not Q.is_empty():
+        u = Q.dequeue()
+        
+        # Loop through vertices connected to u to make edges (u, v); we get the v values from the edges list G.adj, and then look at G.V.
+        for i in G.adj[u.index]:
+            # Get vertex
+            v = G.V[i.v]
+            v.get_info()
+            
+            # Check color
+            if v.color == 'w':
+                v.color = 'g'
+                v.d = u.d + 1
+                v.pred = u
+                Q.enqueue(v)
+            
+        u.color = 'b'
 
 
 
@@ -90,5 +139,13 @@ G.insert(6, 7)
 G.insert(7, 3)
 G.insert(7, 6)
 
-#G.print(False)
-bfs(G, G.V[1])
+# Output sample graph
+G.print()
+
+# Begin breadth-first search starting at vertex with label 1 (look at ascii figure)
+s = 1
+bfs(G, s)
+
+print("\n\nUpdated G.V\n************************")
+for i in G.V:
+    i.get_info()
