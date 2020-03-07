@@ -1,5 +1,7 @@
-\documentclass{article}
+\documentclass[12pt]{article}
+
 \usepackage[utf8]{inputenc}
+\usepackage[a4paper, total={6in, 10in}]{geometry}
 \usepackage[english]{babel}
 
 \title{Red Black Trees}
@@ -49,7 +51,7 @@ A red-black tree with $n$ internal nodes has height at most $2 \cdot \log_2{(n+1
 \includegraphics[scale=0.55]{rbt1}
 \caption{
     A red-black tree from the book, red nodes are shaded while black nodes are darkened. Notice all the red-black properties apply to this tree.
-    \textbf{(a)} Each node is shown with its black height, while also showing all the $\const{nil}$ children, recall they must all be black.
+    \textbf{(a)} Each node is shown with its black height, while also showing all the $\const{nil}$ children, recall they must all be black. 
     \textbf{(b)} Simplifies this view to have all pointers refer to a single node called $\attrib{T}{nil}$.
     \textbf{(c)} What the book will draw to avoid having to draw all the lines and $\attrib{T}{nil}$.
 }
@@ -144,10 +146,10 @@ Four cases to fix after inserting node $z$.
 \setcounter{enumi}{-1} % start list at zero for "case 0"
     % Case 0
     \item $z$ is the root, thus, color $z$ black (we can refer to this as case 0).
-
+    
     % Case 1
     \item $z$'s uncle is red, thus, recolor $z$'s parent, uncle, and grandparent.
-
+    
     % figure 13.5
     \begin{figure}[!ht]
     \includegraphics[scale=0.5]{rbt_insert_case1}
@@ -156,7 +158,7 @@ Four cases to fix after inserting node $z$.
     }
     \label{fig: rbt_insert1}
     \end{figure}
-
+    
     \begin{figure}[!ht]
     \includegraphics[scale=0.45]{rbt_insert_case1_result}
     \caption{
@@ -164,17 +166,17 @@ Four cases to fix after inserting node $z$.
     }
     \label{fig: rbt_insert2}
     \end{figure}
-
+    
     A side-effect to this is that the grandparent (new $z$) and its parent may both be red, thus we move on to case 2.
-
+    
     \newpage
-
+    
     % Case 2
     \item The "triangle" case: $z$'s uncle $y$ is black and $z$, its parent, and $z$'s grandparent form a triangle-shape in the tree. We must rotate $z$'s parent in the opposite direction of $z$, so if $z$ is a right child, perform left-rotate on the parent, and vice versa. Notice no re-coloring is done, we only rotate, thus, we move on to case 3.
 
     % Case 3
     \item The "line" case: $z$'s uncle $y$ is black and $z$, its parent, and $z$'s grandparent form a straight line in the tree. Node $z$ and its parent are either both left or right children. To finally produce a valid red-black tree, rotate $z$'s grandparent in the opposite direction of $z$.
-
+    
     % figure 13.6
     \begin{figure}[!ht]
     \includegraphics[scale=0.45]{rbt_insert_case2-3}
@@ -183,7 +185,7 @@ Four cases to fix after inserting node $z$.
     }
     \label{fig: rbt_insert3}
     \end{figure}
-
+    
     \begin{figure}[!ht]
     \includegraphics[scale=0.45]{rbt_insert_case2-3_result}
     \caption{
@@ -191,13 +193,13 @@ Four cases to fix after inserting node $z$.
     }
     \label{fig: rbt_insert4}
     \end{figure}
-
+    
 \end{enumerate}
 
 \newpage
 
 \subsection*{Procedures}
-The procedure $\proc{rb-insert }$ adds several new lines to $\proc{tree-search}$ in order to properly insert a node into a red-black tree in $O(\log_2n)$ time. It inserts the node $z$, assigns $\attrib{T}{nil}$ to its children pointers, then assigns its color to be red, and finally calls the subroutine $\proc{rb-insert-fixup}$ to check for violations.
+The procedure $\proc{rb-insert }$ adds several new lines to $\proc{tree-search}$ in order to properly insert a node into a red-black tree in $O(\log_2n)$ time. It inserts the node $z$, assigns $\attrib{T}{nil}$ to its children pointers, then assigns its color to be red, and finally calls the subroutine $\proc{rb-insert-fixup}$ to check for violations. 
 
 %--------------------------------------------
 % rb insert
@@ -311,7 +313,7 @@ To start, the $\proc{transplant}$ procedure needs to be modified to be used with
 \li $\attrib{v}{p} \gets{\attrib{u}{p}}$
 \end{codebox}
 
-The delete procedure for a red-black tree keeps track of two nodes, $y$ and $x$, that might cause violations.
+The delete procedure for a red-black tree keeps track of two nodes, $y$ and $x$, that might cause violations. 
 
 \begin{itemize}
     \item Have node $y$ point to $z$, and keep track of $y = z$'s original color.

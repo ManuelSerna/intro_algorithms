@@ -1,5 +1,7 @@
-\documentclass{article}
+\documentclass[12pt]{article}
+
 \usepackage[utf8]{inputenc}
+\usepackage[a4paper, total={6in, 10in}]{geometry}
 
 \title{Getting Started}
 \author{Manuel Serna-Aguilera}
@@ -15,9 +17,7 @@
 
 \maketitle
 
-%================================================
 \section*{Insertion Sort}
-%================================================
 Sorting algorithms solve the sorting problem, given a sequence of numbers\\
 $<a_1, a_2, ..., a_n>$, the result is a permutation $<a_1^{'}, a_2^{'}, ..., a_n^{'}>$ of the input sequence such that $a_1^{'} \leq a_2^{'} \leq ...\leq a_n^{'}$. The values are also referred to as keys in the book, which can make things a bit confusing.
 \\ \\
@@ -27,16 +27,13 @@ Insertion sort is efficient for sorting a small number of values. Insertion sort
 \centering
 \includegraphics[scale=0.5]{insertion_sort}
 \caption{
-    The process of insertion sort. \textbf{(a)} Start with the first two values--7 and 2. \textbf{(b)} 2 and 7 are properly sorted. \textbf{(c)} Consider the third value, 8 is already greater than 7, so do not swap. \textbf{(d)} Consider the value 5, insert it after 2, which means iteratively swapping values towards the left to make room. \textbf{(e)} Place value 4 in between 2 and 5, adjust like in (d).
+The process of insertion sort. \textbf{(a)} Start with the first two values--7 and 2. \textbf{(b)} 2 and 7 are properly sorted. \textbf{(c)} Consider the third value, 8 is already greater than 7, so do not swap. \textbf{(d)} Consider the value 5, insert it after 2, which means iteratively swapping values towards the left to make room. \textbf{(e)} Place value 4 in between 2 and 5, adjust like in (d).
 }
 \label{fig:insertion_sort}
 \end{figure}
 \\ \\
 Here is some pseudo code from the book (without comments), with $A$ being some array with $n$ values.
 
-%------------------------------------------------
-% Insertion sort
-%------------------------------------------------
 \begin{codebox}
 \Procname{$\proc{insertion-sort}(A)$}
 \li \For $j \gets 2$ \To $\attrib{A}{length}$
@@ -52,9 +49,7 @@ Here is some pseudo code from the book (without comments), with $A$ being some a
         \End
 \end{codebox}
 
-%================================================
 \section*{Analysis of Insertion Sort}
-%================================================
 Writing pseudo code is neat and all, but it would be nice if we could understand its running time, below is how the book approaches tackling running time, and it displays it neatly. Simply put, write a cost for each line, and the number of times that line may run.
 \\
 \\

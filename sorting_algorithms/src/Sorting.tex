@@ -1,5 +1,7 @@
-\documentclass{article}
+\documentclass[12pt]{article}
+
 \usepackage[utf8]{inputenc}
+\usepackage[a4paper, total={6in, 10in}]{geometry}
 
 \title{Sorting}
 \author{Manuel Serna-Aguilera}
@@ -14,9 +16,9 @@
 
 \maketitle
 
-%================================================
+%--------------------------------------------------
 \section*{Introduction}
-%================================================
+%--------------------------------------------------
 The sorting problem takes in the following input and produces the following output\\
 \begin{itemize}
     \item \textbf{Input:} A sequence of n numbers $\langle a_1, a_2, \ldots, a_n \rangle$.
@@ -25,9 +27,9 @@ The sorting problem takes in the following input and produces the following outp
 \end{itemize}
 The input sequence is usually an $n$-element array, although it can take on different forms of lists, such as a linked list.
 
-%================================================
+%--------------------------------------------------
 \section*{Why sorting?}
-%================================================
+%--------------------------------------------------
 You may be asking, \say{why sorting?} Well, many scientists consider sorting to be the most fundamental problem in the study of algorithms for a multitude of reasons.
 \begin{itemize}
     \item An application's function is to sort.
@@ -38,9 +40,9 @@ You may be asking, \say{why sorting?} Well, many scientists consider sorting to 
 
 \newpage
 
-%================================================
+%--------------------------------------------------
 \section*{Sorting Algorithms}
-%================================================
+%--------------------------------------------------
 Back in \textit{Getting Started}, insertion sort and merge sort were discussed, and their implementations are in the Sorting Algorithms directory. Next heapsort, quicksort, counting sort, radix sort, and bucket sort will be discussed and implemented. 
 \\ \\
 Do note that although heapsort's best-case running time is $\Theta{(n \cdot \log_2{(n)})}$, quicksort is more popular. Insertion sort, merge sort, heapsort, and quicksort are all comparison sorts, meaning they need to compare values in order to gather information on the data given. Algorithms with running times like these will have the absolute worst-case of $\Omega{(n \cdot \log_2{(n)})}$, in other words, this is the best that they can do. Counting sort, radix sort, and bucket sort are linear-time sorting algorithms. Each require some assumptions about the given data and do not need to compare. Again, what algorithm is best to use depends on the application.
@@ -70,9 +72,9 @@ Counting sort assumes there are $k$ integers, radix sort assumes every number ha
  
 \newpage
 
-%================================================
+%--------------------------------------------------
 \section*{Order Statistics}
-%================================================
+%--------------------------------------------------
 The $i$th order statistic of a set of $n$ numbers is the $i$th smallest number in the set.
 
 \end{document}

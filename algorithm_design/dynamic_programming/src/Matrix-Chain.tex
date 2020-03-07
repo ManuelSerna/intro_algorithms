@@ -1,5 +1,7 @@
-\documentclass{article}
+\documentclass[12pt]{article}
+
 \usepackage[utf8]{inputenc}
+\usepackage[a4paper, total={6in, 10in}]{geometry}
 
 \title{Matrix-chain Multiplication}
 \author{Manuel Serna-Aguilera}
@@ -202,10 +204,6 @@ This gives the updated tables $m$ and $s$.
 \end{tabular}
 \end{center}
 
-%-------------------------------------------------
-% Diagonal i = j + 2
-%-------------------------------------------------
-
 Now we have calculated the cost of multiplying all pairs possible. Now lets calculate the cost of multiplying sequences with three matrices.
 
 \begin{itemize}
@@ -286,10 +284,6 @@ That gives us the updated tables.
     \cline{2-5}
 \end{tabular}
 \end{center}
-
-%-------------------------------------------------
-% m[1,4]
-%-------------------------------------------------
 
 Now, calculate the cost of the entire sequence, $m[1, 4]$.
 

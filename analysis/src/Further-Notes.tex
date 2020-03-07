@@ -1,5 +1,7 @@
-\documentclass{article}
+\documentclass[12pt]{article}
+
 \usepackage[utf8]{inputenc}
+\usepackage[a4paper, total={6in, 10in}]{geometry}
 
 \title{Further Notes}
 \author{Manuel Serna-Aguilera}
@@ -13,9 +15,7 @@
 
 \maketitle
 
-%================================================
 \section*{Comparing Growth Rates}
-%================================================
 The following sequences are ordered according to increasing growth rates as $n\to\infty$; that is, if ${a_n}$ appears before ${b_n}$ in the list, then\newline
 $$\lim_{n\to\infty} \frac{a_n}{b_n} = 0 \text{\hspace{5mm}and\hspace{5mm}} \lim_{n\to\infty} \frac{b_n}{a_n} = \infty:$$ 
 \begin{equation*}
@@ -28,12 +28,8 @@ The ordering applies for positive numbers, $p$, $q$, $r$, $s$, and $b > 1$. \cit
 \textbf{example:} $$\lim_{n\to\infty} \frac{n^8\ln{(n)}}{n^{8.001}} = \lim_{n\to\infty} \frac{n^p\ln^r{(n)}}{n^{p+s}} = 0$$
 \\
 \textbf{example:} $$\lim_{n\to\infty} \frac{n!}{10^n} = \lim_{n\to\infty} \frac{n!}{b^n} = \infty$$
-
 \newpage
-
-%================================================
 \section*{(Some) Logarithm Rules}
-%================================================
 For all real $a>0$, $b>0$, $c>0$, and $n$. 
 \begin{equation*}
 \begin{split}
@@ -54,4 +50,3 @@ $\frac{x}{x+1} \leq \ln{(1+x)} \leq x$.
 \bibliographystyle{plain}
 \bibliography{references}
 \end{document}
-
