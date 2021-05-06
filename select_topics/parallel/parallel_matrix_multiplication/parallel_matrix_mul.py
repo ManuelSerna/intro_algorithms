@@ -105,7 +105,7 @@ def add_multiprocess(C, T):
     n = C.shape[0]
 
     if n == 1:
-        C = C + T 
+        C = C + T
     else:
         # Partition C and T into n/2 X n/2 submatrices
         mid = int(n/2)
@@ -164,7 +164,9 @@ def p_matrix_mult_recursive_multiprocess(C, A, B):
         # Add
         add_multiprocess(C, T)
 
-# Init 
+
+
+# Init
 rng = np.random.default_rng()
 
 # Test: setup
