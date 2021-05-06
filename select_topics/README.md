@@ -1,4 +1,6 @@
 # Select Topics
 
 ## Content
-TBD
+
+### Parallel
+This section contains code for parallel-centered algorithms.
