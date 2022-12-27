@@ -53,8 +53,8 @@ Three ways to walk, or traverse, binary search trees:
     \li \If $x \neq \const{NIL}$
     \li \Then
             print $\attrib{x}{key}$
-    \li     $\proc{inorder-tree-walk}(\attrib{x}{left})$
-    \li     $\proc{inorder-tree-walk}(\attrib{x}{right})$
+    \li     $\proc{preorder-tree-walk}(\attrib{x}{left})$
+    \li     $\proc{preorder-tree-walk}(\attrib{x}{right})$
     \end{codebox}
     
     \item[]\textbf{Postorder tree walk}: traverse left subtree, traverse
@@ -67,8 +67,8 @@ Three ways to walk, or traverse, binary search trees:
     \Procname{\proc{postorder-tree-walk}$(x)$}
     \li \If $x \neq \const{NIL}$
     \li \Then
-            $\proc{inorder-tree-walk}(\attrib{x}{left})$
-    \li     $\proc{inorder-tree-walk}(\attrib{x}{right})$
+            $\proc{postorder-tree-walk}(\attrib{x}{left})$
+    \li     $\proc{postorder-tree-walk}(\attrib{x}{right})$
     \li     print $\attrib{x}{key}$
     \end{codebox}
     
@@ -341,3 +341,4 @@ The $\proc{tree-insert}$ and $\proc{tree-delete}$ procedure take $O(h)$ time for
 \end{figure}
 
 \end{document}
+

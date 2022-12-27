@@ -39,8 +39,8 @@ Here are the procedures for binary search trees discussed in the book.
 \li \If $x \neq \const{NIL}$
 \li \Then
         print $\attrib{x}{key}$
-\li     $\proc{inorder-tree-walk}(\attrib{x}{left})$
-\li     $\proc{inorder-tree-walk}(\attrib{x}{right})$
+\li     $\proc{preorder-tree-walk}(\attrib{x}{left})$
+\li     $\proc{preorder-tree-walk}(\attrib{x}{right})$
 \end{codebox}
 
 %--------------------------------------------
@@ -50,8 +50,8 @@ Here are the procedures for binary search trees discussed in the book.
 \Procname{\proc{postorder-tree-walk}$(x)$}
 \li \If $x \neq \const{NIL}$
 \li \Then
-        $\proc{inorder-tree-walk}(\attrib{x}{left})$
-\li     $\proc{inorder-tree-walk}(\attrib{x}{right})$
+        $\proc{postorder-tree-walk}(\attrib{x}{left})$
+\li     $\proc{postorder-tree-walk}(\attrib{x}{right})$
 \li     print $\attrib{x}{key}$
 \end{codebox}
 
@@ -225,3 +225,4 @@ Here are the procedures for binary search trees discussed in the book.
 \end{codebox}
 
 \end{document}
+
