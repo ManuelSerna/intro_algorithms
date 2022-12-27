@@ -83,7 +83,7 @@ Each of the following operations will run in $O(h)$ time for a bst of height $h$
 \caption{
     Referring to the above binary search tree, here are example cases of queries.
     % search
-    \textbf{i.} To \textbf{search} for the lucky number 7, we always start searching at the root (15 at the top). Compare k=7 with the key of the root, 7 < 15, so go down the left subtree. Now compare k=7 with 6, 7 > 6, so go down the right subtree. Now compare k=7 with 7, 7 = 7, duh, so in this simple procedure we return the value 7.
+    \textbf{i.} To \textbf{search} for the lucky number 7, we always start searching at the root (15 at the top). Compare k=7 with the key of the root, $7 < 15$, so go down the \textit{left} subtree. Now compare k=7 with 6, $7 > 6$, so go down the \textit{right} subtree. Now compare k=7 with 7, 7 = 7, duh, so in this simple procedure we return the value 7.
     % minimum
     \textbf{ii.} The \textbf{minimum} key of this bst is 2, you simply follow the \textit{left} pointers.
     % maximum
