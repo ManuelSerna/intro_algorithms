@@ -1,54 +1,32 @@
-//***********************************************
-// Purpose: Header file for the Binary Search Tree class.
-//***********************************************
+// Binary Search Tree (BST) Class Definition
 
-#include <iostream>
-#include <iomanip>
-using namespace std;
+#include "Node.h"
 
-//===============================================
-// Data node definition.
-//===============================================
-class Node
-{
-    public:
-    int key;
-    Node *parent;
-    Node *left;
-    Node *right;
-};
-
-//===============================================
-// Define the Binary Search Tree class interface.
-//===============================================
 class BinarySearchTree
 {
+    private:
+        int height; // length of longest branch in the BST
     public:
-    	// Constructor and Destructor
+        Node *root;
+        
+        // Constructor and Destructor
     	BinarySearchTree();
     	~BinarySearchTree();
-
-        // Print the entire tree
-        void Print();
-
-    	// Traversal methods
-    	void Inorder(Node *x);
-    	void Preorder(Node *x);
-    	void Postorder(Node *x);
-
-    	// Search queries
-    	Node *Search(Node *x, int k);
-    	Node *SearchIterative(Node *x, int k);
-    	Node *Minimum(Node *x);
-    	Node *Maximum(Node *x);
-    	Node *Predecessor(Node *x);
-    	Node *Successor(Node *x);
-
-    	void Insert(int key);
-
-    	void Transplant(Node *u, Node *v);
-    	void Delete(int key);
-
-    private:
-    	Node *root;
+    	
+    	// Printing
+    	void InOrderWalk(Node *x); // inorder tree walk
+    	void PreOrderWalk(Node *x); // preorder tree walk
+    	void PostOrderWalk(Node *x); // postorder tree walk
+        
+        // Search-related operations
+        Node *Search(Node *x, int k); // search starting at whatever node
+        Node *Min(Node *x); // minimum of subtree
+        Node *Max(Node *x); // maximum of subtree
+        Node *Predecessor(Node *x); // predecessor of node
+        Node *Successor(Node *x); // successor of node
+        
+        // Modify the tree
+        void Transplant(Node *u, Node *v); // replace subtree rooted at u with subtree rooted at v
+        void Insert(Node *z);
+        void Delete(Node *z);
 };

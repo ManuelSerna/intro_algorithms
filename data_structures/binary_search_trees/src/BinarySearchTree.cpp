@@ -1,259 +1,181 @@
-//*********************************************** 
-// Purpose: Implementation of Binary search tree class.
-// Methods take in keys, not nodes
-//***********************************************
+// Binary Search Tree Class Implementation
 
 #include "BinarySearchTree.h"
 
-//===============================================
+#include <iostream>
+
+using namespace std;
+
+//================================
 // Constructor and Destructor
-//===============================================
+//================================
 BinarySearchTree::BinarySearchTree()
 {
-    // Root is nothing, with no values
+    height = 0;
     root = NULL;
 }
 
 BinarySearchTree::~BinarySearchTree()
 {
-
 }
 
-//===============================================
-// Print the entire tree--horizontally
-//===============================================
-#define COUNT 10
-
-void printHelper(Node *x, int indent)
+//================================
+// Walking functions
+//================================
+void BinarySearchTree::InOrderWalk(Node *x)
 {
-    if (x == NULL)  
-        return;  
-  
-    indent += COUNT;  
-  
-    printHelper(x->right, indent);  
-
-    cout << endl;  
-    for (int i = COUNT; i < indent; i++)
+    if (x != NULL)
     {
-        cout << " ";  
+        InOrderWalk(x->left);
+        cout << x->key << " ";
+        InOrderWalk(x->right);
     }
-    cout<< x->key << endl;  
-
-    printHelper(x->left, indent);
 }
 
-void BinarySearchTree::Print()
+void BinarySearchTree::PreOrderWalk(Node *x)
 {
-	cout << "--------------" << endl;
-	cout << "Printing Tree." << endl;
-	printHelper(root, 0);
-	cout << "--------------" << endl;
+    if (x != NULL)
+    {
+        cout << x->key << " ";
+        PreOrderWalk(x->left);
+        PreOrderWalk(x->right);
+    }
 }
 
-//===============================================
-// Traversals
-//===============================================
-void BinarySearchTree::Inorder(Node *x)
+void BinarySearchTree::PostOrderWalk(Node *x)
 {
-	if (x != NULL)
-	{
-		Inorder(x->left);
-		cout << x->key << endl;
-		Inorder(x->right);
-	}
+    if (x != NULL)
+    {
+        PostOrderWalk(x->left);
+        PostOrderWalk(x->right);
+        cout << x->key << " ";
+    }
 }
 
-void BinarySearchTree::Preorder(Node *x)
-{
-	if (x != NULL)
-	{
-		cout << x->key << endl;
-		Inorder(x->left);
-		Inorder(x->right);
-	}
-}
-
-void BinarySearchTree::Postorder(Node *x)
-{
-	if (x != NULL)
-	{
-		Inorder(x->left);
-		Inorder(x->right);
-		cout << x->key << endl;
-	}
-}
-
-//===============================================
-// Search Queries
-//===============================================
+//================================
+// Search for a node with a certain key, otherwise return NULL
+//================================
 Node *BinarySearchTree::Search(Node *x, int k)
 {
-	if (x != NULL || k != x->key)
-	{
-		return x;
-	}
-	if (k < x->key)
-	{
-		return Search(x->left, k);
-	}
-	else
-	{
-		return Search(x->right, k);
-	}
+    while (x != NULL && x->key != k)
+    {
+        if (k < x->key) x = x->left;
+        else if (k > x->key) x = x->right;
+    }
+    
+    return x;
 }
 
-Node *BinarySearchTree::SearchIterative(Node *x, int k)
+//================================
+// Find minimum of subtree
+//================================
+Node *BinarySearchTree::Min(Node *x)
 {
-	while (x != NULL && k != x->key)
-	{
-		if (k < x->key)
-		{
-			x = x->left;
-		}
-		else
-		{
-			x = x->right;
-		}
-	}
-
-	return x;
+    while (x->left != NULL)
+    {
+        x = x->left;
+    }
+    
+    return x;
 }
 
-Node *BinarySearchTree::Minimum(Node *x)
+//================================
+// Find maximum of subtree
+//================================
+Node *BinarySearchTree::Max(Node *x)
 {
-	while (x->left != NULL)
-	{
-		x = x->left;
-	}
-	return x;
+    while (x->right != NULL)
+    {
+        x = x->right;
+    }
+    
+    return x;
 }
 
-Node *BinarySearchTree::Maximum(Node *x)
-{
-	while (x->right != NULL)
-	{
-		x = x->right;
-	}
-	return x;
-}
-
+//================================
+// Predecessor of a node
+//================================
 Node *BinarySearchTree::Predecessor(Node *x)
 {
-	if (x->left != NULL)
-	{
-		return Maximum(x->left);
-	}
-	Node *y = x->parent;
-	while (y != NULL && x == y->left)
-	{
-		x = y;
-		y = y->parent;
-	}
-	return y;
-}
-
-Node *BinarySearchTree::Successor(Node *x)
-{
-	if (x->right != NULL)
-	{
-		return Minimum(x->right);
-	}
-	Node *y = x->parent;
-	while (y != NULL && x == y->right)
-	{
-		x = y;
-		y = y->parent;
-	}
-	return y;
-}
-
-//===============================================
-// Insert
-//===============================================
-void BinarySearchTree::Insert(int key)
-{cout << "inserting " << key << endl;
-	// Create new node z and fill in key value from input
-    Node *z = new Node;
-    z->key = key;
-    z->left = NULL;
-    z->right = NULL;
-
-	Node *y = NULL;
-	Node *x = root;
-	while (x != NULL)
-	{
-		y = x;
-		if (z->key < x->key)
-		{
-			x = x->left; cout << "go left\n";
-		}
-		else
-		{
-			x = x->right; cout << "go right\n";
-		}
-	}
-	z->parent = y; cout << "assign\n";
-	if (y == NULL)
-	{
-		root = z;
-	}
-	else if (z->key < y->key)
-	{
-		y->left = z;
-	}
-	else
-	{
-		y->right = z;
-	}
-	cout << "Inserted key = " << key << endl;
-}
-
-//===============================================
-// Delete
-//===============================================
-void BinarySearchTree::Transplant(Node *u, Node *v)
-{
-	if (u->parent == NULL)
-	{
-		root = v;
-	}
-	else if (u == u->parent->left)
-	{
-		u->parent->left = v;
-	}
-	else
-	{
-		u->parent->right = v;
-	}
-}
-
-void BinarySearchTree::Delete(int key)
-{
-	// Create new node z (search first)
-    Node *z = Search(root, key);
-
-    if (z->left == NULL)
+    if (x->left != NULL)
     {
-    	Transplant(z, z->right);
-    }
-    else if (z->right == NULL)
-    {
-    	Transplant(z, z->left);
+        // Node has a left child, so get max of left subtree
+        return Max(x->left);
     }
     else
     {
-    	Node *y = Minimum(z->right);
-    	if (y->parent != z)
-    	{
-    		Transplant(y, y->right);
-    		y->right = z->right;
-    		y->right->parent = y;
-    	}
-    	Transplant(z, y);
-    	y->left = z->left;
-    	y->left->parent = y;
+        // No left child, so we get parent of first node that's a right child
+        Node *y = x->parent;
+        
+        while (x != NULL && y->left == x)
+        {
+            x = y;
+            y = y->parent;
+        }
+        
+        return y;
     }
-
-    cout << "Deleted key = " << key << endl;
 }
+
+//================================
+// Successor of a node
+//================================
+Node *BinarySearchTree::Successor(Node *x)
+{
+    if (x->right != NULL)
+    {
+        // Node has a right child, so get min of *right* subtree
+        return Min(x->right);
+    }
+    else
+    {
+        // No right child, so we get the parent of the first node that's a *left* child
+        Node *y = x->parent;
+        
+        while (x != NULL && y->right == x)
+        {
+            x = y;
+            y = y->parent;
+        }
+        
+        return y;
+    }
+}
+
+//================================
+//================================
+void BinarySearchTree::Transplant(Node *u, Node *v)
+{
+}
+
+//================================
+// Insert a new node into the BST
+//================================
+void BinarySearchTree::Insert(Node *z)
+{
+    Node *y = NULL; // keep track of the x's parent (root->parent = NULL)
+    Node *x = root; // always start at the root
+    
+    // Search
+    while (x != NULL)
+    {
+        y = x; // keep track of parent node
+        
+        if (z->key < x->key) x = x->left;
+        else if (z->key > x->key) x = x->right;
+    }
+    
+    z->parent = y;
+    
+    // Insert
+    if (y == NULL) { root = z; } // tree was empty
+    else if (z->key < y->key) { y->left = z; } // insert as left child
+    else if (z->key > y->key) { y->right = z; } // insert as right child
+}
+
+//================================
+//================================
+void BinarySearchTree::Delete(Node *z)
+{
+}
+

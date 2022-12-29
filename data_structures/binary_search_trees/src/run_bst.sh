@@ -1,3 +1,5 @@
 #!/bin/sh
-g++ -Wall BinarySearchTree.cpp Main.cpp -o bst.out
+g++ -Wall main.cpp Node.cpp BinarySearchTree.cpp -o bst.out
+
+echo "=================================="
 ./bst.out
