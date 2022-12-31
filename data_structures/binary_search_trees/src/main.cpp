@@ -29,14 +29,11 @@ int main()
     
     
     // Walking functions
-    tree.InOrderWalk(tree.root); 
-    cout << endl;
+    tree.InOrderWalk(tree.root); cout << endl;
     
-    tree.PreOrderWalk(tree.root); 
-    cout << endl;
+    tree.PreOrderWalk(tree.root); cout << endl;
     
-    tree.PostOrderWalk(tree.root); 
-    cout << endl;
+    tree.PostOrderWalk(tree.root); cout << endl;
     
     
     // Query nodes
@@ -45,6 +42,7 @@ int main()
     
     x = tree.Search(tree.root, 6);
     if (x != NULL) { cout << "Found node key: " << x->key <<endl; }
+    else { cout << "Node with key=" << 6 << " not found!" << endl; }
     
     x = tree.Min(tree.root);
     if (x != NULL) { cout << "Min: " << x->key << endl; }
@@ -78,6 +76,46 @@ int main()
     x = tree.Search(tree.root, 5);
     x = tree.Successor(x);
     if (x != NULL) { cout << "Successor(5)=" << x->key << endl; }
+    
+    
+    // Delete
+    /* delete(1) =>
+           7
+         /  \
+        4   10
+       / \  /
+      3  5 9
+          /
+         8
+    */
+    cout << "delete(1):" << endl;
+    Node *z = tree.Search(tree.root, 1);
+    tree.Delete(z);
+    tree.InOrderWalk(tree.root); cout << endl;
+    
+    /* delete(10) =>
+           7
+         /   \
+        4    9
+       / \  /
+      3  5 8
+    */
+    cout << "delete(10):" << endl;
+    z = tree.Search(tree.root, 10);
+    tree.Delete(z);
+    tree.InOrderWalk(tree.root); cout << endl;
+    
+    /* delete(7) =>
+           8
+         /   \
+        4    9
+       / \
+      3  5
+    */
+    cout << "delete(7):" << endl;
+    z = tree.Search(tree.root, 7);
+    tree.Delete(z);
+    tree.InOrderWalk(tree.root); cout << endl;
     
     return 0;
 }

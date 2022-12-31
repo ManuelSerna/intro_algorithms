@@ -143,9 +143,38 @@ Node *BinarySearchTree::Successor(Node *x)
 }
 
 //================================
+// Transplant--replace subtree rooted at u with subtree rooted at v
+// Check how to insert v:
+//  1) u is null, which means the tree was empty
+//  2) u is a left child
+//  3) u is a right child
+//  4) update v's parent
+// Note Transplant() does not change v's children pointers, nor u's,
+// all this does is change the parent-related pointers
 //================================
 void BinarySearchTree::Transplant(Node *u, Node *v)
 {
+    // Check how we should insert v itself
+    if (u == NULL || u == root)
+    {
+        root = v; // tree was empty, make v the root node
+    }
+    else if (u == u->parent->left)
+    {
+        // Check if *u* is a left child, then insert *v*
+        u->parent->left = v;
+    }
+    else if (u == u->parent->right)
+    {
+        // Check if *u* is a right child, then insert *v*
+        u->parent->right = v;
+    }
+    
+    // Update v's parent
+    if (v != NULL)
+    {
+        v->parent = u->parent;
+    }
 }
 
 //================================
@@ -174,8 +203,37 @@ void BinarySearchTree::Insert(Node *z)
 }
 
 //================================
+// Delete node z
 //================================
 void BinarySearchTree::Delete(Node *z)
 {
+    // Node z has no children, and    
+    // Node z has one non-NULL child
+    if (z->left == NULL)
+    {
+        Transplant(z, z->right);
+    }
+    else if (z->right == NULL)
+    {
+        Transplant(z, z->left);
+    }
+    else
+    {
+        // Node has two non-NULL children
+        Node *y = Min(z->right);// get z's successor, y
+                
+        if (y->parent != z)
+        {
+            // succesor y is not z's right child, so make sure it is
+            Transplant(y, y->right);
+            y->right = z->right;
+            y->right->parent = y;
+        }
+        
+        // Node y is at position of z's right child
+        Transplant(z, y);
+        y->left = z->left;
+        y->left->parent = y;
+    }
 }
 
