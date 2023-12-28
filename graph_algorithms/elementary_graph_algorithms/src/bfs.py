@@ -15,7 +15,7 @@
 '''
 #************************************************
 
-import adjacency_list as adj
+from AdjacencyList import AdjacencyList
 
 #------------------------------------------------
 # Include queue class from elementary graphs section.
@@ -117,8 +117,8 @@ def bfs(G, start):
 # Create graph G with n nodes
 #------------------------------------------------
 n = 8
-G = adj.adjlist(n)
-G.insert(0, 1)
+G = AdjacencyList(n)
+G.insert(0, 1) # insert: (start node u, end node v)
 G.insert(0, 4)
 G.insert(1, 0)
 G.insert(1, 5)

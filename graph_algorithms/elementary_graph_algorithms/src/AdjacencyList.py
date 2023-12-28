@@ -19,20 +19,29 @@ infty = 999999
         
         f: finish time. Will be assigned when vertex is assigned color black, null by default.
 
+        pred: a Vertex object that serves as the predecessor to the current vertex
+
     * To access these vertices, create a list V, and that will denote which vertex is which. How many vertices there are and thus how long V is will be determined by the variable `n` in the adjlist class constructor.
 '''
 #================================================
-class vertex():
-    def __init__(self, index, color='w', f=None, v=None, pred=None):
-        self.index=index
-        self.color = color
-        self.d = infty
-        self.f = f
+class Vertex():
+    def __init__(self, index:int=-1, color:str='w', f:int=None, v=None, pred=None):
+        self.index:int = index
+        self.color:str = color
+        self.d:int = infty
+        self.f:int = f
         self.pred = pred
     
-    # Print all the info of this vertex in one line.
     def get_info(self):
-        print("Index: {}\nColor: {}\nDiscovery Time: {}\nFinish Time: {}\nPredecessor: {}\n".format(self.index, self.color, self.d, self.f, self.pred))
+        """Get vertex info."""
+        label = "* Index: {}\n...Color: {}\n...Discovery Time: {}\n...Finish Time: {}\n...Pred: {}\n"
+
+        if self.pred is not None:
+            label = label.format(self.index, self.color, self.d, self.f, self.pred.index)
+        else:
+            label = label.format(self.index, self.color, self.d, self.f, self.pred)
+
+        print(label)
 
 
 
@@ -46,13 +55,14 @@ class vertex():
     * In the adjlist class, the list adj will be created and will house these objects in it.
 '''
 #================================================
-class edge():
-    def __init__(self, u, v, w=1):
-        self.u = u
-        self.v = v
-        self.w = w
+class Edge():
+    def __init__(self, u:Vertex=None, v:Vertex=None, w:int=1):
+        self.u:Vertex = u
+        self.v:Vertex = v
+        self.w:int = w
 
-    def get(self, show_w=False):
+    def get_info(self, show_w=False):
+        """Print edge info."""
         if show_w:
             return "({}, {}, w={})".format(self.v, self.u, self.w)
         else:
@@ -68,42 +78,57 @@ class edge():
         adj: list of edges any vertex i makes.
 '''
 #================================================
-class adjlist():
-    def __init__(self, n=1, is_directed=False):
+class AdjacencyList():
+    def __init__(self, n:int=1, is_directed:bool=False):
         self.n = n
         self.is_directed = is_directed
         
         # Crate set of vertices V
         self.V = []
         for i in range(n):
-            self.V.append(vertex(index=i))
+            self.V.append(Vertex(index=i))
 
         # Create list of edges adj for each vertex i
         self.adj = []
         for i in range(n):
             self.adj.append([])
 
-    # Print the adjancency list with the option to show weights.
     def print(self, show_w=False):
+        """Print graph info.
+
+        Args:
+            show_w: (bool) print edge weights (e.g., if graph has weighted edges, 
+                or don't show if graph is unweighted). Default is False.
+        """
         print("Printing adjacency list.")
         for i in range(self.n):
             edges = self.adj[i]
             paths = str(i)
             for j in range(len(edges)):
-                paths += "->{}".format(edges[j].get(show_w))
+                paths += "->{}".format(edges[j].get_info(show_w))
             print(paths)
         print()
 
-    # Insert edge (u, v) with weight (if directed) into adj.
     def insert(self, u, v, w=1):
-        self.adj[u].append(edge(u, v))
+        """Insert edge.
 
-    # Remove edge (u, v) from graph.
-    # Look at index u, look at all vertices that make edges (u, v).
+        Args:
+            u: (int) index for start vertex
+            v: (int) index for end vertex
+            w: (int) weight for edge (default=1 for "unweighted")
+        """
+        self.adj[u].append(Edge(u, v))
+
     def remove(self, u, v):
-    	edges = self.adj[u]
-    	for i in range(len(edges)):
-    		if self.adj[u][i].v == v:
-    			print('Found at index {}! {}'.format(i, self.adj[u][i].get(False)))
-    			del self.adj[u][i]
-    			break
+        """ Remove edge (u,v) from the graph.
+
+        Args:
+            u: (int) index for start vertex
+            v: (int) index for end vertex
+        """
+        edges = self.adj[u]
+        for i in range(len(edges)):
+            if self.adj[u][i].v == v:
+                print('Found at index {}! {}'.format(i, self.adj[u][i].get_info(False)))
+                del self.adj[u][i]
+                break
