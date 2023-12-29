@@ -52,7 +52,7 @@ def dfs_visit(G=None, s=None):
     s.color = 'b'
 
     # Global updates
-    finished.append(s)
+    finished.insert(0, s) # insert to front of "linked" list
 
 def dfs(G=None):
     """Depth-first search with no starting node.
