@@ -1,31 +1,27 @@
-#************************************************
-# Adjacency-list representation of a graph.
-#************************************************
-
-# Sentinel for infinity
+# 'Sentinel' value for infinity
 infty = 999999
 
-#================================================
-'''
-    The vertex class contains attributes:
-        index: the number label for each vertex in the graph, these will be integers.
-    
-        color: color of vertex in the graph, these are treated as single characters, it is white by default. Possible values:
-            - w: white--vertex not discovered yet.
-            - g: grey--vertex discovered, but may still be connected to undiscovered (w) vertices.
-            - b: black--nothing left to discover, we are done with the current vertex.
-        
-        d: discovery time for the vertex. Will be assigned when vertex is made grey, assigned sentinel value of infinity. Will be an integer.
-        
-        f: finish time. Will be assigned when vertex is assigned color black, null by default.
 
-        pred: a Vertex object that serves as the predecessor to the current vertex
 
-    * To access these vertices, create a list V, and that will denote which vertex is which. How many vertices there are and thus how long V is will be determined by the variable `n` in the adjlist class constructor.
-'''
-#================================================
 class Vertex():
     def __init__(self, index:int=-1, color:str='w', f:int=None, v=None, pred=None):
+        """ Vertex class
+
+        Args:
+            index: (int) label for each vertex in the graph
+            color: (str) color of vertex in the graph
+                Possible values:
+                 w: white--vertex not discovered yet.
+                 g: grey--vertex discovered, but may still be connected to undiscovered (w) vertices.
+                 b: black--nothing left to discover, we are done with the current vertex.
+
+                 NOTE: I am too lazy to make a setter and redo all my code again...
+            
+            d: (number) discovery time for the vertex; this is set when we discover this vertex for the first time
+            f: (number) finish time; this is set when we no longer have any new vertices to discover
+                with this vertex in the path.
+            pred: (Vertex) a Vertex object that serves as the predecessor to the current vertex
+        """
         self.index:int = index
         self.color:str = color
         self.d:int = infty
@@ -45,41 +41,68 @@ class Vertex():
 
 
 
-#================================================
-'''
-    The edge class contains attributes:
-        u: start vertex of edge (u, v), integer.
-        v: end vertex of edge (u, v), integer.
-        w: weight of edge, 1 by default, integer.
-
-    * In the adjlist class, the list adj will be created and will house these objects in it.
-'''
-#================================================
 class Edge():
     def __init__(self, u:Vertex=None, v:Vertex=None, w:int=1):
+        '''Edge class
+            The edge class contains attributes:
+                u: start vertex of edge (u, v), integer.
+                v: end vertex of edge (u, v), integer.
+                w: weight of edge, 1 by default, integer.
+        '''
         self.u:Vertex = u
         self.v:Vertex = v
         self.w:int = w
 
     def get_info(self, show_w=False):
-        """Print edge info."""
+        """Print edge info.
+        
+        Args:
+            show_complete: (bool) if True, then show edge (u,v) and weight,
+                else show only end vertex v
+        """
         if show_w:
-            return "({}, {}, w={})".format(self.v, self.u, self.w)
+            return f"(u={self.u}, v={self.v}, w={self.w})"
         else:
-            return "{}".format(self.v) # only return end edge
+            return f"{self.v}"
 
 
 
-#================================================
-'''
-    The adjacency class contains attributes:
-        n: the number of vertices the list adj contains. If not set, the graph will have one vertex.
-        is_directed: Boolean flag to dictate whether the graph is directed or not. The graph is undirected by default.
-        adj: list of edges any vertex i makes.
-'''
-#================================================
 class AdjacencyList():
     def __init__(self, n:int=1, is_directed:bool=False):
+        """ Adjacency List class
+
+        Represent a graph with vertices/nodes with its edges represented in a list of Edge objects.
+
+        Args:
+            n: (int) the number of vertices the list adj will contain. 
+                If not set, the graph will have one vertex.
+            is_directed: (bool) flag to dictate whether the graph is directed or not.
+        
+        NOTES:
+        I)
+        The attribute V is a list of Vertex objects.
+        Note, then, that each Vertex object's 'index' attribute does not necessarily indicate
+        their position in V.
+
+        II)
+        The attribute "adj" is a list of of lists of Edge objects.
+        To access data in adj, there are several cases to consider.
+        Given AdjacencList object instance called G:
+
+            (1) with Vertex object reference s:
+            
+                G.adj[s.index]
+
+            will return a list of edges with s as the starting vertex,
+            i.e., we get edges in the form (s, v), where v is some other Vertex reference.
+
+            (2) with integer i
+            
+                G.adj[i]
+
+            returns a list of vertices with whatever vertex is indexed by i in 'adj' 
+             as the starting vertex.
+        """
         self.n = n
         self.is_directed = is_directed
         
@@ -110,7 +133,7 @@ class AdjacencyList():
         print()
 
     def insert(self, u, v, w=1):
-        """Insert edge.
+        """Insert edge (u,v).
 
         Args:
             u: (int) index for start vertex
